@@ -1,0 +1,16 @@
+{
+	"MediaManager":{
+		"MEDIA_DIR": "media"	
+	},
+	"OSC":{
+		"URL":"127.0.0.1",
+		"CLIENT_PORT":"9000",
+		"SERVER_PORT":"9001",
+	},
+	"RemoteInterface":"",
+	"SerialInterFace":"",
+	"WebServer":{
+		"ROOT_DIR":"w/root",
+		"PORT":"8080"
+	}
+}
