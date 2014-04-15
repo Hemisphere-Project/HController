@@ -22,9 +22,9 @@ HPlayer.prototype.status = function(status){
 		this.name = status.name;
 		this.isPlaying = status.isPlaying;
 		this.media = status.media;
-		this.isPaused = status.isPaused
+		this.isPaused = status.isPaused;
 		this.isMuted = status.isMuted;
-		this.volume = status.volume
+		this.volume = status.volume;
 	}
 
 	

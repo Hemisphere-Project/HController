@@ -44,10 +44,10 @@ module.exports = function (){
 		}
 		
 		switch(command){
-			case "/end":
+			/*case "/end":
 				console.log("finnished: "+args.shift());
 				self.eventEmitter.emit('end');
-			break;
+			break;*/
 			case "/status":
 				var player = new HPlayer();
 				player.name = args.shift();
@@ -64,6 +64,7 @@ module.exports = function (){
 						player.isPlaying = false;
 						player.isPaused = false;
 					break;
+
 				}
 				player.media.filepath = args.shift();
 				player.media.progress = args.shift();
@@ -72,6 +73,12 @@ module.exports = function (){
 				player.isMuted = (args.shift() === "muted");
 				
 				self.eventEmitter.emit('status',player.status());
+			break;
+			case "ended" :
+				// nothing for the moment
+			break;
+			case "looped" :
+				// nothing for the moment
 			break;
 			default: console.log("message not recognized: "+message);	
 		}
@@ -87,6 +94,10 @@ module.exports = function (){
 					//console.log('play  '+media);
 					oscClient.sendMessage('play',[media]);
 		},
+		playloop : function(media){
+					//console.log('play  '+media);
+					oscClient.sendMessage('playloop',[media]);
+		},
 		stop : function(){
 					//console.log('stop');
 					oscClient.sendMessage('stop');
@@ -96,7 +107,7 @@ module.exports = function (){
 					oscClient.sendMessage('pause');
 		},
 		resume : function(){
-					console.log('resume');
+					//console.log('resume');
 					oscClient.sendMessage('resume');
 		},
 		// SOUND

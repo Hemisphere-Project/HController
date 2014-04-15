@@ -9,6 +9,8 @@ var httpServer = require('http-server'),
 var DEFAULT_PORT = 8080;
 var DEFAULT_ROOT_DIR = path.join(__dirname, '../w/root');
 
+var REFRESH_STATUS_PERIOD = 1000;
+
 
 /*** Client class ****/
 
@@ -27,6 +29,9 @@ Client.prototype.addEventListeners = function(webserver){
 	var self=this;
 	this.socket.on('play', function (data) {
 			webserver.eventEmitter.emit('play',self.socket.id,data);
+	});
+	this.socket.on('playloop', function (data) {
+			webserver.eventEmitter.emit('playloop',self.socket.id,data);
 	});
 	this.socket.on('pause', function (data) {
 			webserver.eventEmitter.emit('pause',self.socket.id);
@@ -48,7 +53,7 @@ Client.prototype.addEventListeners = function(webserver){
 	});	
 	this.socket.on('quit', function (data) {
 			webserver.eventEmitter.emit('quit',self.socket.id);
-	});	
+	});
 	this.socket.on('disconnect',function(){
 		for(var k=0;k<webserver.clients.length;k++){
 			if(webserver.clients[k].socket.id===self.socket.id){
@@ -70,8 +75,13 @@ function WebServer(port,root){
 	this.root = typeof root !== 'undefined' ? root : DEFAULT_ROOT_DIR;
 	
 	this.clients = new Array();
+	
+	this.refreshStatusId = null;
 
 	this.eventEmitter = new events.EventEmitter();
+	
+			
+		
 }
 
 WebServer.prototype.start = function(){
@@ -101,11 +111,16 @@ WebServer.prototype.start = function(){
 		self.eventEmitter.emit('socketConnection',client);
 	}
 	
-	self.eventEmitter.emit('getStatus',io.id);
+	this.refreshStatusId = setInterval(function(){
+		self.eventEmitter.emit('getStatus');	
+	},REFRESH_STATUS_PERIOD);
+	
 	console.log('WebServer Started  '.green+this.port);
 }
 
 WebServer.prototype.stop = function(){
+	
+	clearInterval(refreshStatusId);
 	
 	this.clients.forEach(function(client){
 			client.socket.disconnect();

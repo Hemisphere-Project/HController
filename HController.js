@@ -30,6 +30,9 @@ webServer.eventEmitter.on('socketConnection',function(client){
 webServer.eventEmitter.on('play', function(socketId,media){
 	oscInterface.play(media);
 });
+webServer.eventEmitter.on('playloop', function(socketId,media){
+	oscInterface.playloop(media);
+});
 webServer.eventEmitter.on('pause', function(socketId){
 	oscInterface.pause();	
 });
@@ -48,7 +51,7 @@ webServer.eventEmitter.on('unmute', function(socketId){
 webServer.eventEmitter.on('volume', function(socketId,value){
 	oscInterface.volume(value);	
 });
-webServer.eventEmitter.on('getStatus', function(socketId){
+webServer.eventEmitter.on('getStatus', function(){
 	oscInterface.getStatus();	
 });
 webServer.eventEmitter.on('quit', function(socketId,value){
