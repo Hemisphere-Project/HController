@@ -151,7 +151,7 @@
 		}
 		$('#play_btn').click(function () {
 			if(!currentStatus.isPlaying && selectedMedia.element !== null)
-				socket.emit('play',selectedMedia.path);
+				socket.emit('playloop',selectedMedia.path);
 		});
 		$('#prev_btn').click(function () {
 			var prev = $(selectedMedia.element).prev();
@@ -159,7 +159,7 @@
 				prev = $('.mediaElement').last();
 					
 			if(currentStatus.isPlaying){
-				socket.emit('play',currentMediaList[mediaIndex({name:"",path:"",element:prev.get(0)})].path);
+				socket.emit('playloop',currentMediaList[mediaIndex({name:"",path:"",element:prev.get(0)})].path);
 			}else{
 				//selectMedia({media:prev.text(),element:prev.get(0)});
 				selectMedia(currentMediaList[mediaIndex({name:"",path:"",element:prev.get(0)})]);
@@ -171,7 +171,7 @@
 				next = $('.mediaElement').first();
 					
 			if(currentStatus.isPlaying){
-				socket.emit('play',currentMediaList[mediaIndex({name:"",path:"",element:next.get(0)})].path);
+				socket.emit('playloop',currentMediaList[mediaIndex({name:"",path:"",element:next.get(0)})].path);
 			}else{
 				//selectMedia({media:next.text(),element:next.get(0)});
 				selectMedia(currentMediaList[mediaIndex({name:"",path:"",element:next.get(0)})]);
@@ -204,7 +204,7 @@
 			//selectMedia({media : $(event.currentTarget).text(),	element : event.currentTarget});
 			if(currentStatus.isPlaying){
 				// just do something
-				socket.emit('play',currentMediaList[mediaIndex({name:"",path:"",element:event.currentTarget})].path);
+				socket.emit('playloop',currentMediaList[mediaIndex({name:"",path:"",element:event.currentTarget})].path);
 			}else{
 				selectMedia(currentMediaList[mediaIndex({name:"",path:"",element:event.currentTarget})]);
 			}
@@ -272,7 +272,9 @@
 		
 		
 		function updateWithPlayerStatus(status){
+		
 			$('#player_head').text(status.name);
+			
 			if(status.isPlaying){
 				var statusMedia = currentMediaList[mediaIndexFromPath(status.media.filepath)];
 			
