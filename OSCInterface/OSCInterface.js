@@ -2,19 +2,23 @@ var osc = require('node-osc');
 var events = require('events');
 var HPlayer = require('../HPlayer.js');
 
-var URL = '127.0.0.1';
+var DEFAULT_URL = '127.0.0.1';
 var DEFAULT_CLIENT_PORT = 9000;
 var DEFAULT_SERVER_PORT = 9001;
 var BASE_ADDRESS = '';
 
 
 
-module.exports = function (){
+module.exports = function (url,clientPort,serverPort){
+	
+	url = typeof url !== 'undefined' ? url : DEFAULT_URL;
+	clientPort = typeof clientPort !== 'undefined' ? url : DEFAULT_CLIENT_PORT;
+	serverPort = typeof serverPort !== 'undefined' ? url : DEFAULT_SERVER_PORT;
 	
 	this.eventEmitter = new events.EventEmitter();
 	
-	var oscClient = new osc.Client(URL, DEFAULT_CLIENT_PORT); 
-	var oscServer = new osc.Server(DEFAULT_SERVER_PORT, URL);
+	var oscClient = new osc.Client(url, clientPort); 
+	var oscServer = new osc.Server(serverPort, url);
 	
 	oscClient.sendMessage = function (operation,args){
 		var message = new osc.Message(BASE_ADDRESS+'/'+operation);

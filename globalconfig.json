@@ -1,16 +1,31 @@
 {
 	"MediaManager":{
-		"MEDIA_DIR": "media"	
+		"mediaDir": "media"	
 	},
-	"OSC":{
-		"URL":"127.0.0.1",
-		"CLIENT_PORT":"9000",
-		"SERVER_PORT":"9001",
+	"OSCInterface":{
+		"url":"127.0.0.1",
+		"clientPort":9000,
+		"serverPort":9001
 	},
 	"RemoteInterface":"",
 	"SerialInterFace":"",
 	"WebServer":{
-		"ROOT_DIR":"w/root",
-		"PORT":"8080"
+		"root_dir":"./w/root",
+		"port":8080
+	},
+	"ProcessManager":{
+		"HPlayerPath":"./bin/HPlayer"
+	},
+	"HPlayer":{
+		"name" : "Rodolphe",
+		"isPlaying" : false,
+		"media" : {
+					"filepath":null,
+					"progress":null,
+					"duration":null
+		},
+		"isPaused" : false,
+		"isMuted" : false,
+		"volume" : 50
 	}
 }

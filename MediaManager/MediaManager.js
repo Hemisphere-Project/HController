@@ -7,7 +7,7 @@ var SUPPORTED_MEDIA_EXT = [".mov",".avi",".mp4",".MOV",".AVI",".MP4",".mp3",".MP
 
 
 function MediaManager(mediaDir){
-	this.mediaDirectory = typeof mediaDir !== 'undefined' ? mediaDir : DEFAULT_MEDIA_DIR;
+	this.mediaDirectory = typeof mediaDir !== 'undefined' ? path.resolve(__dirname,"../",mediaDir) : DEFAULT_MEDIA_DIR;
 
 	var self = this;
 	this.listMedia(this.mediaDirectory,function(err,data){

@@ -8,13 +8,27 @@ var WebServer = require('./WebServer/WebServer.js');
 var OSCInterface = require('./OSCInterface/OSCInterface.js');
 var HPlayer = require('./HPlayer');
 var MediaManager = require('./MediaManager/MediaManager.js');
+var ConfigHelper = require('./ConfigHelper.js');
+var ProcessManager = require('./ProcessManager/ProcessManager.js');
 
+// LOAD CONFIG
+var config = ConfigHelper.loadConfig();
+console.log(config.HPlayer.name);
+
+//TODO : base64 filepath
+//TODO : Store player state reguraly into config
+//TODO : autoload from usb storage
+//TODO : Serial interface + patch
 
 // INSTANCIATE
-var webServer = new WebServer();
-var oscInterface = OSCInterface();
+var webServer = new WebServer(config.WebServer.port,config.WebServer.root_dir);
+var oscInterface = OSCInterface(config.OSCInterface.url,OSCInterface.clientPort,OSCInterface.serverPort);
 var player = new HPlayer();
-var mediaManager = new MediaManager();
+	player.status(config.HPlayer);
+
+var mediaManager = new MediaManager(config.MediaManager.mediaDir);
+
+var processManager = new ProcessManager();
 
 //EVENTS BINDING
 oscInterface.eventEmitter.on('status', function(status){
@@ -62,6 +76,13 @@ webServer.eventEmitter.on('quit', function(socketId,value){
 
 //WEBSERVER START
 webServer.start();
+
+//HPlayer START
+processManager.spawn(config.ProcessManager.HPlayerPath,['--name',player.name,'--volume',player.volume,'--in',config.OSCInterface.clientPort,'--out',config.OSCInterface.serverPort,'--base64',1],true);
+
+
+
+
 
 
 

@@ -66,22 +66,19 @@ Client.prototype.addEventListeners = function(webserver){
 }
 
 
-/*** WebServer class ****/
+/*** WebServer class ***/
     
 function WebServer(port,root){
 		
 	
 	this.port = typeof port !== 'undefined' ? port : DEFAULT_PORT;
-	this.root = typeof root !== 'undefined' ? root : DEFAULT_ROOT_DIR;
-	
+	this.root = typeof root !== 'undefined' ? path.resolve(__dirname,'../',root) : DEFAULT_ROOT_DIR;
 	this.clients = new Array();
 	
 	this.refreshStatusId = null;
 
 	this.eventEmitter = new events.EventEmitter();
 	
-			
-		
 }
 
 WebServer.prototype.start = function(){
