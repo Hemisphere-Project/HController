@@ -1,21 +1,37 @@
 var fs = require('fs'),
 	path = require('path'),
+	prompt = require('prompt'),
 	progress = require('progress-stream');
 	
 var DEFAULT_MEDIA_DIR = path.join(__dirname, '../media');
+var DEFAULT_USB_DIR = '/media/usb0';
+
 var SUPPORTED_MEDIA_EXT = [".mov",".avi",".mp4",".MOV",".AVI",".MP4",".mp3",".MP3"];
 
+var YNPromptProperty = {
+  name: 'yesno',
+  message: 'are you sure?',
+  validator: /y[es]*|n[o]?/,
+  warning: 'Must respond yes or no',
 
-function MediaManager(mediaDir){
+};
+
+
+function MediaManager(mediaDir,USBDir){
 	this.mediaDirectory = typeof mediaDir !== 'undefined' ? path.resolve(__dirname,"../",mediaDir) : DEFAULT_MEDIA_DIR;
+	this.USBDirectory = typeof USBDir !== 'undefined' ? USBDir : DEFAULT_USB_DIR;
 
+	//this.updateMediaList()
+}
+
+MediaManager.prototype.updateMediaList = function(){
 	var self = this;
 	this.listMedia(this.mediaDirectory,function(err,data){
 			if(err)
 				return console.log(err);
 				
 			self.mediaList = data;
-	});//temporary
+	});//temporary	
 }
 
 // list every media of a directory 
@@ -133,7 +149,35 @@ MediaManager.prototype.renameMedia = function(media,name,callback){
 	
 }
 MediaManager.prototype.loadFromUSBStorage = function(){
+	var self = this;
 	
+	if(!fs.existsSync(this.USBDirectory))
+		return console.log("usb directory not found");
+	
+	this.listMediaRecursive(this.USBDirectory,function(err,list){
+		if(err)
+			return console.log(err);
+		
+		prompt.start();
+		YNPromptProperty.message = "Do you want to copy "+list.length+" media from USB storage ? (y|n)\n\n";
+		prompt.get(YNPromptProperty, function (err, result) {
+			if(err)
+				return console.log(err);
+			
+			if(result.yesno === "yes" || result.yesno === "y"){
+				list.forEach(function(element){
+				self.copyMedia(element,self.USBDirectory,self.mediaDirectory,function(err,message){
+					if(err)
+						return console.log(err)
+					
+					console.log(message);
+					});
+			}); 
+		  	  
+		  }
+		});
+				
+	});
 }
 
 module.exports = MediaManager;

@@ -17,7 +17,6 @@ console.log(config.HPlayer.name);
 
 //TODO : base64 filepath
 //TODO : Store player state reguraly into config
-//TODO : autoload from usb storage
 //TODO : Serial interface + patch
 
 // INSTANCIATE
@@ -26,7 +25,7 @@ var oscInterface = OSCInterface(config.OSCInterface.url,OSCInterface.clientPort,
 var player = new HPlayer();
 	player.status(config.HPlayer);
 
-var mediaManager = new MediaManager(config.MediaManager.mediaDir);
+var mediaManager = new MediaManager(config.MediaManager.mediaDir,config.MediaManager.USBDir);
 
 var processManager = new ProcessManager();
 
@@ -73,6 +72,11 @@ webServer.eventEmitter.on('quit', function(socketId,value){
 	webServer.stop();
 	process.exit(code=0);
 });
+
+//MEDIA MANAGER WORK
+//TODO : do it sync !!
+mediaManager.loadFromUSBStorage();
+mediaManager.updateMediaList();
 
 //WEBSERVER START
 webServer.start();
