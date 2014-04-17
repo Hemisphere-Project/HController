@@ -55,7 +55,7 @@ MediaManager.prototype.listMedia = function(dir,callback){
 				
 	});
 }
-// list every media of a directory recursively
+// list every media of a directory recursively 
 MediaManager.prototype.listMediaRecursive = function(dir,callback){
 	var self = this;
 	var retList = [];
@@ -81,7 +81,8 @@ MediaManager.prototype.listMediaRecursive = function(dir,callback){
 							var ext = path.extname(file);
 							for(var k=0;k<SUPPORTED_MEDIA_EXT.length;k++){
 								if(ext === SUPPORTED_MEDIA_EXT[k]){
-									retList.push(file);
+									retList.push({filename:path.basename(file),filepath:file});
+									//retList.push(file);
 								}
 							}
 							if (!--pending) callback(null, retList);
@@ -151,19 +152,23 @@ MediaManager.prototype.renameMedia = function(media,name,callback){
 MediaManager.prototype.loadFromUSBStorage = function(callback){
 	var self = this;
 	
-	console.log(fs.statSync(this.USBDirectory));
 	
 	if(!fs.existsSync(this.USBDirectory))
-		return console.log("usb directory not found");
-	if(fs.statSync(this.USBDirectory).size == 0)
-		return console.log("usb directory empty or drive not mounted");
+		return callback(this.USBDirectory+" not found");
+	if(fs.readdirSync(this.USBDirectory).length == 0)
+		return callback(this.USBDirectory+" empty or drive not mounted");
 	
 	this.listMediaRecursive(this.USBDirectory,function(err,list){
 		if(err)
 			return console.log(err);
 		
+		var count = 0;
+		
 		list.forEach(function(element){
-			self.copyMedia(element,self.USBDirectory,self.mediaDirectory,function(err,message){
+			self.copyMedia(element.filename,path.dirname(element.filepath),self.mediaDirectory,function(err,message){
+				
+				count++;
+					
 				if(err)
 					return console.log(err)
 				
@@ -188,7 +193,16 @@ MediaManager.prototype.loadFromUSBStorage = function(callback){
 		  	  
 		  }*/
 		});
-		return callback();		
+		
+		// pas propre
+		var yo = setInterval(function(){
+				if(count == list.length){
+					clearInterval(yo);
+					self.updateMediaList();
+					return callback();
+				}
+				
+		},100);
 	});
 	
 }

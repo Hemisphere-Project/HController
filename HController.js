@@ -75,19 +75,23 @@ webServer.eventEmitter.on('quit', function(socketId,value){
 
 //MEDIA MANAGER WORK
 //TODO : do it sync !!
-mediaManager.loadFromUSBStorage(function(){
-		
-		mediaManager.updateMediaList();
-		webServer.start();
-		processManager.spawn(config.ProcessManager.HPlayerPath,['--name',player.name,'--volume',player.volume,'--in',config.OSCInterface.clientPort,'--out',config.OSCInterface.serverPort,'--base64',1],true);
-		
+
+
+
+mediaManager.loadFromUSBStorage(function(err){
+	if(err)
+		console.log(err);
+	
+	//WEBSERVER START
+	webServer.start();
+	//HPlayer START
+	processManager.spawn(config.ProcessManager.HPlayerPath,['--name',player.name,'--volume',player.volume,'--in',config.OSCInterface.clientPort,'--out',config.OSCInterface.serverPort,'--base64',1],true);
+
 });
 
 
-//WEBSERVER START
 
 
-//HPlayer START
 
 
 
