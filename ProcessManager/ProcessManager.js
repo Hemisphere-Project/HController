@@ -1,5 +1,7 @@
 var spawn = require('child_process').spawn,
-	colors = require('colors');
+	colors = require('colors'),
+	ps = require('ps');
+	
 
 var RESPAWN_DELAY = 1000;
 
@@ -50,14 +52,17 @@ ProcessManager.prototype.spawn = function(proc,args,autorespawn,pipestdout){
 	});
 	
 	this.childProcesses.push(child)
-	console.log(proc+' started'.green+' with pid '.green+child.pid);	
+	console.log((proc+' started with pid ').green+child.pid);	
+}
+
+ProcessManager.prototype.killAll = function(){
+	for (var i in this.childProcesses) this.kill(this.childProcesses[i].pid);
 }
 
 ProcessManager.prototype.kill = function(pid){
 	
 	var i = this.getProcessIndex(pid);
-	if(i !== -1)
-		return console.log("pid doesn't exists")
+	if(i == -1) return console.log("pid doesn't exists");
 	
 	this.childProcesses[i].kill('SIGTERM');
 	this.childProcesses.splice(i,1);
@@ -73,6 +78,33 @@ ProcessManager.prototype.getProcessIndex = function(pid){
 		return k;
 	else
 		return -1;
+}
+
+ProcessManager.prototype.cleanZombies = function(processName) {
+	
+	var self = this;
+	ps.lookup(
+		{
+			command: processName+'+',
+			psargs: 'ux'
+		}, 
+		function(err, resultList ) 
+		{
+			if (err) throw new Error( err );
+			
+			resultList.forEach(function( process )
+			{
+				if (( process ) && ( self.getProcessIndex(parseInt(process.pid)) ))
+				{
+					ps.kill( process.pid , function( err ) 
+					{
+						if (err) throw new Error( err );
+						else console.log( (processName+' zombie '+process.pid+' has been killed').yellow );
+					});			
+				}
+			});
+		}
+	);
 }
 
 

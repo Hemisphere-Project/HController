@@ -1,8 +1,7 @@
 
 /***** HPlayer Model Class ****/
 
-
-function HPlayer(){
+function HPlayer(config){
 	this.pid = null;
 	this.name = "Roberto";
 	this.isPlaying = false;
@@ -14,6 +13,8 @@ function HPlayer(){
 	this.isPaused = false;
 	this.isMuted = false;
 	this.volume = 50;
+	
+	if (config) this.status(config);
 }
 
 HPlayer.prototype.status = function(status){

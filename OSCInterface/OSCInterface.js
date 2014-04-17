@@ -8,18 +8,18 @@ var DEFAULT_SERVER_PORT = 9001;
 var BASE_ADDRESS = '';
 
 
-
-module.exports = function (url,clientPort,serverPort){
+module.exports = function (config){
 	
-	url = typeof url !== 'undefined' ? url : DEFAULT_URL;
-	clientPort = typeof clientPort !== 'undefined' ? url : DEFAULT_CLIENT_PORT;
-	serverPort = typeof serverPort !== 'undefined' ? url : DEFAULT_SERVER_PORT;
+	var url = typeof config.url !== 'undefined' ? config.url : DEFAULT_URL;
+	var clientPort = typeof config.clientPort !== 'undefined' ? config.clientPort : DEFAULT_CLIENT_PORT;
+	var serverPort = typeof config.serverPort !== 'undefined' ? config.serverPort : DEFAULT_SERVER_PORT;
 	
 	this.eventEmitter = new events.EventEmitter();
 	
-	var oscClient = new osc.Client(url, clientPort); 
-	var oscServer = new osc.Server(serverPort, url);
+	var self = this;
 	
+	//OSC CLIENT: SEND MESSAGES
+	var oscClient = new osc.Client(url, clientPort); 
 	oscClient.sendMessage = function (operation,args){
 		var message = new osc.Message(BASE_ADDRESS+'/'+operation);
 		if(typeof args !== 'undefined')// we got args
@@ -29,8 +29,8 @@ module.exports = function (url,clientPort,serverPort){
 		this.send(message);	
 	}
 	
-	var self = this;
-	
+	//OSC SERVER: RECEIVE MESSAGES
+	var oscServer = new osc.Server(serverPort, url);
 	oscServer.on("message", function (message, rinfo) {
 		
 		var args = message.slice();
@@ -48,10 +48,6 @@ module.exports = function (url,clientPort,serverPort){
 		}
 		
 		switch(command){
-			/*case "/end":
-				console.log("finnished: "+args.shift());
-				self.eventEmitter.emit('end');
-			break;*/
 			case "/status":
 				var player = new HPlayer();
 				player.name = args.shift();
@@ -88,10 +84,11 @@ module.exports = function (url,clientPort,serverPort){
 		}
 	});
 	
+	//OSC INTERFACE COMMANDS
 	return{
 		// BASIC CONTROLS
 		quit : function(){
-					console.log('quit');
+					//console.log('quit');
 					oscClient.sendMessage('quit');
 		},
 		play : function(media){
@@ -107,7 +104,7 @@ module.exports = function (url,clientPort,serverPort){
 					oscClient.sendMessage('stop');
 		},
 		pause : function(){
-					///console.log('pause');
+					//console.log('pause');
 					oscClient.sendMessage('pause');
 		},
 		resume : function(){
@@ -124,7 +121,7 @@ module.exports = function (url,clientPort,serverPort){
 					oscClient.sendMessage('mute');
 		},
 		unmute : function(){
-					console.log('unmute');
+					//console.log('unmute');
 					oscClient.sendMessage('unmute');
 		},
 		// EFFECTS
@@ -134,13 +131,8 @@ module.exports = function (url,clientPort,serverPort){
 		},
 		// PLAYER STATUS REQUEST
 		getStatus : function(){
-					console.log('s/getStatus');
+					//console.log('s/getStatus');
 					oscClient.sendMessage('s/getStatus');
-		},
-		// PLAYER QUIT
-		quit : function(){
-					console.log('quit');
-					oscClient.sendMessage('quit');
 		},
 		
 		eventEmitter : this.eventEmitter

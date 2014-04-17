@@ -68,11 +68,11 @@ Client.prototype.addEventListeners = function(webserver){
 
 /*** WebServer class ***/
     
-function WebServer(port,root){
+function WebServer(config){
 		
 	
-	this.port = typeof port !== 'undefined' ? port : DEFAULT_PORT;
-	this.root = typeof root !== 'undefined' ? path.resolve(__dirname,'../',root) : DEFAULT_ROOT_DIR;
+	this.port = typeof config.port !== 'undefined' ? config.port : DEFAULT_PORT;
+	this.root = typeof config.root_dir !== 'undefined' ? path.resolve(__dirname,'../',config.root_dir) : DEFAULT_ROOT_DIR;
 	this.clients = new Array();
 	
 	this.refreshStatusId = null;
@@ -117,7 +117,7 @@ WebServer.prototype.start = function(){
 
 WebServer.prototype.stop = function(){
 	
-	clearInterval(refreshStatusId);
+	//??????? clearInterval(refreshStatusId);
 	
 	this.clients.forEach(function(client){
 			client.socket.disconnect();
