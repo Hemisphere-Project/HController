@@ -148,17 +148,29 @@ MediaManager.prototype.deleteMedia = function(media,callback){
 MediaManager.prototype.renameMedia = function(media,name,callback){
 	
 }
-MediaManager.prototype.loadFromUSBStorage = function(){
+MediaManager.prototype.loadFromUSBStorage = function(callback){
 	var self = this;
+	
+	console.log(fs.statSync(this.USBDirectory));
 	
 	if(!fs.existsSync(this.USBDirectory))
 		return console.log("usb directory not found");
+	if(fs.statSync(this.USBDirectory).size == 0)
+		return console.log("usb directory empty or drive not mounted");
 	
 	this.listMediaRecursive(this.USBDirectory,function(err,list){
 		if(err)
 			return console.log(err);
 		
-		prompt.start();
+		list.forEach(function(element){
+			self.copyMedia(element,self.USBDirectory,self.mediaDirectory,function(err,message){
+				if(err)
+					return console.log(err)
+				
+				console.log(message);
+			
+			});
+		/*prompt.start();
 		YNPromptProperty.message = "Do you want to copy "+list.length+" media from USB storage ? (y|n)\n\n";
 		prompt.get(YNPromptProperty, function (err, result) {
 			if(err)
@@ -174,10 +186,11 @@ MediaManager.prototype.loadFromUSBStorage = function(){
 					});
 			}); 
 		  	  
-		  }
+		  }*/
 		});
-				
+		return callback();		
 	});
+	
 }
 
 module.exports = MediaManager;
