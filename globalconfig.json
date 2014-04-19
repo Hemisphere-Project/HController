@@ -1,6 +1,7 @@
 {
 	"MediaManager":{
-		"mediaDir": "media"	
+		"mediaDir": "media",
+		"USBDir":"/media/usb"
 	},
 	"OSCInterface":{
 		"url":"127.0.0.1",

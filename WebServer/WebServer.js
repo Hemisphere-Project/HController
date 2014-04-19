@@ -82,7 +82,8 @@ function WebServer(config){
 }
 
 WebServer.prototype.start = function(){
-	server = httpServer.createServer({
+	
+	this.server = httpServer.createServer({
 		root: this.root,
 		headers: {
 		  'Access-Control-Allow-Origin': '*',
@@ -91,9 +92,9 @@ WebServer.prototype.start = function(){
 	  });
 	
 	
-	io = socket.listen(server.server,{ log: false });
+	io = socket.listen(this.server.server,{ log: false });
 	
-	server.listen(this.port);
+	this.server.listen(this.port);
 	
 	io.sockets.on('connection',onSocketConnection);	
 	
@@ -112,7 +113,7 @@ WebServer.prototype.start = function(){
 		self.eventEmitter.emit('getStatus');	
 	},REFRESH_STATUS_PERIOD);
 	
-	console.log('WebServer Started  '.green+this.port);
+	console.log('[WebServer]'.green+' started on port '+this.port);
 }
 
 WebServer.prototype.stop = function(){
@@ -123,8 +124,8 @@ WebServer.prototype.stop = function(){
 			client.socket.disconnect();
 	});
 	
-	server.close();
-	console.log('WebServer Stoped'.red);	
+	if (this.server !== undefined) this.server.close();
+	console.log('[WebServer] '.red+'stoped');	
 }
 
 WebServer.prototype.sendPlayerStatus = function(status){

@@ -7,6 +7,8 @@ var DEFAULT_CLIENT_PORT = 9000;
 var DEFAULT_SERVER_PORT = 9001;
 var BASE_ADDRESS = '';
 
+var BASE_64_ENCODE = true;
+
 
 module.exports = function (config){
 	
@@ -66,7 +68,10 @@ module.exports = function (config){
 					break;
 
 				}
-				player.media.filepath = args.shift();
+				if(BASE_64_ENCODE)
+					player.media.filepath = new Buffer(args.shift(), 'base64').toString('ascii');
+				else
+					player.media.filepath = args.shift();
 				player.media.progress = args.shift();
 				player.media.duration = args.shift();
 				player.volume = args.shift();
@@ -93,10 +98,16 @@ module.exports = function (config){
 		},
 		play : function(media){
 					//console.log('play  '+media);
+					if(BASE_64_ENCODE){
+						media = new Buffer(media).toString('base64');	
+					}
 					oscClient.sendMessage('play',[media]);
 		},
 		playloop : function(media){
 					//console.log('play  '+media);
+					if(BASE_64_ENCODE){
+						media = new Buffer(media).toString('base64');	
+					}
 					oscClient.sendMessage('playloop',[media]);
 		},
 		stop : function(){

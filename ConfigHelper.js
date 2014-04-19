@@ -1,4 +1,3 @@
-
 var fs = require('fs');
 
 var CONFIG_FILE = __dirname +"/globalconfig.json";
