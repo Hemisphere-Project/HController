@@ -1,5 +1,5 @@
 var spawn = require('child_process').spawn,
-	colors = require('colors'),
+	colors = require('colors');
 	ps = require('ps');
 	
 

@@ -1,7 +1,21 @@
 var serialport = require("serialport");
 var SerialPort = serialport.SerialPort
-//var sstream = new sps.Serial('/dev/tty.usbmodemfa131',baud = 9600);
-var serialPort = new SerialPort("/dev/tty.usbmodemfa131", {
+
+
+serialport.list(function (err, ports) {
+  ports.forEach(function(port) {
+    console.log(port.comName);
+    console.log(port.pnpId);
+    console.log(port.manufacturer);
+    if(port.pnpId.indexOf("Arduino") > -1){
+    	console.log(port.pnpId.indexOf("Arduino"))
+    	arduinoPort = port.comName;
+    	
+    }
+  });
+});
+
+var serialPort = new SerialPort("/dev/ttyACM0", {
   baudrate: 9600,
   parser: serialport.parsers.readline("\n")
 },false);
@@ -10,8 +24,8 @@ serialPort.open(function () {
   serialPort.on('data', function(data) {
     console.log('data received: ' + data);
   });
-  /*serialPort.write("ls\n", function(err, results) {
-    console.log('err ' + err);
-    console.log('results ' + results);
-  });*/
+  //serialPort.write("ls\n", function(err, results) {
+  //  console.log('err ' + err);
+  //  console.log('results ' + results);
+  //});
 });
