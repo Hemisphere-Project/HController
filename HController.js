@@ -1,9 +1,7 @@
 /* Main Controller of HP */
 
-//TODO : base64 filepath
 //TODO : Store player state reguraly into config
 //TODO : Serial interface + patch
-//TODO : MEDIA MANAGER: do it sync !!
 
 
 var ModuleManager = require('./ModuleManager');

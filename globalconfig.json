@@ -28,5 +28,8 @@
 		"isPaused" : false,
 		"isMuted" : false,
 		"volume" : 50
+	},
+	"SerialInterFace":{
+		"baudRate":9600	
 	}
 }

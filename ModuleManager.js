@@ -8,7 +8,7 @@ var MediaManager 	= require('./MediaManager/MediaManager.js');
 var ConfigHelper 	= require('./ConfigHelper.js');
 var ProcessManager 	= require('./ProcessManager/ProcessManager.js');
 //var RemoteInterface = require('./RemoteInterface/RemoteInterface.js');
-//var SerialInterface = require('./SerialInterface/SerialInterface.js');
+var SerialInterface = require('./SerialInterface/SerialInterface.js');
 
 /**
 MODULE MANAGER
@@ -24,6 +24,7 @@ function ModuleManager(){
 	this.player			= new HPlayer(this.config.HPlayer);
 	this.mediaManager	= new MediaManager(this.config.MediaManager);
 	this.processManager = new ProcessManager();
+	this.serialInterface = new SerialInterface(this.config.SerialInterface);
 
 	this.link();
 }
