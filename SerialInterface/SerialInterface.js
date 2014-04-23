@@ -1,5 +1,5 @@
 var sp = require("serialport");
-var SerialPort = serialport.SerialPort;
+var SerialPort = sp.SerialPort;
 
 var DEFAULT_BAUD_RATE = 9600;
 var DEFAULT_COM_PORT = "/dev/ttyACM0";
@@ -8,13 +8,18 @@ var DEFAULT_COM_PORT = "/dev/ttyACM0";
 function SerialInterface(config){
 	
 	this.arduinoComList = [];
-	this.baudRate = typeof config.baudRate !== 'undefined' ? config.baudRate : DEFAULT_BAUD_RATE;
+	if(typeof config !== 'undefined'){
+		this.baudRate = typeof config.baudRate !== 'undefined' ? config.baudRate : DEFAULT_BAUD_RATE;
+	}else{
+		this.baudRate = DEFAULT_BAUD_RATE;
+	}
 	var self = this;
 	this.getArduinoComList(function(err,list){
 			
 		if(err)
 			return console.log(err);
 
+		console.log(list);
 		self.arduinoComList = list;
 		
 		if(self.arduinoComList.length == 0)
@@ -22,15 +27,16 @@ function SerialInterface(config){
 		if(self.arduinoComList.length>1)
 			console.log("more than one arduino device found.. first take first");
 		
-		self.serialPort = new SerialPort(arduinoComList[0], {
+		self.serialPort = new SerialPort(self.arduinoComList[0], {
 				baudrate: this.baudRate,
-				parser: serialport.parsers.readline("\n")
+				parser: sp.parsers.readline("\n")
 		},false);		
+		
+		self.open();
 	});
 
-});	
+}	
 	
-}
 
 SerialInterface.prototype.open = function(){
 	this.addEventListeners();
@@ -38,8 +44,9 @@ SerialInterface.prototype.open = function(){
 }
 
 SerialInterface.prototype.addEventListeners = function(){
+	console.log('ok');
 	this.serialPort.on('open', this.openHandler);
-	this.serialPort.on('data', this.dataHandler);
+	this.serialPort.on('data',this.dataHandler);
 	this.serialPort.on('close', this.closeHandler);
 	this.serialPort.on('error', this.errorHandler);
 }
@@ -56,7 +63,7 @@ SerialInterface.prototype.openHandler = function(){
 	console.log("serial port open at "+this.baudRate+" on com "+this.comPort);
 }
 SerialInterface.prototype.dataHandler = function(data){
-	console.log('got it ! ' + data);
+	//console.log('got it ! ' + data);
 }
 SerialInterface.prototype.closeHandler = function(){
 	console.lof("serial port closed :"+this.comPort);

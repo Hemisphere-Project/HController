@@ -25,7 +25,7 @@ function ModuleManager(){
 	this.mediaManager	= new MediaManager(this.config.MediaManager);
 	this.processManager = new ProcessManager();
 	this.serialInterface = new SerialInterface(this.config.SerialInterface);
-
+	
 	this.link();
 }
 
