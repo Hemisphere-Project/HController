@@ -69,7 +69,7 @@ module.exports = function (config){
 
 				}
 				if(BASE_64_ENCODE)
-					player.media.filepath = new Buffer(args.shift(), 'base64').toString('ascii');
+					player.media.filepath = new Buffer(args.shift(), 'base64').toString('utf8');
 				else
 					player.media.filepath = args.shift();
 				player.media.progress = args.shift();
