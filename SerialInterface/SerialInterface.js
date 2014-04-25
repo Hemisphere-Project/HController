@@ -44,7 +44,6 @@ SerialInterface.prototype.open = function(){
 }
 
 SerialInterface.prototype.addEventListeners = function(){
-	console.log('ok');
 	this.serialPort.on('open', this.openHandler);
 	this.serialPort.on('data',this.dataHandler);
 	this.serialPort.on('close', this.closeHandler);
@@ -59,14 +58,14 @@ SerialInterface.prototype.removeEventListeners = function(){
 
 /** EVENT HANDLERS **/
 
-SerialInterface.prototype.openHandler = function(){
-	console.log("serial port open at "+this.baudRate+" on com "+this.comPort);
+SerialInterface.prototype.openHandler = function(self){
+	console.log("serial port open");
 }
 SerialInterface.prototype.dataHandler = function(data){
-	//console.log('got it ! ' + data);
+	console.log('got it ! ' + data);
 }
-SerialInterface.prototype.closeHandler = function(){
-	console.lof("serial port closed :"+this.comPort);
+SerialInterface.prototype.closeHandler = function(self){
+	console.lof("serial port closed :");
 }
 SerialInterface.prototype.errorHandler = function(err){
 	console.log("serial port error"+ err);
