@@ -9,7 +9,8 @@
 	"OSCInterface":{
 		"url":"127.0.0.1",
 		"clientPort":9000,
-		"serverPort":9001
+		"serverPort":9001,
+		"base64Encode":true
 	},
 	"RemoteInterface":"",
 	"SerialInterFace":"",

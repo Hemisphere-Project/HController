@@ -16,6 +16,9 @@ module.exports = function (config){
 	var clientPort = typeof config.clientPort !== 'undefined' ? config.clientPort : DEFAULT_CLIENT_PORT;
 	var serverPort = typeof config.serverPort !== 'undefined' ? config.serverPort : DEFAULT_SERVER_PORT;
 	
+	if(typeof config.base64Encode !== 'undefined')
+		BASE_64_ENCODE = config.base64Encode;
+	
 	this.eventEmitter = new events.EventEmitter();
 	
 	var self = this;
