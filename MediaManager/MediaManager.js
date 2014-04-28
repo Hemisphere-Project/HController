@@ -16,13 +16,14 @@ function MediaManager(config){
 	//this.updateMediaList()
 }
 
-MediaManager.prototype.updateMediaList = function(){
+MediaManager.prototype.updateMediaList = function(callback){
 	var self = this;
 	this.listMedia(this.mediaDirectory,function(err,data){
 			if(err)
-				return console.log(err);
+				return callback(err);
 				
 			self.mediaList = data;
+			return callback(null,self.mediaList);
 	});//temporary	
 }
 

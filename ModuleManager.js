@@ -99,8 +99,13 @@ ModuleManager.prototype.start = function() {
 	this.mediaManager.loadFromUSBStorage(function(msg) 
 	{ 
 		if(msg) console.log(msg+'\n'); 
-		self.isLocked = false; 
-		self.mediaManager.updateMediaList();
+		//self.isLocked = false; 
+		self.mediaManager.updateMediaList(function(err,list){
+			if(err)
+				return console.log(err)
+			
+			self.isLocked=false;	
+		});
 	});
 	
 	//START SERVICES
@@ -124,7 +129,15 @@ ModuleManager.prototype.startServices = function() {
 
 		//HPlayer START
 		this.processManager.spawn(this.config.ProcessManager.HPlayerPath,['--name',this.player.name,'--volume',this.player.volume,'--in',this.config.OSCInterface.clientPort,'--out',this.config.OSCInterface.serverPort,'--base64',1],true);
-
+		
+		if(that.config.ModuleManager.playlistAutoLaunch){
+			var autoPlayList = [];
+			that.mediaManager.mediaList.forEach(function(element){
+				autoPlayList.push(element.filepath)
+			});
+			that.oscInterface.playloop(autoPlayList);
+		}
+		
 		console.log('Running..'.green+'\n');
 		this.isRunning = true;
 	}

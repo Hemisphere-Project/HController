@@ -1,4 +1,7 @@
 {
+	"ModuleManager":{
+		"playlistAutoLaunch":true
+	},
 	"MediaManager":{
 		"mediaDir": "media",
 		"USBDir":"/media/usb"
