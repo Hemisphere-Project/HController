@@ -13,6 +13,7 @@ function SerialInterface(config){
 	this.arduinoComList = [];
 	if(typeof config !== 'undefined'){
 		this.baudRate = typeof config.baudRate !== 'undefined' ? config.baudRate : DEFAULT_BAUD_RATE;
+		this.range = config.range;
 	}else{
 		this.baudRate = DEFAULT_BAUD_RATE;
 	}
@@ -64,9 +65,13 @@ SerialInterface.prototype.removeEventListeners = function(){
 SerialInterface.prototype.openHandler = function(){
 	this.eventEmitter.emit("open");
 }
+var last_value = 0;
 SerialInterface.prototype.dataHandler = function(data){
-	//console.log('got it ! ' + data);
-	this.eventEmitter.emit("data",data);
+	var value = map(data,this.range.inMin,this.range.inMax,this.range.outMin,this.range.outMax);
+	value = constrain(value,this.range.outMin,this.range.outMax);
+	// raw easing
+	value = last_value + (value - last_value)*0.8;
+	this.eventEmitter.emit("data",value);
 }
 SerialInterface.prototype.closeHandler = function(){
 	this.eventEmitter.emit("close");
@@ -100,6 +105,19 @@ SerialInterface.prototype.getArduinoComList = function(callback){
 		
 		return callback(null,alist);
   	});
+}
+
+function map(value,inMin,inMax,outMin,outMax){
+  return (value - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
+}
+
+function constrain(value,min,max){
+	if(value>max)
+		return max;
+	if(value<min)
+		return min;
+	
+	return value;
 }
 
 module.exports = SerialInterface;
