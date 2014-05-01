@@ -26,6 +26,7 @@ Maxbotix rangeSensorPW(8, Maxbotix::PW, Maxbotix::LV);
 //Maxbotix rangeSensorTX(6, Maxbotix::TX, Maxbotix::LV);
 //Maxbotix rangeSensorAD(A0, Maxbotix::AN, Maxbotix::LV);
 
+
 void setup()
 {
   Serial.begin(9600);
@@ -35,14 +36,15 @@ void loop()
 {
   unsigned long start;
   
-  // PW
-  Serial.print("PW: ");
+  // PW range in cm from the sensor
   float range = rangeSensorPW.getRange() ;
-  Serial.print(range);
+ 
   
+  // sound indicating range
   int thisPitch = map(range, 300, 10, 120, 1500);
   tone(9, thisPitch, 30);
   
+  Serial.print(range);
   Serial.println();
   delay(50);
 }
