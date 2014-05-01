@@ -30,12 +30,13 @@ void loop()
 {
   unsigned long start;
   
-  //Serial.print("PW: ");
-  //float range = rangeSensorPW.getRange() ;
-  //Serial.print(range);
+  // PW
+  Serial.print("PW: ");
+  float range = rangeSensorPW.getRange() ;
+  Serial.print(range);
   
-  //int thisPitch = map(range, 300, 10, 120, 1500);
-  //tone(9, thisPitch, 30);
+  int thisPitch = map(range, 300, 10, 120, 1500);
+  tone(9, thisPitch, 30);
   
   Serial.println();
   delay(50);
