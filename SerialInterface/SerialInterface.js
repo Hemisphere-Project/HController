@@ -1,12 +1,15 @@
 var sp = require("serialport");
 var SerialPort = sp.SerialPort;
 
+var events = require('events')
+
 var DEFAULT_BAUD_RATE = 9600;
 var DEFAULT_COM_PORT = "/dev/ttyACM0";
 
 
 function SerialInterface(config){
 	
+	this.eventEmitter = new events.EventEmitter();
 	this.arduinoComList = [];
 	if(typeof config !== 'undefined'){
 		this.baudRate = typeof config.baudRate !== 'undefined' ? config.baudRate : DEFAULT_BAUD_RATE;
@@ -44,10 +47,10 @@ SerialInterface.prototype.open = function(){
 }
 
 SerialInterface.prototype.addEventListeners = function(){
-	this.serialPort.on('open', this.openHandler);
-	this.serialPort.on('data',this.dataHandler);
-	this.serialPort.on('close', this.closeHandler);
-	this.serialPort.on('error', this.errorHandler);
+	this.serialPort.on('open', this.openHandler.bind(this));
+	this.serialPort.on('data',this.dataHandler.bind(this));
+	this.serialPort.on('close', this.closeHandler.bind(this));
+	this.serialPort.on('error', this.errorHandler.bind(this));
 }
 SerialInterface.prototype.removeEventListeners = function(){
 	this.serialPort.removeEventListener('open', this.openHandler);
@@ -58,17 +61,18 @@ SerialInterface.prototype.removeEventListeners = function(){
 
 /** EVENT HANDLERS **/
 
-SerialInterface.prototype.openHandler = function(self){
-	console.log("serial port open");
+SerialInterface.prototype.openHandler = function(){
+	this.eventEmitter.emit("open");
 }
 SerialInterface.prototype.dataHandler = function(data){
-	console.log('got it ! ' + data);
+	//console.log('got it ! ' + data);
+	this.eventEmitter.emit("data",data);
 }
-SerialInterface.prototype.closeHandler = function(self){
-	console.lof("serial port closed :");
+SerialInterface.prototype.closeHandler = function(){
+	this.eventEmitter.emit("close");
 }
 SerialInterface.prototype.errorHandler = function(err){
-	console.log("serial port error"+ err);
+	this.eventEmitter.emit("error",err);
 }
 
 

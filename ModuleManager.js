@@ -85,7 +85,28 @@ ModuleManager.prototype.link = function() {
 		self.stop(0);
 		process.exit(0);
 	});
-}
+	
+	this.serialInterface.eventEmitter.on('open',function(){
+		console.log("serial port open");	
+	});
+	
+	this.serialInterface.eventEmitter.on('error',function(err){
+		console.log("serial port error "+err);	
+	});
+		
+	this.serialInterface.eventEmitter.on('close',function(){
+		console.log("serial port closed");	
+	});
+			
+	this.serialInterface.eventEmitter.on('data',function(data){
+		//console.log(JSON.stringify(self.config));
+		if(self.config.SerialInterface.BindToOSC === "volume"){
+			self.oscInterface.volume(data);
+		}else{
+			console.log("nothing to bind serial data to");	
+		}
+	});
+}	
 
 /**
 START ALL
