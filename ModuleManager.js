@@ -98,10 +98,11 @@ ModuleManager.prototype.link = function() {
 		console.log("serial port closed");	
 	});
 			
-	this.serialInterface.eventEmitter.on('data',function(data){
+	this.serialInterface.eventEmitter.on('data',function(value){
 		//console.log(JSON.stringify(self.config));
+		console.log(value);
 		if(self.config.SerialInterface.BindToOSC === "volume"){
-			self.oscInterface.volume(data);
+			//self.oscInterface.volume(value);
 		}else{
 			console.log("nothing to bind serial data to");	
 		}

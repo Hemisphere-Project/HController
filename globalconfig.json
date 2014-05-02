@@ -35,9 +35,11 @@
 	"SerialInterface":{
 		"baudRate":9600,
 		"BindToOSC":"volume",
-		"InMinValue":150,	
-		"InMaxValue":350,
-		"OutMinValue":0,
-		"OutMaxValue":100
+		"range":{
+			"inMin":150,	
+			"inMax":350,
+			"outMin":0,
+			"outMax":100
+		}
 	}
 }
