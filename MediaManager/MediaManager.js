@@ -10,6 +10,9 @@ var SUPPORTED_MEDIA_EXT = [".mov",".avi",".mp4",".MOV",".AVI",".MP4",".mp3",".MP
 
 
 function MediaManager(config){
+	if(typeof config === 'undefined')
+		return console.log("no config found for MediaManager");
+	
 	this.mediaDirectory = typeof config.mediaDir !== 'undefined' ? path.resolve(__dirname,"../",config.mediaDir) : DEFAULT_MEDIA_DIR;
 	this.USBDirectory = typeof config.USBDir !== 'undefined' ? config.USBDir : DEFAULT_USB_DIR;
 	this.pendingTransfer = 0;

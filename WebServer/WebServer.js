@@ -6,10 +6,10 @@ var httpServer = require('http-server'),
     colors = require('colors');
   
     
-var DEFAULT_PORT = 8080;
-var DEFAULT_ROOT_DIR = path.join(__dirname, '../w/root');
+//var DEFAULT_PORT = 8080;
+//var DEFAULT_ROOT_DIR = path.join(__dirname, '../w/root');
 
-var REFRESH_STATUS_PERIOD = 1000;
+//var REFRESH_STATUS_PERIOD = 1000;
 
 
 /*** Client class ****/
@@ -70,9 +70,14 @@ Client.prototype.addEventListeners = function(webserver){
     
 function WebServer(config){
 		
+	if(typeof config === 'undefined')
+		return console.log("no config found for WebServer");
 	
-	this.port = typeof config.port !== 'undefined' ? config.port : DEFAULT_PORT;
-	this.root = typeof config.root_dir !== 'undefined' ? path.resolve(__dirname,'../',config.root_dir) : DEFAULT_ROOT_DIR;
+	this.port = typeof config.port !== 'undefined' ? config.port : 8080;
+	this.root = typeof config.root_dir !== 'undefined' ? path.resolve(__dirname,'../',config.root_dir) : path.join(__dirname, '../w/root');
+	this.refreshStatusPeriod = typeof config.refreshStatusPeriod !== 'undefined' ? config.refreshStatusPeriod : 1000;
+
+	
 	this.clients = new Array();
 	
 	this.refreshStatusId = null;
@@ -111,14 +116,14 @@ WebServer.prototype.start = function(){
 	
 	this.refreshStatusId = setInterval(function(){
 		self.eventEmitter.emit('getStatus');	
-	},REFRESH_STATUS_PERIOD);
+	},this.refreshStatusPeriod);
 	
 	console.log('[WebServer]'.green+' started on port '+this.port);
 }
 
 WebServer.prototype.stop = function(){
 	
-	//??????? clearInterval(refreshStatusId);
+	clearInterval(this.refreshStatusId);
 	
 	this.clients.forEach(function(client){
 			client.socket.disconnect();
