@@ -36,7 +36,7 @@ function SerialInterface(config){
 				parser: sp.parsers.readline("\n")
 		},false);		
 		
-		self.open();
+		//self.open();
 	});
 
 }	
@@ -67,8 +67,11 @@ SerialInterface.prototype.openHandler = function(){
 }
 var last_value = 0;
 SerialInterface.prototype.dataHandler = function(data){
+	
 	var value = map(data,this.range.inMin,this.range.inMax,this.range.outMin,this.range.outMax);
 	value = constrain(value,this.range.outMin,this.range.outMax);
+	//invert
+	value = this.range.outMax - value;
 	// raw easing
 	value = last_value + (value - last_value)*0.8;
 	this.eventEmitter.emit("data",value);

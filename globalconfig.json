@@ -21,7 +21,7 @@
 		"HPlayerPath":"./bin/HPlayer"
 	},
 	"HPlayer":{
-		"name" : "Rodolphe",
+		"name" : "Alberto",
 		"isPlaying" : false,
 		"media" : {
 					"filepath":null,
@@ -36,8 +36,8 @@
 		"baudRate":9600,
 		"BindToOSC":"volume",
 		"range":{
-			"inMin":150,	
-			"inMax":350,
+			"inMin":100,	
+			"inMax":200,
 			"outMin":0,
 			"outMax":100
 		}
