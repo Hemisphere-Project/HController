@@ -16,6 +16,9 @@ module.exports = function (config){
 	var clientPort = typeof config.clientPort !== 'undefined' ? config.clientPort : DEFAULT_CLIENT_PORT;
 	var serverPort = typeof config.serverPort !== 'undefined' ? config.serverPort : DEFAULT_SERVER_PORT;
 	
+	if(typeof config.base64Encode !== 'undefined')
+		BASE_64_ENCODE = config.base64Encode;
+	
 	this.eventEmitter = new events.EventEmitter();
 	
 	var self = this;
@@ -69,7 +72,7 @@ module.exports = function (config){
 
 				}
 				if(BASE_64_ENCODE)
-					player.media.filepath = new Buffer(args.shift(), 'base64').toString('ascii');
+					player.media.filepath = new Buffer(args.shift(), 'base64').toString('utf8');
 				else
 					player.media.filepath = args.shift();
 				player.media.progress = args.shift();
@@ -97,18 +100,30 @@ module.exports = function (config){
 					oscClient.sendMessage('quit');
 		},
 		play : function(media){
-					//console.log('play  '+media);
 					if(BASE_64_ENCODE){
-						media = new Buffer(media).toString('base64');	
+						if(typeof media === "object"){
+							console.log("yay");
+							for( var k=0;k<media.length;k++){
+								media[k] = new Buffer(media[k]).toString('base64');
+							}
+						}else
+							media = new Buffer(media).toString('base64');
 					}
-					oscClient.sendMessage('play',[media]);
+					//console.log('play  '+JSON.stringify(media));
+					oscClient.sendMessage('play',typeof media === "string" ? [media] : media);
 		},
 		playloop : function(media){
-					//console.log('play  '+media);
 					if(BASE_64_ENCODE){
-						media = new Buffer(media).toString('base64');	
+						if(typeof media === "object"){
+							console.log("yay");
+							for( var k=0;k<media.length;k++){
+								media[k] = new Buffer(media[k]).toString('base64');
+							}
+						}else
+							media = new Buffer(media).toString('base64');
 					}
-					oscClient.sendMessage('playloop',[media]);
+					console.log('playloop  '+JSON.stringify(media));
+					oscClient.sendMessage('playloop',typeof media === "string" ? [media] : media);
 		},
 		stop : function(){
 					//console.log('stop');
