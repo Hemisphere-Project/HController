@@ -144,21 +144,38 @@ ModuleManager.prototype.startServices = function() {
 	else
 	{	
 		//HPLAYER ZOMBIES KILLER
+//TODO: doesn't seems to Work !
 		this.processManager.cleanZombies('HPlayer');
 
 		//WEBSERVER START
 		this.webServer.start();
 
 		//HPlayer START
-		this.processManager.spawn(this.config.ProcessManager.HPlayerPath,['--name',this.player.name,'--volume',this.player.volume,'--in',this.config.OSCInterface.clientPort,'--out',this.config.OSCInterface.serverPort,'--base64',1],true);
+		this.processManager.spawn(
+			this.config.ProcessManager.HPlayerPath,
+			[
+				'--name',this.player.name,
+				'--volume',this.player.volume,
+				'--in',this.config.OSCInterface.clientPort,
+				'--out',this.config.OSCInterface.serverPort,
+				'--base64',1,
+				'--info',1
+			],
+			true,	//re-start if killed
+			false); //pipe stdout to console log
 		
-		if(that.config.ModuleManager.playlistAutoLaunch){
-			var autoPlayList = [];
-			that.mediaManager.mediaList.forEach(function(element){
-				autoPlayList.push(element.filepath)
-			});
-			that.oscInterface.playloop(autoPlayList);
-		}
+//CRADOS --> find a way to know if the HPlayer is ready to receive playlist !
+//=> wait for the first status 
+		setTimeout(function(){
+			if(that.config.ModuleManager.playlistAutoLaunch){
+				var autoPlayList = [];
+				that.mediaManager.mediaList.forEach(function(element){
+					autoPlayList.push(element.filepath)
+				});
+				that.oscInterface.playloop(autoPlayList);
+			}
+		},2000);
+		
 		
 		console.log('Running..'.green+'\n');
 		this.isRunning = true;

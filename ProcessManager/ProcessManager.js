@@ -89,7 +89,7 @@ ProcessManager.prototype.cleanZombies = function(processName) {
 			psargs: 'ux'
 		}, 
 		function(err, resultList ) 
-		{
+		{			
 			if (err) throw new Error( err );
 			
 			resultList.forEach(function( process )
