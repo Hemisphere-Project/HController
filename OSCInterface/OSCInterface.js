@@ -65,7 +65,7 @@ function OSCInterface(config){
 					break;
 
 				}
-				if(BASE_64_ENCODE)
+				if(self.base64Encode)
 					player.media.filepath = new Buffer(args.shift(), 'base64').toString('utf8');
 				else
 					player.media.filepath = args.shift();
