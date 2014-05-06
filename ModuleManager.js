@@ -172,7 +172,7 @@ ModuleManager.prototype.startServices = function() {
 		this.processManager.cleanZombies('HPlayer');
 
 		//WEBSERVER START
-		this.webServer.start();
+		//this.webServer.start();
 		
 
 		//HPlayer START
@@ -199,11 +199,11 @@ ModuleManager.prototype.startServices = function() {
 				});
 				that.oscInterface.playloop(autoPlayList);
 			}
-		},2000);
+		},5000);
 		
 		
 		//SERIAL START
-		this.serialInterface.start();
+		//this.serialInterface.start();
 		
 		console.log('Running..'.green+'\n');
 		this.isRunning = true;
