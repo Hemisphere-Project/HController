@@ -96,7 +96,7 @@ module.exports = function (config){
 	return{
 		// BASIC CONTROLS
 		quit : function(){
-					//console.log('quit');
+					console.log('quit');
 					oscClient.sendMessage('quit');
 		},
 		play : function(media){

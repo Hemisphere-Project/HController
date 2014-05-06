@@ -25,6 +25,7 @@ function exit(code,err) {
     
     modules.stop(code);
     
+    
 	if (code == 2) console.log('Exit on SIGINT'.red);
 	else if (code == 99) console.log('Exit on Uncaught Exception: '.red+err);
 	else console.log('Exit'.red);

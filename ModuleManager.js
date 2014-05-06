@@ -162,7 +162,7 @@ ModuleManager.prototype.startServices = function() {
 				'--info',1
 			],
 			true,	//re-start if killed
-			false); //pipe stdout to console log
+			true); //pipe stdout to console log
 		
 //CRADOS --> find a way to know if the HPlayer is ready to receive playlist !
 //=> wait for the first status 
