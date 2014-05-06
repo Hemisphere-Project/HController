@@ -10,7 +10,7 @@ function OSCInterface(config){
 	this.url = typeof config.url !== 'undefined' ? config.url : '127.0.0.1';
 	this.clientPort = typeof config.clientPort !== 'undefined' ? config.clientPort : 9000;
 	this.serverPort = typeof config.serverPort !== 'undefined' ? config.serverPort : 9001;
-	this.baseAddress = typeof config.baseAddress !== 'undefined' ? config.baseAddress : '';
+	this.baseAddress = typeof config.baseAddress !== 'undefined' ? config.baseAddress : "";
 	this.base64Encode = typeof config.base64Encode !== 'undefined' ? config.base64Encode : false;
 
 	this.eventEmitter = new events.EventEmitter();
@@ -20,7 +20,7 @@ function OSCInterface(config){
 	//OSC CLIENT: SEND MESSAGES
 	this.oscClient = new osc.Client(this.url, this.clientPort); 
 	this.oscClient.sendMessage = function (operation,args){
-		var message = new osc.Message(this.baseAddress+'/'+operation);
+		var message = new osc.Message(self.baseAddress+'/'+operation);
 		if(typeof args !== 'undefined')// we got args
 			for(var k=0;k<args.length;k++)// we push args
 				message.append(args[k]);
