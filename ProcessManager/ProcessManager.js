@@ -1,8 +1,6 @@
-var spawn = require('child_process').spawn,
+var process = require('child_process'),
 	colors = require('colors');
-	ps = require('ps');
 	
-
 var RESPAWN_DELAY = 1000;
 
 
@@ -13,7 +11,7 @@ function ProcessManager(){
 ProcessManager.prototype.spawn = function(proc,args,autorespawn,pipestdout){
 	
 	var self = this;
-	var child = spawn(proc,args);
+	var child = process.spawn(proc,args);
 	
 	if(pipestdout){
 		child.stdout.setEncoding('utf8');
@@ -64,7 +62,7 @@ ProcessManager.prototype.kill = function(pid){
 	var i = this.getProcessIndex(pid);
 	if(i == -1) return console.log("[Process Manager]".yellow+" pid doesn't exists");
 	
-	this.childProcesses[i].kill('SIGTERM');
+	this.childProcesses[i].kill('SIGKILL');
 	this.childProcesses.splice(i,1);
 	
 	console.log('[Process Manager] '.red+pid+' killed');
@@ -83,28 +81,20 @@ ProcessManager.prototype.getProcessIndex = function(pid){
 ProcessManager.prototype.cleanZombies = function(processName) {
 	
 	var self = this;
-	ps.lookup(
+	
+	process.exec('pgrep '+processName, function (error, stdout, stderr) 
+	{
+		if (error) { console.error(error); }
+		pids = stdout.split("\n");
+		for(var i=0; i<pids.length;i++) pids[i] = +pids[i];
+		
+		pids.forEach(function( pid )
 		{
-			command: processName+'+',
-			psargs: 'ux'
-		}, 
-		function(err, resultList ) 
-		{			
-			if (err) throw new Error( err );
-			
-			resultList.forEach(function( process )
-			{
-				if (( process ) && ( self.getProcessIndex(parseInt(process.pid)) ))
-				{
-					ps.kill( process.pid , function( err ) 
-					{
-						if (err) throw new Error( err );
-						else console.log( ('[Process Manager] '+processName+' zombie '+process.pid+' killed').yellow );
-					});			
-				}
-			});
-		}
-	);
+			if ((pid > 0) && ( self.getProcessIndex(pid) == -1))
+				process.exec('kill -9 '+pid, function (error, stdout, stderr) {
+					console.log( ('[Process Manager] '+processName+' zombie '+pid+' killed').yellow ); });
+		});
+	});
 }
 
 

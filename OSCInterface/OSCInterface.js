@@ -85,7 +85,7 @@ function OSCInterface(config){
 			default: console.log("message not recognized: "+message);	
 		}
 	});
-
+}
 /***************************   OSCInterface Commands   ************************/
 
 

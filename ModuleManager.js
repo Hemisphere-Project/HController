@@ -18,12 +18,12 @@ function ModuleManager(){
 	this.isRunning 	= false;
 	//this.isLocked	= false;
 	
-	this.config			= ConfigHelper.loadConfig();
-	this.webServer		= new WebServer(this.config.WebServer);
-	this.oscInterface	= new OSCInterface(this.config.OSCInterface);
-	this.player			= new HPlayer(this.config.HPlayer);
-	this.mediaManager	= new MediaManager(this.config.MediaManager);
-	this.processManager = new ProcessManager();
+	this.config			 = ConfigHelper.loadConfig();
+	this.webServer		 = new WebServer(this.config.WebServer);
+	this.oscInterface	 = new OSCInterface(this.config.OSCInterface);
+	this.player			 = new HPlayer(this.config.HPlayer);
+	this.mediaManager	 = new MediaManager(this.config.MediaManager);
+	this.processManager  = new ProcessManager();
 	this.serialInterface = new SerialInterface(this.config.SerialInterface);
 	
 	this.link();
@@ -128,31 +128,17 @@ START ALL
 ModuleManager.prototype.start = function() {	
 	
 	var self = this;
-	/*
-	//TRANSFER FROM USB
-	this.isLocked = true;
-	this.mediaManager.loadFromUSBStorage(function(msg) 
-	{ 
-		if(msg) console.log(msg+'\n'); 
-		//self.isLocked = false; 
-		self.mediaManager.updateMediaList(function(err,list){
-			if(err)
-				return console.log(err)
-			
-			self.isLocked=false;	
-		});
-	});
 	
-	//START SERVICES
-	this.startServices();*/
-	function sync(task) {
-	  if(task) {
-		task.method.call(task.context,function(args) {
-				return sync(self.startupList.shift());
-		});
-	  } else {
-		return ;
-	  }
+	//START STACK
+	function sync(task) 
+	{
+		if(task) 
+		{
+			task.method.call(task.context,function(args) {
+					return sync(self.startupList.shift());
+			});
+		} 
+		else return ;
 	}
 	
 	sync(self.startupList.shift());
@@ -164,50 +150,45 @@ START SERVICES
 ModuleManager.prototype.startServices = function() {	
 	
 	var that = this;
-	//if (this.isLocked) setTimeout(function(){that.startServices()},1000);
-	//else
-	//{	
-		//HPLAYER ZOMBIES KILLER
-		//TODO: doesn't seems to Work !
-		this.processManager.cleanZombies('HPlayer');
 
-		//WEBSERVER START
-		//this.webServer.start();
-		
+	//HPLAYER ZOMBIES KILLER
+	this.processManager.cleanZombies('HPlayer');
 
-		//HPlayer START
-		this.processManager.spawn(
-			this.config.ProcessManager.HPlayerPath,
-			[
-				'--name',this.player.name,
-				'--volume',this.player.volume,
-				'--in',this.config.OSCInterface.clientPort,
-				'--out',this.config.OSCInterface.serverPort,
-				'--base64',1,
-				'--info',1
-			],
-			true,	//re-start if killed
-			true); //pipe stdout to console log
+	//WEBSERVER START
+	this.webServer.start();	
+
+	//HPlayer START
+	this.processManager.spawn(
+		this.config.ProcessManager.HPlayerPath,
+		[
+			'--name',this.player.name,
+			'--volume',this.player.volume,
+			'--in',this.config.OSCInterface.clientPort,
+			'--out',this.config.OSCInterface.serverPort,
+			'--base64',1,
+			'--info',0
+		],
+		true,	//re-start if killed
+		false);  //pipe stdout to console log
 		
-//CRADOS --> find a way to know if the HPlayer is ready to receive playlist !
-//=> wait for the first status 
-		setTimeout(function(){
-			if(that.config.ModuleManager.playlistAutoLaunch){
-				var autoPlayList = [];
-				that.mediaManager.mediaList.forEach(function(element){
-					autoPlayList.push(element.filepath)
-				});
-				that.oscInterface.playloop(autoPlayList);
-			}
-		},5000);
+	//CRADOS --> find a way to know if the HPlayer is ready to receive playlist !
+	//=> wait for the first status ?? 
+	setTimeout(function(){
+		if(that.config.ModuleManager.playlistAutoLaunch){
+			var autoPlayList = [];
+			that.mediaManager.mediaList.forEach(function(element){
+				autoPlayList.push(element.filepath)
+			});
+			that.oscInterface.playloop(autoPlayList);
+		}
+	},2000);
 		
-		
-		//SERIAL START
-		//this.serialInterface.start();
-		
-		console.log('Running..'.green+'\n');
-		this.isRunning = true;
-	//}
+	
+	//SERIAL START
+	//this.serialInterface.start();
+	
+	console.log('Running..'.green+'\n');
+	this.isRunning = true;
 }
 
 
@@ -217,8 +198,8 @@ STOP ALL
 **/
 ModuleManager.prototype.stop = function() {
 	
-	if (this.isRunning) {
-		this.oscInterface.quit();
+	if (this.isRunning) 
+	{
 		this.webServer.stop();
 		this.processManager.killAll();
 	}
