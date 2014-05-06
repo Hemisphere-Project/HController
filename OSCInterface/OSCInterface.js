@@ -2,31 +2,25 @@ var osc = require('node-osc');
 var events = require('events');
 var HPlayer = require('../HPlayer.js');
 
-var DEFAULT_URL = '127.0.0.1';
-var DEFAULT_CLIENT_PORT = 9000;
-var DEFAULT_SERVER_PORT = 9001;
-var BASE_ADDRESS = '';
 
-var BASE_64_ENCODE = true;
+function OSCInterface(config){
+	if(typeof config === 'undefined')
+		return console.log("no config found for OSCInterface");
+	
+	this.url = typeof config.url !== 'undefined' ? config.url : '127.0.0.1';
+	this.clientPort = typeof config.clientPort !== 'undefined' ? config.clientPort : 9000;
+	this.serverPort = typeof config.serverPort !== 'undefined' ? config.serverPort : 9001;
+	this.baseAddress = typeof config.baseAddress !== 'undefined' ? config.baseAddress : "";
+	this.base64Encode = typeof config.base64Encode !== 'undefined' ? config.base64Encode : false;
 
-
-module.exports = function (config){
-	
-	var url = typeof config.url !== 'undefined' ? config.url : DEFAULT_URL;
-	var clientPort = typeof config.clientPort !== 'undefined' ? config.clientPort : DEFAULT_CLIENT_PORT;
-	var serverPort = typeof config.serverPort !== 'undefined' ? config.serverPort : DEFAULT_SERVER_PORT;
-	
-	if(typeof config.base64Encode !== 'undefined')
-		BASE_64_ENCODE = config.base64Encode;
-	
 	this.eventEmitter = new events.EventEmitter();
 	
 	var self = this;
 	
 	//OSC CLIENT: SEND MESSAGES
-	var oscClient = new osc.Client(url, clientPort); 
-	oscClient.sendMessage = function (operation,args){
-		var message = new osc.Message(BASE_ADDRESS+'/'+operation);
+	this.oscClient = new osc.Client(this.url, this.clientPort); 
+	this.oscClient.sendMessage = function (operation,args){
+		var message = new osc.Message(self.baseAddress+'/'+operation);
 		if(typeof args !== 'undefined')// we got args
 			for(var k=0;k<args.length;k++)// we push args
 				message.append(args[k]);
@@ -35,8 +29,8 @@ module.exports = function (config){
 	}
 	
 	//OSC SERVER: RECEIVE MESSAGES
-	var oscServer = new osc.Server(serverPort, url);
-	oscServer.on("message", function (message, rinfo) {
+	this.oscServer = new osc.Server(this.serverPort, this.url);
+	this.oscServer.on("message", function (message, rinfo) {
 		
 		var args = message.slice();
 		var command = "";	
@@ -71,7 +65,7 @@ module.exports = function (config){
 					break;
 
 				}
-				if(BASE_64_ENCODE)
+				if(self.base64Encode)
 					player.media.filepath = new Buffer(args.shift(), 'base64').toString('utf8');
 				else
 					player.media.filepath = args.shift();
@@ -91,80 +85,71 @@ module.exports = function (config){
 			default: console.log("message not recognized: "+message);	
 		}
 	});
-	
-	//OSC INTERFACE COMMANDS
-	return{
-		// BASIC CONTROLS
-		quit : function(){
-					console.log('quit');
-					oscClient.sendMessage('quit');
-		},
-		play : function(media){
-					if(BASE_64_ENCODE){
-						if(typeof media === "object"){
-							console.log("yay");
-							for( var k=0;k<media.length;k++){
-								media[k] = new Buffer(media[k]).toString('base64');
-							}
-						}else
-							media = new Buffer(media).toString('base64');
-					}
-					//console.log('play  '+JSON.stringify(media));
-					oscClient.sendMessage('play',typeof media === "string" ? [media] : media);
-		},
-		playloop : function(media){
-					if(BASE_64_ENCODE){
-						if(typeof media === "object"){
-							console.log("yay");
-							for( var k=0;k<media.length;k++){
-								media[k] = new Buffer(media[k]).toString('base64');
-							}
-						}else
-							media = new Buffer(media).toString('base64');
-					}
-					console.log('playloop  '+JSON.stringify(media));
-					oscClient.sendMessage('playloop',typeof media === "string" ? [media] : media);
-		},
-		stop : function(){
-					//console.log('stop');
-					oscClient.sendMessage('stop');
-		},
-		pause : function(){
-					//console.log('pause');
-					oscClient.sendMessage('pause');
-		},
-		resume : function(){
-					//console.log('resume');
-					oscClient.sendMessage('resume');
-		},
-		// SOUND
-		volume : function(value){
-					//console.log('volume  '+value);
-					oscClient.sendMessage('volume',[value]);
-		},
-		mute : function(){
-					//console.log('mute');
-					oscClient.sendMessage('mute');
-		},
-		unmute : function(){
-					//console.log('unmute');
-					oscClient.sendMessage('unmute');
-		},
-		// EFFECTS
-		gaussianBlur : function(blurSize){
-					//console.log('fx/gaussianBlur  '+blurSize);
-					oscClient.sendMessage('fx/gaussianBlur',[blurSize]);
-		},
-		// PLAYER STATUS REQUEST
-		getStatus : function(){
-					//console.log('s/getStatus');
-					oscClient.sendMessage('s/getStatus');
-		},
-		
-		eventEmitter : this.eventEmitter
 
-	};
+/***************************   OSCInterface Commands   ************************/
+
+
+OSCInterface.prototype.quit = function(){
+	this.oscClient.sendMessage('quit');
 }
+
+// BASIC CONTROLS 
+OSCInterface.prototype.play = function(media){
+	if(this.base64Encode){
+		if(typeof media === "object"){
+			for( var k=0;k<media.length;k++){
+				media[k] = new Buffer(media[k]).toString('base64');
+			}
+		}else
+			media = new Buffer(media).toString('base64');
+	}
+	//console.log('play  '+JSON.stringify(media));
+	this.oscClient.sendMessage('play',typeof media === "string" ? [media] : media);
+	
+}
+OSCInterface.prototype.playloop = function(media){
+	if(this.base64Encode){
+		if(typeof media === "object"){
+			for( var k=0;k<media.length;k++){
+				media[k] = new Buffer(media[k]).toString('base64');
+			}
+		}else
+			media = new Buffer(media).toString('base64');
+	}
+	console.log('playloop  '+JSON.stringify(media));
+	this.oscClient.sendMessage('playloop',typeof media === "string" ? [media] : media);
+	
+}
+OSCInterface.prototype.stop = function(){
+	this.oscClient.sendMessage('stop');
+	
+}
+OSCInterface.prototype.pause = function(){
+	this.oscClient.sendMessage('pause');
+}
+OSCInterface.prototype.resume = function(){
+	this.oscClient.sendMessage('resume');
+}
+// SOUND
+OSCInterface.prototype.volume = function(value){
+	this.oscClient.sendMessage('volume',[value]);
+}
+OSCInterface.prototype.mute = function(){
+	this.oscClient.sendMessage('mute');
+}
+OSCInterface.prototype.unmute = function(){
+	this.oscClient.sendMessage('unmute');	
+}
+// EFFECTS
+OSCInterface.prototype.gaussianBlur = function(blurSize){
+	this.oscClient.sendMessage('fx/gaussianBlur',[blurSize]);
+}
+// PLAYER STATUS REQUEST
+OSCInterface.prototype.getStatus = function(){
+	this.oscClient.sendMessage('s/getStatus');
+}
+
+module.exports = OSCInterface
 
 
 
