@@ -168,7 +168,7 @@ ModuleManager.prototype.startServices = function() {
 	//else
 	//{	
 		//HPLAYER ZOMBIES KILLER
-//TODO: doesn't seems to Work !
+		//TODO: doesn't seems to Work !
 		this.processManager.cleanZombies('HPlayer');
 
 		//WEBSERVER START
