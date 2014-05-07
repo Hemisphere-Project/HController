@@ -38,7 +38,7 @@
 		"baudRate":9600,
 		"BindToOSC":"volume",
 		"DataFormater":{
-			"inMin":100,	
+			"inMin":50,	
 			"inMax":200,
 			"outMin":0,
 			"outMax":100

@@ -5,15 +5,19 @@ module.exports = {
 		format:function(inData, parameters){
 			var outData;
 			/* specific format script  */
-
-				outData = map(inData,parameters.inMin,parameters.inMax,parameters.outMin,parameters.outMax);
-				outData = constrain(outData,parameters.outMin,parameters.outMax);
+				//console.log(inData);
+				//outData = map(inData,parameters.inMin,parameters.inMax,parameters.outMin,parameters.outMax);
+				//console.log(outData);
+				//outData = constrain(outData,parameters.outMin,parameters.outMax);
+				//console.log(outData);
 				//invert
-				outData = parameters.outMax - outData;
+				//outData = parameters.outMax - outData;
+				//console.log(outData);
 				// raw easing
-				outData = store.lastValue + (outData - store.lastValue)*0.8;			
+				//outData = store.lastValue + (outData - store.lastValue)*0.8;
+				//console.log(outData);
 			
-				store.lastValue = outData
+				//store.lastValue = outData
 			/**************************/
 			return outData;
 		}

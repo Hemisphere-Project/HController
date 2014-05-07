@@ -68,7 +68,9 @@ SerialInterface.prototype.openHandler = function(){
 	this.eventEmitter.emit("open");
 }
 SerialInterface.prototype.dataHandler = function(data){
-	this.eventEmitter.emit("data",df.format(data,this.DataFormater));
+	//console.log(df.format(data,this.DataFormater));
+	//this.eventEmitter.emit("data",df.format(data,this.DataFormater));
+	this.eventEmitter.emit("data",data,this.DataFormater)
 }
 SerialInterface.prototype.closeHandler = function(){
 	this.eventEmitter.emit("close");

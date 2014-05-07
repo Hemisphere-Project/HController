@@ -113,9 +113,9 @@ ModuleManager.prototype.link = function() {
 			
 	this.serialInterface.eventEmitter.on('data',function(value){
 		//console.log(JSON.stringify(self.config));
-		console.log(value);
+		//console.log(value);
 		if(self.config.SerialInterface.BindToOSC === "volume"){
-			//self.oscInterface.volume(value);
+			self.oscInterface.volume(value);
 		}else{
 			console.log("nothing to bind serial data to");	
 		}
@@ -152,10 +152,10 @@ ModuleManager.prototype.startServices = function() {
 	var that = this;
 
 	//HPLAYER ZOMBIES KILLER
-	this.processManager.cleanZombies('HPlayer');
+	//this.processManager.cleanZombies('HPlayer');
 
 	//WEBSERVER START
-	this.webServer.start();	
+	//this.webServer.start();	
 
 	//HPlayer START
 	this.processManager.spawn(
@@ -166,7 +166,8 @@ ModuleManager.prototype.startServices = function() {
 			'--in',this.config.OSCInterface.clientPort,
 			'--out',this.config.OSCInterface.serverPort,
 			'--base64',1,
-			'--info',0
+			'--info',0,
+			'--ahdmi',0
 		],
 		true,	//re-start if killed
 		false);  //pipe stdout to console log
@@ -185,7 +186,7 @@ ModuleManager.prototype.startServices = function() {
 		
 	
 	//SERIAL START
-	//this.serialInterface.start();
+	this.serialInterface.start();
 	
 	console.log('Running..'.green+'\n');
 	this.isRunning = true;
