@@ -115,7 +115,7 @@ WebServer.prototype.start = function(){
 	}
 	
 	this.refreshStatusId = setInterval(function(){
-		//self.eventEmitter.emit('getStatus');	
+		self.eventEmitter.emit('getStatus');	
 	},this.refreshStatusPeriod);
 	
 	console.log('[WebServer]'.green+' started on port '+this.port);
