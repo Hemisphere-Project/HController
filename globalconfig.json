@@ -35,13 +35,6 @@
 		"volume" : 50
 	},
 	"SerialInterface":{
-		"baudRate":9600,
-		"BindToOSC":"volume",
-		"DataFormater":{
-			"inMin":50,	
-			"inMax":200,
-			"outMin":0,
-			"outMax":100
-		}
+		"baudRate":9600
 	}
 }
