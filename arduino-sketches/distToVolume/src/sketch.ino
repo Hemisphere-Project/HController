@@ -41,6 +41,6 @@ void loop()
   Serial.print("{\"name\":\"volume\",\"args\":{\"value\":\"");
   Serial.print(range);
   Serial.print("\"}}");
-  Serial.println();*/
+  Serial.println();
   delay(d);
 }

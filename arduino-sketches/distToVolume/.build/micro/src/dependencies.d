@@ -12,5 +12,4 @@
   /Applications/Arduino.app/Contents/Resources/Java/hardware/arduino/variants/micro/pins_arduino.h \
   /Applications/Arduino.app/Contents/Resources/Java/hardware/arduino/variants/micro/../leonardo/pins_arduino.h \
   lib/arduinoMaxbotix/Maxbotix.h lib/arduinoMaxbotix/RxSoftwareSerial.h \
-  /Applications/Arduino.app/Contents/Resources/Java/hardware/arduino/cores/arduino/Stream.h \
-  lib/Base64/Base64.h
+  /Applications/Arduino.app/Contents/Resources/Java/hardware/arduino/cores/arduino/Stream.h
