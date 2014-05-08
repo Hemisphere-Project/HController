@@ -151,7 +151,7 @@ ModuleManager.prototype.startServices = function() {
 	//this.webServer.start();	
 
 	//HPlayer START
-	/*this.processManager.spawn(
+	this.processManager.spawn(
 		this.config.ProcessManager.HPlayerPath,
 		[
 			'--name',this.player.name,
@@ -164,11 +164,11 @@ ModuleManager.prototype.startServices = function() {
 		],
 		true,	//re-start if killed
 		false);  //pipe stdout to console log
-	*/	
+		
 	/********* TO BE REPLACED WITH MEDIA ON SPAWN ********************/
 	//CRADOS --> find a way to know if the HPlayer is ready to receive playlist !
 	//=> wait for the first status ?? 
-	/*setTimeout(function(){
+	setTimeout(function(){
 	if(that.config.ModuleManager.playlistAutoLaunch){
 		if(that.mediaManager.mediaList.length == 0){// nothing to play
 			console.log("no media to play".red)
@@ -178,7 +178,7 @@ ModuleManager.prototype.startServices = function() {
 			that.oscInterface.playloop(that.mediaManager.mediaDirectory);
 		}
 	}
-	},2000);*/
+	},2000);
 	/********************************************************************/
 		
 	
