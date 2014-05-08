@@ -97,7 +97,9 @@ SerialInterface.prototype.errorHandler = function(err){
 }
 SerialInterface.prototype.dataHandler = function(data){
 	command = new Command();
-	command.parseString(data);
+	command.name = "volume";
+	command.args = {"value":data};
+	//command.parseString(data);
 	//console.log(JSON.stringify(command));
 	switch (command.name){
 		case "volume":
