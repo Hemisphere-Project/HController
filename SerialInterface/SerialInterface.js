@@ -14,9 +14,15 @@ function Command(){
 
 Command.prototype.parseString = function(string){
 	// command  sent as stringified JSON = easy parse ;)
-	var json = JSON.parse(string);
-	this.name = json.name;
-	this.args = json.args;
+	try {
+		var json = JSON.parse(string);
+		this.name = json.name;
+		this.args = json.args;
+	}
+	catch (e) {
+		console.log("parsing error: "+e);
+	};
+
 }
 
 

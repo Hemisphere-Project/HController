@@ -1,5 +1,6 @@
 #include "Maxbotix.h"
-#include<stdlib.h>
+#include <stdlib.h>
+
 
 Maxbotix rangeSensorPW(8, Maxbotix::PW, Maxbotix::LV);
 
@@ -37,13 +38,9 @@ void loop()
   range = constrain(range,rangeMin,rangeMax);
   range = map(range,rangeMax,rangeMin,volMin,volMax);
   
-  // sound indicating range
-  //int thisPitch = map(range, 300, 10, 120, 1500);
-  //tone(9, thisPitch, 30);
-  //dtostrf(range,5,2,command[1]);
   Serial.print("{\"name\":\"volume\",\"args\":{\"value\":\"");
   Serial.print(range);
   Serial.print("\"}}");
-  Serial.println();
+  Serial.println();*/
   delay(d);
 }
