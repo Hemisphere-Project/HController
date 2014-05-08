@@ -158,8 +158,8 @@ ModuleManager.prototype.startServices = function() {
 			'--volume',this.player.volume,
 			'--in',this.config.OSCInterface.clientPort,
 			'--out',this.config.OSCInterface.serverPort,
-			'--base64',1,
-			'--info',0,
+			'--base64',0,
+			'--info',1,
 			'--ahdmi',0
 		],
 		true,	//re-start if killed

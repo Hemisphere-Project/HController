@@ -1,5 +1,4 @@
 var sp = require("serialport"),
-	df = require("./DataFormater.js"),
 	events = require('events');
 
 var SerialPort = sp.SerialPort;
