@@ -38,9 +38,9 @@ void loop()
   range = constrain(range,rangeMin,rangeMax);
   range = map(range,rangeMax,rangeMin,volMin,volMax);
   
-  //Serial.print("{\"name\":\"volume\",\"args\":{\"value\":\"");
+  //Serial.print("{\"name\":\"volume\",\"args\":{\"value\":");
   Serial.print(range);
-  //Serial.print("\"}}");
+  //Serial.print("}}");
   Serial.println();
   delay(d);
 }
