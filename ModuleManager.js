@@ -16,7 +16,6 @@ MODULE MANAGER
 function ModuleManager(){
 	
 	this.isRunning 	= false;
-	//this.isLocked	= false;
 	
 	this.config			 = ConfigHelper.loadConfig();
 	this.webServer		 = new WebServer(this.config.WebServer);

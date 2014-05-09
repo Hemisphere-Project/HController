@@ -3,7 +3,7 @@
 		"playlistAutoLaunch":true
 	},
 	"MediaManager":{
-		"mediaDir": "media",
+		"mediaDir": "../media",
 		"USBDir":"/media/usb"
 	},
 	"OSCInterface":{
