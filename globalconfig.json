@@ -34,7 +34,7 @@
 		"isPaused"  : false,
 		"isMuted"   : false,
 		"volume"    : 50,
-		"hdmiAudio"	: true,
+		"hdmiAudio"	: false,
 		"glsl"		: false,
 		"info"		: true
 	},
