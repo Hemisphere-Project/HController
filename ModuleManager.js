@@ -28,7 +28,12 @@ function ModuleManager(){
 	
 	this.link();
 	
-	this.startupList = [{
+	this.startupList = [
+						{
+							context:this.mediaManager,
+							method:this.mediaManager.loadFromUSBStorage
+						},
+						{
 							context:this.mediaManager,
 							method:this.mediaManager.updateMediaList
 						},
@@ -161,7 +166,7 @@ ModuleManager.prototype.startServices = function() {
 			'--base64',this.config.OSCInterface.base64Encode,
 			'--glsl',0,
 			'--ahdmi',0,
-			'--info',0
+			'--info',1
 		],
 		true,	//re-start if killed
 		false);  //pipe stdout to console log

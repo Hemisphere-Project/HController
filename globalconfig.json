@@ -4,14 +4,14 @@
 	},
 	"MediaManager":{
 		"mediaDir": "media",
-		"USBDir":"./media"
+		"USBDir":"/media/usb"
 	},
 	"OSCInterface":{
 		"url":"127.0.0.1",
 		"clientPort":9000,
 		"serverPort":9001,
 		"baseAddress":"",
-		"base64Encode":true
+		"base64Encode":false
 	},
 	"RemoteInterface":"",
 	"WebServer":{
