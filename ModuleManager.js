@@ -166,6 +166,8 @@ ModuleManager.prototype.startServices = function() {
 			'--in',this.config.OSCInterface.clientPort,
 			'--out',this.config.OSCInterface.serverPort,
 			'--base64',1,
+			'--glsl',0,
+			'--ahdmi',0,
 			'--info',0
 		],
 		true,	//re-start if killed
@@ -205,8 +207,6 @@ ModuleManager.prototype.stop = function() {
 	}
 	this.isRunning = false;
 }
-
-
 
 module.exports = ModuleManager;
 
