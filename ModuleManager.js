@@ -148,7 +148,7 @@ ModuleManager.prototype.startServices = function() {
 	this.processManager.cleanZombies('HPlayer');
 
 	//WEBSERVER START
-	//this.webServer.start();	
+	this.webServer.start();	
 
 	//HPlayer START
 	this.processManager.spawn(
