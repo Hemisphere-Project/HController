@@ -1,11 +1,33 @@
 var sp = require("serialport"),
-	df = require("./DataFormater.js"),
 	events = require('events');
 
 var SerialPort = sp.SerialPort;
 
 
 
+/*** Command class ****/
+
+function Command(){
+	this.name = "";
+	this.args = [];	
+}
+
+Command.prototype.parseString = function(string){
+	// command  sent as stringified JSON = easy parse ;)
+	try {
+		var json = JSON.parse(string);
+		this.name = json.name;
+		this.args = json.args;
+	}
+	catch (e) {
+		console.log("parsing error: "+e);
+	};
+
+}
+
+
+
+/*****************  SerialInterface Class *************************************/
 
 function SerialInterface(config){
 	
@@ -67,14 +89,28 @@ SerialInterface.prototype.removeEventListeners = function(){
 SerialInterface.prototype.openHandler = function(){
 	this.eventEmitter.emit("open");
 }
-SerialInterface.prototype.dataHandler = function(data){
-	this.eventEmitter.emit("data",df.format(data,this.DataFormater));
-}
 SerialInterface.prototype.closeHandler = function(){
 	this.eventEmitter.emit("close");
 }
 SerialInterface.prototype.errorHandler = function(err){
 	this.eventEmitter.emit("error",err);
+}
+SerialInterface.prototype.dataHandler = function(data){
+	command = new Command();
+	command.name = "volume";
+	command.args = {"value":data};
+	//command.parseString(data);
+	//console.log(JSON.stringify(command));
+	switch (command.name){
+		case "volume":
+			this.eventEmitter.emit("volume",command.args.value);
+			break;
+		case "gaussianBlur":
+			break;
+		default: console.log("serial command not recognized: "+command.name);		
+	}
+	
+	
 }
 
 
@@ -94,7 +130,8 @@ SerialInterface.prototype.getArduinoComList = function(callback){
 			return callback(err)
 			
 		for(var k=0;k<ports.length;k++){
-			if(ports[k].pnpId.indexOf("Arduino") > -1){
+			//console.log(JSON.stringify(ports[k]));
+			if(ports[k].pnpId.indexOf("Arduino") > -1 || ports[k].manufacturer.indexOf("Arduino") > -1){
 				//console.log(ports[k].pnpId.indexOf("Arduino"))
 				alist.push(ports[k].comName);
 			}
@@ -103,7 +140,6 @@ SerialInterface.prototype.getArduinoComList = function(callback){
 		return callback(null,alist);
   	});
 }
-
 
 
 module.exports = SerialInterface;

@@ -30,10 +30,6 @@ function ModuleManager(){
 	
 	this.startupList = [{
 							context:this.mediaManager,
-							method:this.mediaManager.loadFromUSBStorage
-						},
-						{
-							context:this.mediaManager,
 							method:this.mediaManager.updateMediaList
 						},
 						{	
@@ -111,14 +107,11 @@ ModuleManager.prototype.link = function() {
 		console.log("serial port closed");	
 	});
 			
-	this.serialInterface.eventEmitter.on('data',function(value){
-		//console.log(JSON.stringify(self.config));
-		console.log(value);
-		if(self.config.SerialInterface.BindToOSC === "volume"){
-			//self.oscInterface.volume(value);
-		}else{
-			console.log("nothing to bind serial data to");	
-		}
+	this.serialInterface.eventEmitter.on('volume',function(value){
+		self.oscInterface.volume(value);
+	});
+	this.serialInterface.eventEmitter.on('gaussianBlur',function(value){
+		self.oscInterface.gaussianBlur(value);
 	});
 }	
 
@@ -165,7 +158,7 @@ ModuleManager.prototype.startServices = function() {
 			'--volume',this.player.volume,
 			'--in',this.config.OSCInterface.clientPort,
 			'--out',this.config.OSCInterface.serverPort,
-			'--base64',1,
+			'--base64',this.config.OSCInterface.base64Encode,
 			'--glsl',0,
 			'--ahdmi',0,
 			'--info',0
@@ -173,21 +166,25 @@ ModuleManager.prototype.startServices = function() {
 		true,	//re-start if killed
 		false);  //pipe stdout to console log
 		
+	/********* TO BE REPLACED WITH MEDIA ON SPAWN ********************/
 	//CRADOS --> find a way to know if the HPlayer is ready to receive playlist !
 	//=> wait for the first status ?? 
 	setTimeout(function(){
-		if(that.config.ModuleManager.playlistAutoLaunch){
-			var autoPlayList = [];
-			that.mediaManager.mediaList.forEach(function(element){
-				autoPlayList.push(element.filepath)
-			});
-			that.oscInterface.playloop(autoPlayList);
+	if(that.config.ModuleManager.playlistAutoLaunch){
+		if(that.mediaManager.mediaList.length == 0){// nothing to play
+			console.log("no media to play".red)
+		}else if(that.mediaManager.mediaList.length == 1){// one media, we send the media
+			that.oscInterface.playloop(that.mediaManager.mediaList[0].filepath);
+		}else{// more than one media, we send the dir
+			that.oscInterface.playloop(that.mediaManager.mediaDirectory);
 		}
+	}
 	},2000);
+	/********************************************************************/
 		
 	
 	//SERIAL START
-	//this.serialInterface.start();
+	this.serialInterface.start();
 	
 	console.log('Running..'.green+'\n');
 	this.isRunning = true;

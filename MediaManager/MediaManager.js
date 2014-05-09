@@ -16,7 +16,7 @@ function MediaManager(config){
 	this.mediaDirectory = typeof config.mediaDir !== 'undefined' ? path.resolve(__dirname,"../",config.mediaDir) : DEFAULT_MEDIA_DIR;
 	this.USBDirectory = typeof config.USBDir !== 'undefined' ? config.USBDir : DEFAULT_USB_DIR;
 	this.pendingTransfer = 0;
-	//this.updateMediaList()
+	//this.updateMediaList();
 }
 
 MediaManager.prototype.updateMediaList = function(callback){

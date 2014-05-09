@@ -41,7 +41,7 @@
   3. Get Started :
   
   	cd HController
-  	node MainController.js
+  	node HController.js
   	
   3bis.
   

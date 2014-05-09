@@ -96,7 +96,7 @@ OSCInterface.prototype.quit = function(){
 // BASIC CONTROLS 
 OSCInterface.prototype.play = function(media){
 	if(this.base64Encode){
-		if(typeof media === "object"){
+		if(typeof media === "object"){// allow list of media
 			for( var k=0;k<media.length;k++){
 				media[k] = new Buffer(media[k]).toString('base64');
 			}
@@ -109,7 +109,7 @@ OSCInterface.prototype.play = function(media){
 }
 OSCInterface.prototype.playloop = function(media){
 	if(this.base64Encode){
-		if(typeof media === "object"){
+		if(typeof media === "object"){// allow list of media
 			for( var k=0;k<media.length;k++){
 				media[k] = new Buffer(media[k]).toString('base64');
 			}
@@ -132,6 +132,7 @@ OSCInterface.prototype.resume = function(){
 }
 // SOUND
 OSCInterface.prototype.volume = function(value){
+	//console.log("volume = "+value);
 	this.oscClient.sendMessage('volume',[value]);
 }
 OSCInterface.prototype.mute = function(){
