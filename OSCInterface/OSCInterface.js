@@ -71,6 +71,7 @@ function OSCInterface(config){
 					player.media.filepath = args.shift();
 				player.media.progress = args.shift();
 				player.media.duration = args.shift();
+				player.loop = (args.shift() === 1);
 				player.volume = args.shift();
 				player.isMuted = (args.shift() === "muted");
 				
@@ -93,42 +94,49 @@ OSCInterface.prototype.quit = function(){
 	this.oscClient.sendMessage('quit');
 }
 
+//MEDIA LIST 
+OSCInterface.prototype.mediaOSCList = function(media){
+	if(this.base64Encode){
+		if(typeof media === "object"){// allow list of media
+			for( var k=0;k<media.length;k++){
+				media[k] = new Buffer(media[k]).toString('base64');
+			}
+		}else
+			media = new Buffer(media).toString('base64');
+	}
+	return (typeof media === "string") ? [media] : media;
+}
+
 // BASIC CONTROLS 
 OSCInterface.prototype.play = function(media){
-	if(this.base64Encode){
-		if(typeof media === "object"){// allow list of media
-			for( var k=0;k<media.length;k++){
-				media[k] = new Buffer(media[k]).toString('base64');
-			}
-		}else
-			media = new Buffer(media).toString('base64');
-	}
-	//console.log('play  '+JSON.stringify(media));
-	this.oscClient.sendMessage('play',typeof media === "string" ? [media] : media);
-	
+	console.log("play");
+	this.oscClient.sendMessage('play',this.mediaOSCList(media));
 }
 OSCInterface.prototype.playloop = function(media){
-	if(this.base64Encode){
-		if(typeof media === "object"){// allow list of media
-			for( var k=0;k<media.length;k++){
-				media[k] = new Buffer(media[k]).toString('base64');
-			}
-		}else
-			media = new Buffer(media).toString('base64');
-	}
-	console.log('playloop  '+JSON.stringify(media));
-	this.oscClient.sendMessage('playloop',typeof media === "string" ? [media] : media);
-	
+	console.log("playloop");
+	this.oscClient.sendMessage('playloop',this.mediaOSCList(media));	
 }
 OSCInterface.prototype.stop = function(){
 	this.oscClient.sendMessage('stop');
 	
+}
+OSCInterface.prototype.next = function(){
+	this.oscClient.sendMessage('next');
+}
+OSCInterface.prototype.prev = function(){
+	this.oscClient.sendMessage('prev');
 }
 OSCInterface.prototype.pause = function(){
 	this.oscClient.sendMessage('pause');
 }
 OSCInterface.prototype.resume = function(){
 	this.oscClient.sendMessage('resume');
+}
+OSCInterface.prototype.loop = function(){
+	this.oscClient.sendMessage('loop');
+}
+OSCInterface.prototype.unloop = function(){
+	this.oscClient.sendMessage('unloop');	
 }
 // SOUND
 OSCInterface.prototype.volume = function(value){

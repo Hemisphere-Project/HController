@@ -84,7 +84,7 @@ ProcessManager.prototype.cleanZombies = function(processName) {
 	
 	process.exec('pgrep '+processName, function (error, stdout, stderr) 
 	{
-		if (error) { console.error(error); }
+		//if (error) { console.error(error); }
 		pids = stdout.split("\n");
 		for(var i=0; i<pids.length;i++) pids[i] = +pids[i];
 		

@@ -59,11 +59,16 @@ ModuleManager.prototype.link = function() {
 	});
 
 	this.webServer.eventEmitter.on('play', function(socketId,media){
-		self.oscInterface.play(media);
+		if (self.player.loop) self.oscInterface.playloop(media);
+		else self.oscInterface.play(media);
 	});
 	
-	this.webServer.eventEmitter.on('playloop', function(socketId,media){
-		self.oscInterface.playloop(media);
+	this.webServer.eventEmitter.on('next', function(socketId){
+		self.oscInterface.next();	
+	});
+	
+	this.webServer.eventEmitter.on('prev', function(socketId){
+		self.oscInterface.prev();	
 	});
 	
 	this.webServer.eventEmitter.on('pause', function(socketId){
@@ -84,6 +89,14 @@ ModuleManager.prototype.link = function() {
 	
 	this.webServer.eventEmitter.on('unmute', function(socketId){
 		self.oscInterface.unmute();
+	});
+	
+	this.webServer.eventEmitter.on('loop', function(socketId){
+		self.oscInterface.loop();
+	});
+	
+	this.webServer.eventEmitter.on('unloop', function(socketId){
+		self.oscInterface.unloop();
 	});
 	
 	this.webServer.eventEmitter.on('volume', function(socketId,value){
@@ -162,29 +175,15 @@ ModuleManager.prototype.startServices = function() {
 			'--volume',this.player.volume,
 			'--in',this.config.OSCInterface.clientPort,
 			'--out',this.config.OSCInterface.serverPort,
-			'--base64',this.config.OSCInterface.base64Encode,
-			'--glsl',0,
-			'--ahdmi',0,
-			'--info',1
+			'--base64',(this.config.OSCInterface.base64Encode)?1:0,
+			'--loop',(this.player.loop)?1:0,
+			'--glsl',(this.player.glsl)?1:0,
+			'--ahdmi',(this.player.hdmiAudio)?1:0,
+			'--info',(this.player.info)?1:0,
+			'--media',(that.config.ModuleManager.playlistAutoLaunch) ? that.mediaManager.mediaDirectory : 'none'
 		],
 		true,	//re-start if killed
 		false);  //pipe stdout to console log
-		
-	/********* TO BE REPLACED WITH MEDIA ON SPAWN ********************/
-	//CRADOS --> find a way to know if the HPlayer is ready to receive playlist !
-	//=> wait for the first status ?? 
-	setTimeout(function(){
-	if(that.config.ModuleManager.playlistAutoLaunch){
-		if(that.mediaManager.mediaList.length == 0){// nothing to play
-			console.log("no media to play".red)
-		}else if(that.mediaManager.mediaList.length == 1){// one media, we send the media
-			that.oscInterface.playloop(that.mediaManager.mediaList[0].filepath);
-		}else{// more than one media, we send the dir
-			that.oscInterface.playloop(that.mediaManager.mediaDirectory);
-		}
-	}
-	},2000);
-	/********************************************************************/
 		
 	
 	//SERIAL START

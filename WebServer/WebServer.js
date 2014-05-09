@@ -30,11 +30,14 @@ Client.prototype.addEventListeners = function(webserver){
 	this.socket.on('play', function (data) {
 			webserver.eventEmitter.emit('play',self.socket.id,data);
 	});
-	this.socket.on('playloop', function (data) {
-			webserver.eventEmitter.emit('playloop',self.socket.id,data);
-	});
 	this.socket.on('pause', function (data) {
 			webserver.eventEmitter.emit('pause',self.socket.id);
+	});
+	this.socket.on('next', function (data) {
+			webserver.eventEmitter.emit('next',self.socket.id);
+	});
+	this.socket.on('prev', function (data) {
+			webserver.eventEmitter.emit('prev',self.socket.id);
 	});
 	this.socket.on('resume', function (data) {
 			webserver.eventEmitter.emit('resume',self.socket.id);
@@ -47,6 +50,12 @@ Client.prototype.addEventListeners = function(webserver){
 	});
 	this.socket.on('unmute', function (data) {
 			webserver.eventEmitter.emit('unmute',self.socket.id);
+	});
+	this.socket.on('loop', function (data) {
+			webserver.eventEmitter.emit('loop',self.socket.id);
+	});
+	this.socket.on('unloop', function (data) {
+			webserver.eventEmitter.emit('unloop',self.socket.id);
 	});
 	this.socket.on('volume', function (data) {
 			webserver.eventEmitter.emit('volume',self.socket.id,data);
