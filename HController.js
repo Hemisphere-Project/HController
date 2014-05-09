@@ -33,8 +33,8 @@ function exit(code,err) {
 	process.exit(code);
 }
 
-//process.on('SIGINT', exit.bind(null,2)); //CTRL-C
-//process.on('uncaughtException', function (err) { exit(99,err); });
+process.on('SIGINT', exit.bind(null,2)); //CTRL-C
+process.on('uncaughtException', function (err) { exit(99,err); });
 
 
 
