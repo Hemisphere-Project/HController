@@ -32,6 +32,9 @@ HPlayer.prototype.status = function(status){
 		this.isMuted = status.isMuted;
 		this.volume = status.volume;
 		this.loop = status.loop;
+		this.hdmiAudio	= status.hdmiAudio;
+		this.glsl		= status.glsl;
+		this.info		= status.info;
 	}
 
 	
@@ -42,7 +45,10 @@ HPlayer.prototype.status = function(status){
 		isPaused : this.isPaused,
 		isMuted : this.isMuted,
 		volume : this.volume,
-		loop : this.loop
+		loop : this.loop,
+		hdmiAudio : this.hdmiAudio,
+		glsl : this.glsl,
+		info : this.info
 	}
 		
 }
