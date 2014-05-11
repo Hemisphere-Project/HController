@@ -106,6 +106,7 @@ SerialInterface.prototype.dataHandler = function(data){
 			this.eventEmitter.emit("volume",command.args.value);
 			break;
 		case "gaussianBlur":
+			this.eventEmitter.emit("gaussianBlur",command.args.value);
 			break;
 		default: console.log("serial command not recognized: "+command.name);		
 	}

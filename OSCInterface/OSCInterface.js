@@ -140,7 +140,7 @@ OSCInterface.prototype.unloop = function(){
 }
 // SOUND
 OSCInterface.prototype.volume = function(value){
-	console.log("volume = "+value);
+	//console.log("volume = "+value);
 	this.oscClient.sendMessage('volume',[value]);
 }
 OSCInterface.prototype.mute = function(){
