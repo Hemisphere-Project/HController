@@ -74,7 +74,8 @@
        		<button id="pause_btn"class="btn btn-wide btn-primary disabled"><span class="glyphicon glyphicon-pause"></span></button>
        		<button id="stop_btn"class="btn btn-wide btn-danger"><span class="glyphicon glyphicon-stop"></span></button>
        		<button id="mute_btn"class="btn btn btn-primary"><span class="glyphicon glyphicon-volume-off"></span></button>
-       		<button id="quit_btn"class="btn btn btn-primary"><span class="glyphicon glyphicon-remove"></span></button>
+       		<button id="loop_btn"class="btn btn-primary"><span class="glyphicon glyphicon-retweet"></span></button>
+       		<button id="quit_btn"class="btn btn-primary btn-danger"><span class="glyphicon glyphicon-remove"></span></button>
        		<div id="slider" class="ui-slider" style="margin-top:20px;"></div>
 
        		    		
@@ -151,7 +152,7 @@
 		}
 		$('#play_btn').click(function () {
 			if(!currentStatus.isPlaying && selectedMedia.element !== null)
-				socket.emit('playloop',selectedMedia.path);
+				socket.emit('play',selectedMedia.path);
 		});
 		$('#prev_btn').click(function () {
 			var prev = $(selectedMedia.element).prev();
@@ -159,7 +160,7 @@
 				prev = $('.mediaElement').last();
 					
 			if(currentStatus.isPlaying){
-				socket.emit('playloop',currentMediaList[mediaIndex({name:"",path:"",element:prev.get(0)})].path);
+				socket.emit('prev');
 			}else{
 				//selectMedia({media:prev.text(),element:prev.get(0)});
 				selectMedia(currentMediaList[mediaIndex({name:"",path:"",element:prev.get(0)})]);
@@ -171,7 +172,7 @@
 				next = $('.mediaElement').first();
 					
 			if(currentStatus.isPlaying){
-				socket.emit('playloop',currentMediaList[mediaIndex({name:"",path:"",element:next.get(0)})].path);
+				socket.emit('next');
 			}else{
 				//selectMedia({media:next.text(),element:next.get(0)});
 				selectMedia(currentMediaList[mediaIndex({name:"",path:"",element:next.get(0)})]);
@@ -194,6 +195,12 @@
 			else
 				socket.emit('mute');
 		});
+		$('#loop_btn').click(function () {
+			if(currentStatus.loop)
+				socket.emit('unloop');
+			else
+				socket.emit('loop');
+		});
 		$('#quit_btn').click(function () {
 				socket.emit('quit');
 		});
@@ -204,7 +211,7 @@
 			//selectMedia({media : $(event.currentTarget).text(),	element : event.currentTarget});
 			if(currentStatus.isPlaying){
 				// just do something
-				socket.emit('playloop',currentMediaList[mediaIndex({name:"",path:"",element:event.currentTarget})].path);
+				socket.emit('play',currentMediaList[mediaIndex({name:"",path:"",element:event.currentTarget})].path);
 			}else{
 				selectMedia(currentMediaList[mediaIndex({name:"",path:"",element:event.currentTarget})]);
 			}
@@ -332,6 +339,17 @@
 				if(currentStatus.isMuted){
 					$('#mute_btn').addClass("btn-primary");
 					$('#mute_btn').removeClass("btn-warning");
+				}
+			}
+			if(status.loop){
+				if(!currentStatus.loop){
+					$('#loop_btn').removeClass("btn-primary");
+					$('#loop_btn').addClass("btn-warning");
+				}
+			}else{
+				if(currentStatus.loop){
+					$('#loop_btn').addClass("btn-primary");
+					$('#loop_btn').removeClass("btn-warning");
 				}
 			}
 			if(status.volume !== currentStatus.volume){

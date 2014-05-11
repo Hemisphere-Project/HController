@@ -30,9 +30,13 @@
 					"progress":null,
 					"duration":null
 		},
-		"isPaused" : false,
-		"isMuted" : false,
-		"volume" : 50
+		"loop"		: true,
+		"isPaused"  : false,
+		"isMuted"   : false,
+		"volume"    : 50,
+		"hdmiAudio"	: false,
+		"glsl"		: false,
+		"info"		: true
 	},
 	"SerialInterface":{
 		"baudRate":9600
