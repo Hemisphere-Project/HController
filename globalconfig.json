@@ -36,7 +36,7 @@
 		"volume"    : 50,
 		"hdmiAudio"	: false,
 		"glsl"		: false,
-		"info"		: true
+		"info"		: false
 	},
 	"SerialInterface":{
 		"baudRate":9600
