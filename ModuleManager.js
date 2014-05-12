@@ -9,6 +9,7 @@ var ConfigHelper 	= require('./ConfigHelper.js');
 var ProcessManager 	= require('./ProcessManager/ProcessManager.js');
 //var RemoteInterface = require('./RemoteInterface/RemoteInterface.js');
 var SerialInterface = require('./SerialInterface/SerialInterface.js');
+var IcePicker = require('./IcePicker.js');
 
 /**
 MODULE MANAGER
@@ -24,6 +25,7 @@ function ModuleManager(){
 	this.mediaManager	 = new MediaManager(this.config.MediaManager);
 	this.processManager  = new ProcessManager();
 	this.serialInterface = new SerialInterface(this.config.SerialInterface);
+	this.icePicker = new IcePicker(this.config.IcePicker);
 	
 	this.link();
 	
@@ -51,6 +53,8 @@ ModuleManager.prototype.link = function() {
 
 	this.oscInterface.eventEmitter.on('status', function(status){
 		self.webServer.sendPlayerStatus(self.player.status(status));
+		// we have a heart beat from the player, we push back the IcePicker
+		self.icePicker.pushBack();
 	});
 
 	this.webServer.eventEmitter.on('socketConnection',function(client){	
@@ -130,6 +134,11 @@ ModuleManager.prototype.link = function() {
 	this.serialInterface.eventEmitter.on('gaussianBlur',function(value){
 		self.oscInterface.gaussianBlur(value);
 	});
+	
+	this.icePicker.eventEmitter.on('rampage',function(value){
+		self.processManager.killAll();
+		self.icePicker.start();
+	});
 }	
 
 /**
@@ -188,6 +197,9 @@ ModuleManager.prototype.startServices = function() {
 	
 	//SERIAL START
 	this.serialInterface.start();
+	
+	//ICEPICKER START
+	this.icePicker.start();
 	
 	console.log('Running..'.green+'\n');
 	this.isRunning = true;

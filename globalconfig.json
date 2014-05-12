@@ -40,5 +40,9 @@
 	},
 	"SerialInterface":{
 		"baudRate":9600
+	},
+	"IcePicker":{
+		"stepsBeforeRampage":10,
+		"timeBetweenSteps":500
 	}
 }
