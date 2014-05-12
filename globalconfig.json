@@ -43,6 +43,6 @@
 	},
 	"IcePicker":{
 		"stepsBeforeRampage":10,
-		"timeBetweenSteps":500
+		"timeBetweenSteps":2000
 	}
 }
