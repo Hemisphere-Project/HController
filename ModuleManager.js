@@ -137,6 +137,22 @@ ModuleManager.prototype.link = function() {
 	
 	this.icePicker.eventEmitter.on('rampage',function(value){
 		self.processManager.killAll();
+		self.processManager.spawn(
+		self.config.ProcessManager.HPlayerPath,
+		[
+			'--name',self.player.name,
+			'--volume',self.player.volume,
+			'--in',self.config.OSCInterface.clientPort,
+			'--out',self.config.OSCInterface.serverPort,
+			'--base64',(self.config.OSCInterface.base64Encode)?1:0,
+			'--loop',(self.player.loop)?1:0,
+			'--glsl',(self.player.glsl)?1:0,
+			'--ahdmi',(self.player.hdmiAudio)?1:0,
+			'--info',(self.player.info)?1:0,
+			'--media',(self.config.ModuleManager.playlistAutoLaunch) ? self.mediaManager.mediaDirectory : 'none'
+		],
+		true,	//re-start if killed
+		false);  //pipe stdout to console log
 		self.icePicker.start();
 	});
 }	
@@ -168,7 +184,6 @@ START SERVICES
 **/
 ModuleManager.prototype.startServices = function() {	
 	
-	var that = this;
 
 	//HPLAYER ZOMBIES KILLER
 	this.processManager.cleanZombies('HPlayer');
@@ -189,7 +204,7 @@ ModuleManager.prototype.startServices = function() {
 			'--glsl',(this.player.glsl)?1:0,
 			'--ahdmi',(this.player.hdmiAudio)?1:0,
 			'--info',(this.player.info)?1:0,
-			'--media',(that.config.ModuleManager.playlistAutoLaunch) ? that.mediaManager.mediaDirectory : 'none'
+			'--media',(this.config.ModuleManager.playlistAutoLaunch) ? this.mediaManager.mediaDirectory : 'none'
 		],
 		true,	//re-start if killed
 		false);  //pipe stdout to console log

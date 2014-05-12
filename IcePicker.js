@@ -27,7 +27,7 @@ IcePicker.prototype.stop = function(){
 }
 IcePicker.prototype.walk = function(){
 	this.currentStep--;
-	console.log("IcePicker is walking step = "+this.currentStep);
+	//console.log("IcePicker is walking step = "+this.currentStep);
 	if(this.currentStep==0){
 		this.eventEmitter.emit('rampage');
 		this.stop(); 

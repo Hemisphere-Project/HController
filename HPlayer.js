@@ -19,7 +19,13 @@ function HPlayer(config){
 	this.glsl		= false;
 	this.info		= false;
 	
-	if (config) this.status(config);
+	if (config){ 
+		this.status(config);
+		this.loop = config.loop;
+		this.hdmiAudio	= config.hdmiAudio;
+		this.glsl		= config.glsl;
+		this.info		= config.info;
+	}
 }
 
 HPlayer.prototype.status = function(status){
@@ -31,10 +37,6 @@ HPlayer.prototype.status = function(status){
 		this.isPaused = status.isPaused;
 		this.isMuted = status.isMuted;
 		this.volume = status.volume;
-		this.loop = status.loop;
-		this.hdmiAudio	= status.hdmiAudio;
-		this.glsl		= status.glsl;
-		this.info		= status.info;
 	}
 
 	
