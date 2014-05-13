@@ -4,22 +4,24 @@
 
 Maxbotix rangeSensorPW(8, Maxbotix::PW, Maxbotix::LV);
 
-const float rangeMin = 50;// cm
-const float rangeMax = 150;// cm
+const float rangeMin = 80;// cm
+const float rangeMax = 110;// cm
 const float volMin = 20;// 0 - 100
-const float volMax = 60;// 0 - 100
-const int d = 200; // ms
+const float volMax = 50;// 0 - 100
+const int d = 50; // ms
 
 float GLITCH_DIFF = 100;
 float range;//measured ranges
 float prevRange;//measured ranges
 float volume = 0;
 float stepVolume = 0;
+float lastStepVolume = 0;
 
 void setup()
 {
   Serial.begin(9600);
   range = prevRange = rangeSensorPW.getRange(); 
+  volume = stepVolume = lastStepVolume = volMin;
 }
 
 void loop()
@@ -44,11 +46,17 @@ void loop()
   if(volume > stepVolume) stepVolume++;
   if(volume < stepVolume) stepVolume--;
   
+  if(stepVolume == lastStepVolume)
+  	  return;
+  
   Serial.print("{\"name\":\"volume\",\"args\":{\"value\":");
   Serial.print(stepVolume);
   Serial.print(",\"range\":");
   Serial.print(range);
   Serial.print("}}");
   Serial.println();
+  
+  lastStepVolume = stepVolume;
+  
   delay(d);
 }
