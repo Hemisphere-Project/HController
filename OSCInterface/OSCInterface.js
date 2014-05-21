@@ -75,6 +75,8 @@ function OSCInterface(config){
 				player.loop = (args.shift() === 1);
 				player.volume = args.shift();
 				player.isMuted = (args.shift() === "muted");
+				player.zoom = args.shift();
+				player.blur = args.shift();
 				
 				self.eventEmitter.emit('status',player.status());
 			break;

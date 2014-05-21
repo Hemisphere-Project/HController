@@ -202,7 +202,7 @@ ModuleManager.prototype.startServices = function() {
 	this.webServer.start();	
 
 	//HPlayer START
-	/*this.processManager.spawn(
+	this.processManager.spawn(
 		this.config.ProcessManager.HPlayerPath,
 		[
 			'--name',this.player.name,
@@ -221,12 +221,12 @@ ModuleManager.prototype.startServices = function() {
 		true,	//re-start if killed
 		false);  //pipe stdout to console log
 		
-	*/
+	
 	//SERIAL START
 	this.serialInterface.start();
 	
 	//ICEPICKER START
-	//this.icePicker.start();
+	this.icePicker.start();
 	
 	console.log('Running..'.green+'\n');
 	this.isRunning = true;
