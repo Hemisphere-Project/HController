@@ -31,12 +31,14 @@
 					"duration":null
 		},
 		"loop"		: true,
+		"zoom"		: 100,
+		"blur"		: 0,
 		"isPaused"  : false,
 		"isMuted"   : false,
 		"volume"    : 50,
 		"hdmiAudio"	: false,
 		"glsl"		: false,
-		"info"		: false
+		"info"		: true
 	},
 	"SerialInterface":{
 		"baudRate":9600

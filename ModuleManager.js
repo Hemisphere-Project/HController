@@ -107,6 +107,14 @@ ModuleManager.prototype.link = function() {
 		self.oscInterface.volume(value);	
 	});
 	
+	this.webServer.eventEmitter.on('zoom', function(socketId,value){
+		self.oscInterface.zoom(value);	
+	});
+	
+	this.webServer.eventEmitter.on('blur', function(socketId,value){
+		self.oscInterface.blur(value);	
+	});
+	
 	this.webServer.eventEmitter.on('getStatus', function(){
 		self.oscInterface.getStatus();	
 	});
@@ -142,6 +150,8 @@ ModuleManager.prototype.link = function() {
 		[
 			'--name',self.player.name,
 			'--volume',self.player.volume,
+			'--zoom',this.player.zoom,
+			'--blur',this.player.blur,
 			'--in',self.config.OSCInterface.clientPort,
 			'--out',self.config.OSCInterface.serverPort,
 			'--base64',(self.config.OSCInterface.base64Encode)?1:0,
@@ -197,6 +207,8 @@ ModuleManager.prototype.startServices = function() {
 		[
 			'--name',this.player.name,
 			'--volume',this.player.volume,
+			'--zoom',this.player.zoom,
+			'--blur',this.player.blur,
 			'--in',this.config.OSCInterface.clientPort,
 			'--out',this.config.OSCInterface.serverPort,
 			'--base64',(this.config.OSCInterface.base64Encode)?1:0,

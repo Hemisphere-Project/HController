@@ -60,6 +60,12 @@ Client.prototype.addEventListeners = function(webserver){
 	this.socket.on('volume', function (data) {
 			webserver.eventEmitter.emit('volume',self.socket.id,data);
 	});	
+	this.socket.on('zoom', function (data) {
+			webserver.eventEmitter.emit('zoom',self.socket.id,data);
+	});	
+	this.socket.on('blur', function (data) {
+			webserver.eventEmitter.emit('blur',self.socket.id,data);
+	});	
 	this.socket.on('quit', function (data) {
 			webserver.eventEmitter.emit('quit',self.socket.id);
 	});

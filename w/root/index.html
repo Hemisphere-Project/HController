@@ -76,8 +76,10 @@
        		<button id="mute_btn"class="btn btn btn-primary"><span class="glyphicon glyphicon-volume-off"></span></button>
        		<button id="loop_btn"class="btn btn-primary"><span class="glyphicon glyphicon-retweet"></span></button>
        		<button id="quit_btn"class="btn btn-primary btn-danger"><span class="glyphicon glyphicon-remove"></span></button>
-       		<div id="slider" class="ui-slider" style="margin-top:20px;"></div>
-
+       		<div id="volume_sli" class="ui-slider" style="margin-top:20px;"></div>
+       		<div id="zoom_sli" class="ui-slider" style="margin-top:20px;"></div>
+       		<div id="blur_sli" class="ui-slider" style="margin-top:20px;"></div>
+		
        		    		
     </div>
 
@@ -117,7 +119,9 @@
 			isPaused : false,
 			idStoped : false,
 			isMuted : false,
-			volume : 0
+			volume : 0,
+			zoom : 100,
+			blur: 0
 		}
 		var currentMediaList = [];
 		var selectedMedia = {
@@ -140,9 +144,26 @@
 			//$("#server_info").text(JSON.stringify(data));
 		});
 	
-		var $slider = $("#slider");
-		if ($slider.length > 0) {
-		  $slider.slider({
+		if ($("#volume_sli").length > 0) {
+		  $("#volume_sli").slider({
+			min: 0,
+			max: 100,
+			value: 0,
+			orientation: "horizontal",
+			range: "min"
+		  });
+		}
+		if ($("#zoom_sli").length > 0) {
+		  $("#zoom_sli").slider({
+			min: 0,
+			max: 100,
+			value: 0,
+			orientation: "horizontal",
+			range: "min"
+		  });
+		}
+		if ($("#blur_sli").length > 0) {
+		  $("#blur_sli").slider({
 			min: 0,
 			max: 100,
 			value: 0,
@@ -204,8 +225,14 @@
 		$('#quit_btn').click(function () {
 				socket.emit('quit');
 		});
-		$( "#slider" ).on( "slide", function( event, ui ) {
+		$("#volume_sli").on( "slide", function( event, ui ) {
 			socket.emit('volume',ui.value);
+		});
+		$("#zoom_sli").on( "slide", function( event, ui ) {
+			socket.emit('zoom',ui.value);
+		});
+		$("#blur_sli").on( "slide", function( event, ui ) {
+			socket.emit('blur',ui.value);
 		});
 		$(".mediaElement").live('click',function (event) {
 			//selectMedia({media : $(event.currentTarget).text(),	element : event.currentTarget});
@@ -353,7 +380,14 @@
 				}
 			}
 			if(status.volume !== currentStatus.volume){
-				$( "#slider" ).slider("value",status.volume);
+				$("#volume_sli").slider("value",status.volume);
+			}
+			console.log(status.zoom);
+			if(status.zoom !== currentStatus.zoom){
+				$("#zoom_sli").slider("value",status.zoom);
+			}
+			if(status.blur !== currentStatus.blur){
+				$("#blur_sli").slider("value",status.blur);
 			}
 			
 			currentStatus = status;
