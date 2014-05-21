@@ -69,14 +69,12 @@ function OSCInterface(config){
 					player.media.filepath = new Buffer(args.shift(), 'base64').toString('utf8');
 				else
 					player.media.filepath = args.shift();
-					
+				
 				player.media.progress = args.shift();
 				player.media.duration = args.shift();
 				player.loop = (args.shift() === 1);
 				player.volume = args.shift();
 				player.isMuted = (args.shift() === "muted");
-				player.zoom = args.shift();
-				player.blur = args.shift();
 				
 				self.eventEmitter.emit('status',player.status());
 			break;
@@ -112,11 +110,11 @@ OSCInterface.prototype.mediaOSCList = function(media){
 
 // BASIC CONTROLS 
 OSCInterface.prototype.play = function(media){
-	//console.log("play");
+	console.log("play");
 	this.oscClient.sendMessage('play',this.mediaOSCList(media));
 }
 OSCInterface.prototype.playloop = function(media){
-	//console.log("playloop");
+	console.log("playloop");
 	this.oscClient.sendMessage('playloop',this.mediaOSCList(media));	
 }
 OSCInterface.prototype.stop = function(){
@@ -153,11 +151,8 @@ OSCInterface.prototype.unmute = function(){
 	this.oscClient.sendMessage('unmute');	
 }
 // EFFECTS
-OSCInterface.prototype.blur = function(blurSize){
-	this.oscClient.sendMessage('blur',[blurSize]);
-}
-OSCInterface.prototype.zoom = function(zoomSize){
-	this.oscClient.sendMessage('zoom',[zoomSize]);
+OSCInterface.prototype.gaussianBlur = function(blurSize){
+	this.oscClient.sendMessage('fx/gaussianBlur',[blurSize]);
 }
 // PLAYER STATUS REQUEST
 OSCInterface.prototype.getStatus = function(){
