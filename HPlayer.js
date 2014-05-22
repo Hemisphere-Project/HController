@@ -15,7 +15,7 @@ function HPlayer(config){
 	this.isPaused 	= false;
 	this.isMuted 	= false;
 	this.volume 	= 50;
-	this.zoom 		= 100;
+	this.zoom 		= 10;
 	this.blur 		= 0;
 	this.hdmiAudio	= false;
 	this.glsl		= false;

@@ -141,6 +141,12 @@ OSCInterface.prototype.loop = function(){
 OSCInterface.prototype.unloop = function(){
 	this.oscClient.sendMessage('unloop');	
 }
+OSCInterface.prototype.zoom = function(value){
+	this.oscClient.sendMessage('zoom',[value]);
+}
+OSCInterface.prototype.blur = function(value){
+	this.oscClient.sendMessage('blur',[value]);
+}
 // SOUND
 OSCInterface.prototype.volume = function(value){
 	//console.log("volume = "+value);

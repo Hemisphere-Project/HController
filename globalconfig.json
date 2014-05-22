@@ -23,7 +23,7 @@
 		"HPlayerPath":"./bin/HPlayer"
 	},
 	"HPlayer":{
-		"name" : "Alberto",
+		"name" : "Raymond",
 		"isPlaying" : false,
 		"media" : {
 					"filepath":null,
@@ -36,9 +36,9 @@
 		"isPaused"  : false,
 		"isMuted"   : false,
 		"volume"    : 50,
-		"hdmiAudio"	: false,
+		"hdmiAudio"	: true,
 		"glsl"		: false,
-		"info"		: true
+		"info"		: false
 	},
 	"SerialInterface":{
 		"baudRate":9600
