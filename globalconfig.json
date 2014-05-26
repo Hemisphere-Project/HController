@@ -37,7 +37,6 @@
 		"isMuted"   : false,
 		"volume"    : 50,
 		"hdmiAudio"	: true,
-		"glsl"		: false,
 		"info"		: false
 	},
 	"SerialInterface":{

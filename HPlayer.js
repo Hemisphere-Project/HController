@@ -18,14 +18,12 @@ function HPlayer(config){
 	this.zoom 		= 10;
 	this.blur 		= 0;
 	this.hdmiAudio	= false;
-	this.glsl		= false;
 	this.info		= false;
 	
 	if (config)
 	{ 
 		this.status(config);
 		this.hdmiAudio	= config.hdmiAudio;
-		this.glsl		= config.glsl;
 		this.info		= config.info;
 	}
 }
@@ -57,7 +55,6 @@ HPlayer.prototype.status = function(status){
 		blur : this.blur,
 		loop : this.loop,
 		hdmiAudio : this.hdmiAudio,
-		glsl : this.glsl,
 		info : this.info
 	}
 		

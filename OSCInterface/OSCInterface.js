@@ -112,11 +112,9 @@ OSCInterface.prototype.mediaOSCList = function(media){
 
 // BASIC CONTROLS 
 OSCInterface.prototype.play = function(media){
-	console.log("play");
 	this.oscClient.sendMessage('play',this.mediaOSCList(media));
 }
 OSCInterface.prototype.playloop = function(media){
-	console.log("playloop");
 	this.oscClient.sendMessage('playloop',this.mediaOSCList(media));	
 }
 OSCInterface.prototype.stop = function(){
@@ -144,9 +142,6 @@ OSCInterface.prototype.unloop = function(){
 OSCInterface.prototype.zoom = function(value){
 	this.oscClient.sendMessage('zoom',[value]);
 }
-OSCInterface.prototype.blur = function(value){
-	this.oscClient.sendMessage('blur',[value]);
-}
 // SOUND
 OSCInterface.prototype.volume = function(value){
 	//console.log("volume = "+value);
@@ -159,8 +154,8 @@ OSCInterface.prototype.unmute = function(){
 	this.oscClient.sendMessage('unmute');	
 }
 // EFFECTS
-OSCInterface.prototype.gaussianBlur = function(blurSize){
-	this.oscClient.sendMessage('fx/gaussianBlur',[blurSize]);
+OSCInterface.prototype.blur = function(blurSize){
+	this.oscClient.sendMessage('blur',[blurSize]);
 }
 // PLAYER STATUS REQUEST
 OSCInterface.prototype.getStatus = function(){

@@ -111,10 +111,6 @@ ModuleManager.prototype.link = function() {
 		self.oscInterface.zoom(value);	
 	});
 	
-	this.webServer.eventEmitter.on('blur', function(socketId,value){
-		self.oscInterface.blur(value);	
-	});
-	
 	this.webServer.eventEmitter.on('getStatus', function(){
 		self.oscInterface.getStatus();	
 	});
@@ -128,6 +124,10 @@ ModuleManager.prototype.link = function() {
 		console.log("serial port open");	
 	});
 	
+	this.webServer.eventEmitter.on('blur', function(socketId,value){
+		self.oscInterface.blur(value);	
+	});
+	
 	this.serialInterface.eventEmitter.on('error',function(err){
 		console.log("serial port error "+err);	
 	});
@@ -139,8 +139,8 @@ ModuleManager.prototype.link = function() {
 	this.serialInterface.eventEmitter.on('volume',function(value){
 		self.oscInterface.volume(value);
 	});
-	this.serialInterface.eventEmitter.on('gaussianBlur',function(value){
-		self.oscInterface.gaussianBlur(value);
+	this.serialInterface.eventEmitter.on('blur',function(value){
+		self.oscInterface.blur(value);
 	});
 	
 	this.icePicker.eventEmitter.on('rampage',function(value){
@@ -150,13 +150,12 @@ ModuleManager.prototype.link = function() {
 		[
 			'--name',self.player.name,
 			'--volume',self.player.volume,
-			'--zoom',this.player.zoom,
-			'--blur',this.player.blur,
+			'--zoom',self.player.zoom,
+			'--blur',self.player.blur,
 			'--in',self.config.OSCInterface.clientPort,
 			'--out',self.config.OSCInterface.serverPort,
 			'--base64',(self.config.OSCInterface.base64Encode)?1:0,
 			'--loop',(self.player.loop)?1:0,
-			'--glsl',(self.player.glsl)?1:0,
 			'--ahdmi',(self.player.hdmiAudio)?1:0,
 			'--info',(self.player.info)?1:0,
 			'--media',(self.config.ModuleManager.playlistAutoLaunch) ? self.mediaManager.mediaDirectory : 'none'
@@ -213,7 +212,6 @@ ModuleManager.prototype.startServices = function() {
 			'--out',this.config.OSCInterface.serverPort,
 			'--base64',(this.config.OSCInterface.base64Encode)?1:0,
 			'--loop',(this.player.loop)?1:0,
-			'--glsl',(this.player.glsl)?1:0,
 			'--ahdmi',(this.player.hdmiAudio)?1:0,
 			'--info',(this.player.info)?1:0,
 			'--media',(this.config.ModuleManager.playlistAutoLaunch) ? this.mediaManager.mediaDirectory : 'none'
