@@ -10,11 +10,11 @@ void loop();
 
 Maxbotix rangeSensorPW(8, Maxbotix::PW, Maxbotix::LV);
 
-const float rangeMin = 80;// cm
-const float rangeMax = 200;// cm
+const float rangeMin = 200;// cm
+const float rangeMax = 260;// cm
 const float outMin = 0;// 0 - 100
 const float outMax = 100;// 0 - 100
-const int d = 50; // ms
+const int d = 0; // ms
 
 float GLITCH_DIFF = 100;
 float range;//measured ranges
@@ -54,6 +54,9 @@ void loop()
   
   if(stepOut == lastStepOut)
   	  return;
+  
+  //if(stepOut <10)
+  	//  stepOut = 0;
   
   Serial.print("{\"name\":\"gaussianBlur\",\"args\":{\"value\":");
   Serial.print(stepOut);
