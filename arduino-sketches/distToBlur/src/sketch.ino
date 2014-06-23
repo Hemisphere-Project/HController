@@ -49,8 +49,6 @@ void loop()
   if(stepOut == lastStepOut)
   	  return;
   
-  //if(stepOut <10)
-  	//  stepOut = 0;
   
   Serial.print("{\"name\":\"gaussianBlur\",\"args\":{\"value\":");
   Serial.print(stepOut);

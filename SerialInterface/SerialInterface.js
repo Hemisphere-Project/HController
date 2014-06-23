@@ -18,9 +18,11 @@ Command.prototype.parseString = function(string){
 		var json = JSON.parse(string);
 		this.name = json.name;
 		this.args = json.args;
+		return true;
 	}
 	catch (e) {
 		console.log("parsing error: "+e);
+		return false;
 	};
 
 }
@@ -99,7 +101,8 @@ SerialInterface.prototype.dataHandler = function(data){
 	command = new Command();
 	//command.name = "volume";
 	//command.args = {"value":parseInt(data)};
-	command.parseString(data);
+	if(!command.parseString(data))
+		return;
 	//console.log(JSON.stringify(command));
 	switch (command.name){
 		case "volume":

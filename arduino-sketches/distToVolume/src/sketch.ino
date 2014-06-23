@@ -4,7 +4,7 @@
 
 Maxbotix rangeSensorPW(8, Maxbotix::PW, Maxbotix::LV);
 
-const float rangeMin = 150;// cm
+const float rangeMin = 190;// cm
 const float rangeMax = 290;// cm
 const float volMin = 20;// 0 - 100
 const float volMax = 50;// 0 - 100
