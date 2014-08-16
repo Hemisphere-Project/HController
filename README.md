@@ -63,6 +63,57 @@ OSC Messages
 /unloop         : Disable looping for the current playlist
 /info           : Toggle media info window (disabled)
 /quit           : Exit the player
+
+About config
+-------------
+
+Here is a brief description of the globalconfig.json parameters. You can change them at your convinience
+ModuleManager
+	.playlistAutoLaunch (true|false) Do we launch HPlayer in playlist mode
+MediaManager
+	.mediaDir (pathToDir) Path to the directory where the media are stored
+	.USBDir (pathToDir) Path the USB directory where there's media you want to copy (typically /media/usb for the latest drive mounted with usbmount)
+	"OSCInterface":{
+		"url":"127.0.0.1",
+		"clientPort":9000,
+		"serverPort":9001,
+		"baseAddress":"",
+		"base64Encode":false
+	},
+	"RemoteInterface":"",
+	"WebServer":{
+		"root_dir":"./w/root",
+		"port":8080,
+		"refreshStatusPeriod":1000
+	},
+	"ProcessManager":{
+		"HPlayerPath":"./bin/HPlayer"
+	},
+	"HPlayer":{
+		"name" : "Raymond",
+		"isPlaying" : false,
+		"media" : {
+					"filepath":null,
+					"progress":null,
+					"duration":null
+		},
+		"loop"		: true,
+		"zoom"		: 100,
+		"blur"		: 0,
+		"isPaused"  : false,
+		"isMuted"   : false,
+		"volume"    : 50,
+		"hdmiAudio"	: true,
+		"info"		: false
+	},
+	"SerialInterface":{
+		"baudRate":9600
+	},
+	"IcePicker":{
+		"stepsBeforeRampage":10,
+		"timeBetweenSteps":2000
+	}
+
 		
 Credits
 ------------- 
