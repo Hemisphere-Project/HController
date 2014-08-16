@@ -44,30 +44,32 @@ Installation
   	node HController.js
   	
   	
-#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#  
-#* OSC Messages #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
-#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
+OSC Messages
+------------- 
 
----- To the HPlayer ----
-
-/PlayerName
-	└── /play ["file path"]
-	└── /pause 
-	└── /stop 
-	└── /resume
-	└── /volume [50] #int value 0-100
-	└── /mute
-	└── /unmute
-	└── /fx
-		└── /gaussianBlur [5]
-	└── /s
-		└── /getStatus
-			  
----- From the HPlayer ----
-
-/PlayerName
-		└── /status ["name"] ["playing / paused / stoped"] ["file path"] [1273] [5555555] [volume] ["muted / unmuted"] 
-		└── /end ["file path"]
+/play [<path1>] [<path2>] ...       : Play the file (or dir) list in order
+/playloop [<path1>] [<path2>] ...   : Same as play with playlist loop
+/volume <0:100>     : Set volume from 0 to 100
+/blur <0:100>       : Set blur level from 0 to 100
+/zoom <0:100>       : Set zoom from 0 to 100%
+/stop           : Stop and rewind the current video file
+/pause          : Pause the video file
+/resume         : Resume the paused file
+/next           : Play the next file in the list
+/prev           : Play the previous file in the list
+/mute           : Mute the sound of the video
+/unmute         : Unmute the sound of the video
+/loop           : Enable looping for the current playlist
+/unloop         : Disable looping for the current playlist
+/info           : Toggle media info window (disabled)
+/quit           : Exit the player
 		
-		
+Credits
+------------- 
+
+HController is developped by the Hemisphere-Project Team
+
+    ++ Thomas Bohl ++
+    ++ Alain Barthelemy ++
+    ++ Jeremie Forge ++
   
