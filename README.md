@@ -11,11 +11,10 @@
 Description
 ------------- 
   
-  HController is a media controller designed to work with HPlayer.
+	HController is a media controller designed to work with HPlayer.
   
-#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#  
-#* Installation #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
-#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
+Installation 
+------------- 
 
   1. install node.js 
   	
@@ -44,13 +43,6 @@ Description
   	cd HController
   	node HController.js
   	
-  3bis.
-  
-  # if you wish to run chromium on the raspberry pi, you'll need to install it 
-  
-  sudo apt-get install chromium x11-xserver-utils unclutter
-  
-  (# with some other programs to run it on kiosk mode :)
   	
 #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#  
 #* OSC Messages #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
