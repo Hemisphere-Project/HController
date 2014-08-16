@@ -18,7 +18,7 @@ Installation
 
   1. install node.js 
   	
-  	# create a node directory and download the last arm distribution 
+  	create a node directory and download the last arm distribution 
   	in this directory
   	
 		cd /home/pi
@@ -26,11 +26,11 @@ Installation
   		cd ./node
   		wget http://node-arm.herokuapp.com/node_latest_armhf.deb
   		
-  	# Install the downloaded package
+  	Install the downloaded package
   		
   		sudo dpkg -i node_latest_armhf.deb
   	
-  	# Once the package installed you should be able to run node typing "node" 
+  	Once the package installed you should be able to run node typing "node" 
   	and execute a console.log("hello baby") in interactive mode
   	
   2. clone HController from GitHub
