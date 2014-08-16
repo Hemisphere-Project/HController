@@ -69,51 +69,25 @@ About config
 
 Here is a brief description of the globalconfig.json parameters. You can change them at your convinience.
 ```
-	ModuleManager
-		.playlistAutoLaunch (true|false) Do we launch HPlayer in playlist mode
-	MediaManager
-		.mediaDir (pathToDir) Path to the directory where the media are stored
-		.USBDir (pathToDir) Path the USB directory where there's media you want to copy (typically /media/usb for the latest drive mounted with usbmount)
-		"OSCInterface":{
-			"url":"127.0.0.1",
-			"clientPort":9000,
-			"serverPort":9001,
-			"baseAddress":"",
-			"base64Encode":false
-		},
-		"RemoteInterface":"",
-		"WebServer":{
-			"root_dir":"./w/root",
-			"port":8080,
-			"refreshStatusPeriod":1000
-		},
-		"ProcessManager":{
-			"HPlayerPath":"./bin/HPlayer"
-		},
-		"HPlayer":{
-			"name" : "Raymond",
-			"isPlaying" : false,
-			"media" : {
-						"filepath":null,
-						"progress":null,
-						"duration":null
-			},
-			"loop"		: true,
-			"zoom"		: 100,
-			"blur"		: 0,
-			"isPaused"  : false,
-			"isMuted"   : false,
-			"volume"    : 50,
-			"hdmiAudio"	: true,
-			"info"		: false
-		},
-		"SerialInterface":{
-			"baudRate":9600
-		},
-		"IcePicker":{
-			"stepsBeforeRampage":10,
-			"timeBetweenSteps":2000
-		}
+ModuleManager
+	.playlistAutoLaunch (true|false) Do we launch HPlayer in playlist mode
+MediaManager
+	.mediaDir (pathToDir) Path to the directory where the media are stored
+	.USBDir (pathToDir) Path the USB directory where there's media you want to copy (typically /media/usb for the latest drive mounted with usbmount)
+OSCInterface (obj) Parameter of the OSCInterface
+RemoteInterface (?) Nothing here. Will welcome parameters for a remote control if the feature is developped sometime 
+WebServer
+	.root_dir (pathToDir) path to the web root dir, often named www...
+	.port (int) the port used by webserver
+	.refreshStatusPeriod (int) how often we query the HPlayer for status upade (in ms)
+	
+ProcessManager
+	.HPlayerPath (pathToBin) location of the HPlayer binary
+HPlayer (obj) default parameters of the HPlayer
+SerialInterface
+	.baudRate (int) We use serial to communicate with an arduino board sometime..
+
+IcePicker (obj) Some creepy watchdog who kills HPlayer when frozen. Will be removed upon lake placid of full stability.
 ```
 		
 Credits
