@@ -68,6 +68,7 @@ About config
 -------------
 
 Here is a brief description of the globalconfig.json parameters. You can change them at your convinience.
+```
 	ModuleManager
 		.playlistAutoLaunch (true|false) Do we launch HPlayer in playlist mode
 	MediaManager
@@ -113,7 +114,7 @@ Here is a brief description of the globalconfig.json parameters. You can change 
 			"stepsBeforeRampage":10,
 			"timeBetweenSteps":2000
 		}
-
+```
 		
 Credits
 ------------- 
