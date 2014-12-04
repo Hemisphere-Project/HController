@@ -15,7 +15,7 @@
 	},
 	"RemoteInterface":"",
 	"WebServer":{
-		"root_dir":"./w/root",
+		"root_dir":"./w/static",
 		"port":8080,
 		"refreshStatusPeriod":1000
 	},

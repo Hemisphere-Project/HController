@@ -216,15 +216,15 @@ ModuleManager.prototype.startServices = function() {
 			'--info',(this.player.info)?1:0,
 			'--media',(this.config.ModuleManager.playlistAutoLaunch) ? this.mediaManager.mediaDirectory : 'none'
 		],
-		true,	//re-start if killed
+		false,	//re-start if killed
 		false);  //pipe stdout to console log
 		
 	
 	//SERIAL START
-	this.serialInterface.start();
+	//this.serialInterface.start();
 	
 	//ICEPICKER START
-	this.icePicker.start();
+	//this.icePicker.start();
 	
 	console.log('Running..'.green+'\n');
 	this.isRunning = true;
