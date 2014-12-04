@@ -92,7 +92,6 @@ function WebServer(config){
 	this.root = typeof config.root_dir !== 'undefined' ? path.resolve(__dirname,'../',config.root_dir) : path.join(__dirname, '../w/root');
 	this.refreshStatusPeriod = typeof config.refreshStatusPeriod !== 'undefined' ? config.refreshStatusPeriod : 1000;
 
-	
 	this.clients = new Array();
 	
 	this.refreshStatusId = null;
@@ -112,7 +111,7 @@ WebServer.prototype.start = function(){
 	  });
 	
 	
-	io = socket.listen(this.server.server,{ log: false });
+	io = socket.listen(this.server.server,{ log: true });
 	
 	this.server.listen(this.port);
 	
@@ -121,7 +120,6 @@ WebServer.prototype.start = function(){
 	var self = this;
 	
 	function onSocketConnection(socket){
-		
 		var client = new Client("thierry",socket);
 		
 		client.addEventListeners(self);

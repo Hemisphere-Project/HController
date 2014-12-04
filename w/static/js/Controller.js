@@ -16,11 +16,16 @@ function Controller(){
 		//var socket = io.connect('http://localhost:8080');
 		
 
+
 		this.addEventListeners();
 
 }
 
 Controller.prototype.addEventListeners = function(){
+	
+	this.socket.on('connect', function (data) {
+			console.log('connected  '+data);
+	});
 	
 	this.socket.on('playerStatus', function (status) {
 		$('#player-head player-name').text(status.name);
