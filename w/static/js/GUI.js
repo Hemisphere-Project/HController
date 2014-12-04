@@ -8,18 +8,20 @@ function GUI(){
 	};
 	
 	// initialize the current state
-	this.changeState(this.states.medias);
+	this.changeState(this.states.controls);
 	
 	this.addEventListeners();
 	
 	//initialize jquery-ui components
-	$("#volume_sli").slider({
-			min: 0,
-			max: 100,
-			value: 50,
-			orientation: "horizontal",
-			range: "min"
-	});
+	if ($("#volume-sli").length > 0) {
+		$("#volume-sli").slider({
+				min: 0,
+				max: 100,
+				value: 50,
+				orientation: "horizontal",
+				range: "min"
+		});
+	}
 	$( "#controls-accordion" ).accordion({
       heightStyle: "fill",
       header: ".panel-heading",
@@ -38,7 +40,7 @@ function GUI(){
 }
 
 GUI.prototype.addEventListeners = function(){
-	console.log($(".nav-btn"));
+	//console.log($(".nav-btn"));
 /*	$(".nav-btn").each(function(element){
 			$(this).on("click",navclick(event));
 	});*/
