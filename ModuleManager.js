@@ -52,7 +52,8 @@ ModuleManager.prototype.link = function() {
 	var self = this;
 
 	this.oscInterface.eventEmitter.on('status', function(status){
-		self.webServer.sendPlayerStatus(self.player.status(status));
+		self.player.status(status);
+		//self.webServer.sendPlayerStatus(self.player.status(status));
 		// we have a heart beat from the player, we push back the IcePicker
 		self.icePicker.pushBack();
 	});
@@ -112,7 +113,9 @@ ModuleManager.prototype.link = function() {
 	});
 	
 	this.webServer.eventEmitter.on('getStatus', function(){
-		self.oscInterface.getStatus();	
+		//self.oscInterface.getStatus();	
+		//console.log(self.player.status());
+		self.webServer.sendPlayerStatus(self.player.status());
 	});
 	
 	this.webServer.eventEmitter.on('quit', function(socketId,value){
@@ -221,10 +224,10 @@ ModuleManager.prototype.startServices = function() {
 		
 	
 	//SERIAL START
-	//this.serialInterface.start();
+	this.serialInterface.start();
 	
 	//ICEPICKER START
-	//this.icePicker.start();
+	this.icePicker.start();
 	
 	console.log('Running..'.green+'\n');
 	this.isRunning = true;

@@ -17,14 +17,14 @@
 	"WebServer":{
 		"root_dir":"./w/static",
 		"port":8080,
-		"refreshStatusPeriod":1000,
+		"refreshStatusPeriod":5000,
 		"debug":false
 	},
 	"ProcessManager":{
 		"HPlayerPath":"./bin/HPlayer"
 	},
 	"HPlayer":{
-		"name" : "Raymond",
+		"name" : "Thierry",
 		"isPlaying" : false,
 		"media" : {
 					"filepath":null,
@@ -38,7 +38,7 @@
 		"isMuted"   : false,
 		"volume"    : 50,
 		"hdmiAudio"	: true,
-		"info"		: false
+		"info"		: true
 	},
 	"SerialInterface":{
 		"baudRate":9600

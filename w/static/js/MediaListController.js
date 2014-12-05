@@ -24,6 +24,19 @@ MediaListController.prototype.selectMedia = function(media){
 	this.selectedMedia = media;		
 }
 
+MediaListController.prototype.selectNext = function(){
+	var next = $(this.selectedMedia.element).next();
+	if(next.get(0) === undefined)
+		next = self.table.find("tbody tr").first();
+	this.selectMedia(this.currentMediaList[this.mediaIndex({name:"",path:"",element:prev.get(0)})]);
+}
+
+MediaListController.prototype.selectPrev = function(){
+	var prev = $(this.selectedMedia.element).prev();
+	if(prev.get(0) === undefined)
+		prev = self.table.find("tbody tr").last();
+	this.selectMedia(this.currentMediaList[this.mediaIndex({name:"",path:"",element:prev.get(0)})]);
+}
 
 MediaListController.prototype.populateMediaList = function(list){
 	
@@ -37,7 +50,7 @@ MediaListController.prototype.populateMediaList = function(list){
 		var media = {
 				name :file.filename,
 				path :file.filepath,
-				element:$('#mediaList a:last-child').get(0)
+				element:self.table.find("tbody tr:last").get(0)
 		}
 		self.currentMediaList.push(media);
 	});

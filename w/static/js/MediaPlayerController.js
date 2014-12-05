@@ -1,4 +1,4 @@
-function MediaPlayerController(element){
+function MediaPlayerController(element,mediaListElement){
 	this.currentPlayerStatus = {
 			isPlaying : false,
 			media : null,
@@ -10,14 +10,81 @@ function MediaPlayerController(element){
 			blur: 0
 	}
 	this.element = element // more jQuery object than dom element
+	
+	this.mediaList = new MediaListController(mediaListElement);
+	
+	this.addEventListeners();
+}
+
+MediaPlayerController.prototype.addEventListeners = function(){
+	
+	var self = this;
+	this.element.find('#play-btn').click(function () {
+		if(!self.currentPlayerStatus.isPlaying && self.mediaList.selectedMedia.element !== null)
+			socket.emit('play',self.mediaList.selectedMedia.path);
+	});
+	this.element.find('#prev-btn').click(function () {
+		self.mediaList.selectPrev();
+		if(self.currentPlayerStatus.isPlaying)
+			socket.emit('play',self.mediaList.selectedMedia.path);
+	});
+	this.element.find('#next-btn').click(function () {
+		self.mediaList.selectNext();
+		if(self.currentPlayerStatus.isPlaying)
+			socket.emit('play',self.mediaList.selectedMedia.path);			
+	});
+	this.element.find('#pause-btn').click(function () {
+		if(!self.currentPlayerStatus.isPaused)
+			socket.emit('pause');
+		else
+			socket.emit('resume');
+			
+	});
+	this.element.find('#stop-btn').click(function () {
+		if(!self.currentPlayerStatus.isStoped)
+			socket.emit('stop');
+	});
+	this.element.find('#mute-btn').click(function () {
+		if(self.currentPlayerStatus.isMuted)
+			socket.emit('unmute');
+		else
+			socket.emit('mute');
+	});
+	this.element.find('#loop-btn').click(function () {
+		if(self.currentPlayerStatus.loop)
+			socket.emit('unloop');
+		else
+			socket.emit('loop');
+	});
+	this.element.find('#quit-btn').click(function () {
+			socket.emit('quit');
+	});
+	this.element.find("#volume-sli").on( "slide", function( event, ui ) {
+		socket.emit('volume',ui.value);
+	});
+/*	$("#zoom_sli").on( "slide", function( event, ui ) {
+		socket.emit('zoom',ui.value);
+	});
+	$("#blur_sli").on( "slide", function( event, ui ) {
+		socket.emit('blur',ui.value);
+	});*/
+	/*$(".mediaElement").live('click',function (event) {
+		//selectMedia({media : $(event.currentTarget).text(),	element : event.currentTarget});
+		if(currentPlayerStatus.isPlaying){
+			// just do something
+			socket.emit('play',currentMediaList[mediaIndex({name:"",path:"",element:event.currentTarget})].path);
+		}else{
+			selectMedia(currentMediaList[mediaIndex({name:"",path:"",element:event.currentTarget})]);
+		}
+	});*/
+	
 }
 
 
 MediaPlayerController.prototype.updateWithPlayerStatus = function(status){
 		
 	if(status.isPlaying){
-		///CCC
-		//var statusMedia = currentMediaList[mediaIndexFromPath(status.media.filepath)];
+		var statusMedia = this.mediaList.currentMediaList[this.mediaList.mediaIndexFromPath(status.media.filepath)];
 	
 		if(!this.currentPlayerStatus.isPlaying ){
 			this.element.find('#play-btn').removeClass("btn-primary");
@@ -25,21 +92,22 @@ MediaPlayerController.prototype.updateWithPlayerStatus = function(status){
 			
 			this.element.find('#pause-btn').removeClass("disabled");
 			
-			//if(selectedMedia !== statusMedia)//CCC
-				//selectMedia(statusMedia);//CCC
+			if(this.mediaList.selectedMedia !== statusMedia)//CCC
+				this.mediaList.selectMedia(statusMedia);//CCC
 
 			//CCC
 			//$(selectedMedia.element).append('<div id="play-info"><div class="progress" ><div class="progress-bar" style="width:'+100*status.media.progress/status.media.duration+'%;"></div></div></div>');
 
 			
 		}else{
-			if(false/*selectedMedia !== statusMedia*/){
+			if(this.mediaList.selectedMedia !== statusMedia){
 				//this.element.find("#play-info").remove();
-				//selectMedia(statusMedia);//CCC
+				this.mediaList.selectMedia(statusMedia);//CCC
 				//CCC
 				//$(selectedMedia.element).append('<div id="play-info"><div class="progress" ><div class="progress-bar" style="width:'+100*status.media.progress/status.media.duration+'%;"></div></div></div>');
 			}else{
 				// update progress
+				console.log("progress  "+100*status.media.progress/status.media.duration);
 				this.element.find(".progress-bar").css('width',100*status.media.progress/status.media.duration+'%');
 			}
 		}
