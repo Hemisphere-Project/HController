@@ -29,23 +29,23 @@ MediaListController.prototype.populateMediaList = function(list){
 	
 	// we do it the hard way for the moment :
 	this.currentMediaList = [];
-	this.table.children("tbody").text("");
+	this.table.find("tbody").empty();
 	
-	this.table.children("tbody").append('');
+	var self = this;
 	list.forEach(function(file){
-		this.table.children("tbody").append('<tr><td><span class="glyphicon glyphicon-film"></span></td><td>'+file.filename+'</td><td>55:02</td><td>773 Mo</td></tr>');
+		self.table.find("tbody").append('<tr><td><span class="glyphicon glyphicon-film"></span></td><td>'+file.filename+'</td><td>55:02</td><td>773 Mo</td></tr>');
 		var media = {
 				name :file.filename,
 				path :file.filepath,
 				element:$('#mediaList a:last-child').get(0)
 		}
-		this.currentMediaList.push(media);
+		self.currentMediaList.push(media);
 	});
 	
-	this.table.children("tbody").children().uniqueId();
+	this.table.find("tbody").children().uniqueId();
 	
-	if(!this.selectedMedia.element && this.currentMediaList.length > 0)
-		selectMedia(this.currentMediaList[0]);
+	//if(!this.selectedMedia.element && this.currentMediaList.length > 0)
+		//selectMedia(this.currentMediaList[0]);
 }
 
 

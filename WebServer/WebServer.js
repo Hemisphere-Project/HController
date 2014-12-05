@@ -88,6 +88,7 @@ function WebServer(config){
 	if(typeof config === 'undefined')
 		return console.log("no config found for WebServer");
 	
+	this.debug = typeof config.debug !== 'undefined' ? config.debug : true;
 	this.port = typeof config.port !== 'undefined' ? config.port : 8080;
 	this.root = typeof config.root_dir !== 'undefined' ? path.resolve(__dirname,'../',config.root_dir) : path.join(__dirname, '../w/root');
 	this.refreshStatusPeriod = typeof config.refreshStatusPeriod !== 'undefined' ? config.refreshStatusPeriod : 1000;
@@ -111,7 +112,7 @@ WebServer.prototype.start = function(){
 	  });
 	
 	
-	io = socket.listen(this.server.server,{ log: true });
+	io = socket.listen(this.server.server,{ log: this.debug });
 	
 	this.server.listen(this.port);
 	

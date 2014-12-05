@@ -3,7 +3,7 @@
 function Controller(){
 	
 		// media list in media player section
-		this.mpMediaListController = new MediaListController($("#media-player .medialist"));
+		this.mpMediaListController = new MediaListController($("#media-player .media-list"));
 		// media list in medias section
 		//this.msMediaListController = new MediaListController($("#media-section .medialist"));
 		
@@ -23,19 +23,20 @@ function Controller(){
 
 Controller.prototype.addEventListeners = function(){
 	
+	var self = this;
 	this.socket.on('connect', function (data) {
-			console.log('connected  '+data);
+			console.log('connected');
 	});
 	
 	this.socket.on('playerStatus', function (status) {
 		$('#player-head player-name').text(status.name);
-		this.mediaPlayer.updateWithPlayerStatus(status);
-		console.log(status);
+		self.mediaPlayer.updateWithPlayerStatus(status);
+		//console.log(status);
 	});
 	
 	this.socket.on('mediaList', function (list) {
-		this.mpMediaListController.populateMediaList(list);
-			//console.log(list);
+		self.mpMediaListController.populateMediaList(list);
+			console.log(list);
 	});
 	
 }

@@ -17,7 +17,8 @@
 	"WebServer":{
 		"root_dir":"./w/static",
 		"port":8080,
-		"refreshStatusPeriod":1000
+		"refreshStatusPeriod":1000,
+		"debug":false
 	},
 	"ProcessManager":{
 		"HPlayerPath":"./bin/HPlayer"
