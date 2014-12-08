@@ -27,14 +27,14 @@ MediaListController.prototype.selectMedia = function(media){
 MediaListController.prototype.selectNext = function(){
 	var next = $(this.selectedMedia.element).next();
 	if(next.get(0) === undefined)
-		next = self.table.find("tbody tr").first();
-	this.selectMedia(this.currentMediaList[this.mediaIndex({name:"",path:"",element:prev.get(0)})]);
+		next = this.table.find("tbody tr").first();
+	this.selectMedia(this.currentMediaList[this.mediaIndex({name:"",path:"",element:next.get(0)})]);
 }
 
 MediaListController.prototype.selectPrev = function(){
 	var prev = $(this.selectedMedia.element).prev();
 	if(prev.get(0) === undefined)
-		prev = self.table.find("tbody tr").last();
+		prev = this.table.find("tbody tr").last();
 	this.selectMedia(this.currentMediaList[this.mediaIndex({name:"",path:"",element:prev.get(0)})]);
 }
 
@@ -46,7 +46,7 @@ MediaListController.prototype.populateMediaList = function(list){
 	
 	var self = this;
 	list.forEach(function(file){
-		self.table.find("tbody").append('<tr><td><span class="glyphicon glyphicon-film"></span></td><td>'+file.filename+'</td><td>55:02</td><td>773 Mo</td></tr>');
+		self.table.find("tbody").append('<tr class="media-element"><td><span class="glyphicon glyphicon-film"></span></td><td>'+file.filename+'</td><td>55:02</td><td>773 Mo</td></tr>');
 		var media = {
 				name :file.filename,
 				path :file.filepath,

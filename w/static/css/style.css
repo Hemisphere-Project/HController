@@ -345,13 +345,19 @@ a:hover {
   border-top-style: dashed;
   border-top-width: 1px;
   border-top-color: #878a8f;
-  /*.btn{
-					background-color: @g1-ppp;
-				}
-				.btn:hover{
-					background-color: @g1-pp;
-					color:@w;
-				}*/
+}
+#controls-section #media-player #player-controls .btn-default {
+  background-color: #cbced3;
+}
+#controls-section #media-player #player-controls .btn-default:hover {
+  background-color: #878a8f;
+  color: white;
+}
+#controls-section #media-player #player-controls .btn-warning {
+  background-color: #dcdf5e;
+}
+#controls-section #media-player #player-controls .btn-warning:hover {
+  background-color: #babd3c;
 }
 #controls-section #media-player #player-controls .slider-container {
   padding: 0px 10px;

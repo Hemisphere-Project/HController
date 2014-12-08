@@ -66,46 +66,57 @@ ModuleManager.prototype.link = function() {
 	this.webServer.eventEmitter.on('play', function(socketId,media){
 		if (self.player.loop) self.oscInterface.playloop(media);
 		else self.oscInterface.play(media);
+		console.log("play  "+media);
 	});
 	
 	this.webServer.eventEmitter.on('next', function(socketId){
 		self.oscInterface.next();	
+		console.log("next");
 	});
 	
 	this.webServer.eventEmitter.on('prev', function(socketId){
 		self.oscInterface.prev();	
+		console.log("prev");
 	});
 	
 	this.webServer.eventEmitter.on('pause', function(socketId){
 		self.oscInterface.pause();	
+		console.log("pause");
 	});
 	
 	this.webServer.eventEmitter.on('resume', function(socketId){
 		self.oscInterface.resume();	
+		console.log("resume");
 	});
 	
 	this.webServer.eventEmitter.on('stop', function(socketId){
 		self.oscInterface.stop();
+		console.log("stop");
 	});
 	
 	this.webServer.eventEmitter.on('mute', function(socketId){
 		self.oscInterface.mute();
+		console.log("mute");
 	});
 	
 	this.webServer.eventEmitter.on('unmute', function(socketId){
 		self.oscInterface.unmute();
+		console.log("unmute");
 	});
 	
 	this.webServer.eventEmitter.on('loop', function(socketId){
 		self.oscInterface.loop();
+		console.log("loop");
 	});
 	
 	this.webServer.eventEmitter.on('unloop', function(socketId){
 		self.oscInterface.unloop();
+		console.log("unloop");
 	});
 	
 	this.webServer.eventEmitter.on('volume', function(socketId,value){
 		self.oscInterface.volume(value);	
+		console.log("volume "+value);
 	});
 	
 	this.webServer.eventEmitter.on('zoom', function(socketId,value){
@@ -163,7 +174,7 @@ ModuleManager.prototype.link = function() {
 			'--info',(self.player.info)?1:0,
 			'--media',(self.config.ModuleManager.playlistAutoLaunch) ? self.mediaManager.mediaDirectory : 'none'
 		],
-		true,	//re-start if killed
+		false,	//re-start if killed
 		false);  //pipe stdout to console log
 		self.icePicker.start();
 	});
@@ -227,7 +238,7 @@ ModuleManager.prototype.startServices = function() {
 	this.serialInterface.start();
 	
 	//ICEPICKER START
-	this.icePicker.start();
+	//this.icePicker.start();
 	
 	console.log('Running..'.green+'\n');
 	this.isRunning = true;

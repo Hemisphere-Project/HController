@@ -1,4 +1,4 @@
-function MediaPlayerController(element,mediaListElement){
+function MediaPlayerController(socket,element,mediaListElement){
 	this.currentPlayerStatus = {
 			isPlaying : false,
 			media : null,
@@ -13,6 +13,8 @@ function MediaPlayerController(element,mediaListElement){
 	
 	this.mediaList = new MediaListController(mediaListElement);
 	
+	this.socket = socket;
+	
 	this.addEventListeners();
 }
 
@@ -21,46 +23,46 @@ MediaPlayerController.prototype.addEventListeners = function(){
 	var self = this;
 	this.element.find('#play-btn').click(function () {
 		if(!self.currentPlayerStatus.isPlaying && self.mediaList.selectedMedia.element !== null)
-			socket.emit('play',self.mediaList.selectedMedia.path);
+			self.socket.emit('play',self.mediaList.selectedMedia.path);
 	});
 	this.element.find('#prev-btn').click(function () {
 		self.mediaList.selectPrev();
 		if(self.currentPlayerStatus.isPlaying)
-			socket.emit('play',self.mediaList.selectedMedia.path);
+			self.socket.emit('play',self.mediaList.selectedMedia.path);
 	});
 	this.element.find('#next-btn').click(function () {
 		self.mediaList.selectNext();
 		if(self.currentPlayerStatus.isPlaying)
-			socket.emit('play',self.mediaList.selectedMedia.path);			
+			self.socket.emit('play',self.mediaList.selectedMedia.path);			
 	});
 	this.element.find('#pause-btn').click(function () {
 		if(!self.currentPlayerStatus.isPaused)
-			socket.emit('pause');
+			self.socket.emit('pause');
 		else
-			socket.emit('resume');
+			self.socket.emit('resume');
 			
 	});
 	this.element.find('#stop-btn').click(function () {
 		if(!self.currentPlayerStatus.isStoped)
-			socket.emit('stop');
+			self.socket.emit('stop');
 	});
 	this.element.find('#mute-btn').click(function () {
 		if(self.currentPlayerStatus.isMuted)
-			socket.emit('unmute');
+			self.socket.emit('unmute');
 		else
-			socket.emit('mute');
+			self.socket.emit('mute');
 	});
 	this.element.find('#loop-btn').click(function () {
 		if(self.currentPlayerStatus.loop)
-			socket.emit('unloop');
+			self.socket.emit('unloop');
 		else
-			socket.emit('loop');
+			self.socket.emit('loop');
 	});
 	this.element.find('#quit-btn').click(function () {
-			socket.emit('quit');
+			self.socket.emit('quit');
 	});
 	this.element.find("#volume-sli").on( "slide", function( event, ui ) {
-		socket.emit('volume',ui.value);
+		self.socket.emit('volume',ui.value);
 	});
 /*	$("#zoom_sli").on( "slide", function( event, ui ) {
 		socket.emit('zoom',ui.value);
@@ -68,15 +70,13 @@ MediaPlayerController.prototype.addEventListeners = function(){
 	$("#blur_sli").on( "slide", function( event, ui ) {
 		socket.emit('blur',ui.value);
 	});*/
-	/*$(".mediaElement").live('click',function (event) {
-		//selectMedia({media : $(event.currentTarget).text(),	element : event.currentTarget});
-		if(currentPlayerStatus.isPlaying){
-			// just do something
-			socket.emit('play',currentMediaList[mediaIndex({name:"",path:"",element:event.currentTarget})].path);
+	$("#media-player").on('click','.media-element',function (event) {
+		if(self.currentPlayerStatus.isPlaying){
+			self.socket.emit('play',self.mediaList.currentMediaList[self.mediaList.mediaIndex({name:"",path:"",element:event.currentTarget})].path);
 		}else{
-			selectMedia(currentMediaList[mediaIndex({name:"",path:"",element:event.currentTarget})]);
+			self.mediaList.selectMedia(self.mediaList.currentMediaList[self.mediaList.mediaIndex({name:"",path:"",element:event.currentTarget})]);
 		}
-	});*/
+	});
 	
 }
 
@@ -87,7 +87,7 @@ MediaPlayerController.prototype.updateWithPlayerStatus = function(status){
 		var statusMedia = this.mediaList.currentMediaList[this.mediaList.mediaIndexFromPath(status.media.filepath)];
 	
 		if(!this.currentPlayerStatus.isPlaying ){
-			this.element.find('#play-btn').removeClass("btn-primary");
+			this.element.find('#play-btn').removeClass("btn-default");
 			this.element.find('#play-btn').addClass("btn-warning");
 			
 			this.element.find('#pause-btn').removeClass("disabled");
@@ -114,7 +114,7 @@ MediaPlayerController.prototype.updateWithPlayerStatus = function(status){
 		
 	}else{
 		if(this.currentPlayerStatus.isPlaying){
-			this.element.find('#play-btn').addClass("btn-primary");
+			this.element.find('#play-btn').addClass("btn-default");
 			this.element.find('#play-btn').removeClass("btn-warning");
 			
 			this.element.find('#pause-btn').addClass("disabled");
@@ -125,34 +125,34 @@ MediaPlayerController.prototype.updateWithPlayerStatus = function(status){
 	}
 	if(status.isPaused){
 		if(!this.currentPlayerStatus.isPaused){
-			this.element.find('#pause-btn').removeClass("btn-primary");
+			this.element.find('#pause-btn').removeClass("btn-default");
 			this.element.find('#pause-btn').addClass("btn-warning");
 		}
 	}else{
 		if(this.currentPlayerStatus.isPaused){
-			this.element.find('#pause-btn').addClass("btn-primary");
+			this.element.find('#pause-btn').addClass("btn-default");
 			this.element.find('#pause-btn').removeClass("btn-warning");
 		}			
 	}
 	if(status.isMuted){
 		if(!this.currentPlayerStatus.isMuted){
-			this.element.find('#mute-btn').removeClass("btn-primary");
+			this.element.find('#mute-btn').removeClass("btn-default");
 			this.element.find('#mute-btn').addClass("btn-warning");
 		}
 	}else{
 		if(this.currentPlayerStatus.isMuted){
-			this.element.find('#mute-btn').addClass("btn-primary");
+			this.element.find('#mute-btn').addClass("btn-default");
 			this.element.find('#mute-btn').removeClass("btn-warning");
 		}
 	}
 	if(status.loop){
 		if(!this.currentPlayerStatus.loop){
-			this.element.find('#loop-btn').removeClass("btn-primary");
+			this.element.find('#loop-btn').removeClass("btn-default");
 			this.element.find('#loop-btn').addClass("btn-warning");
 		}
 	}else{
 		if(this.currentPlayerStatus.loop){
-			this.element.find('#loop-btn').addClass("btn-primary");
+			this.element.find('#loop-btn').addClass("btn-default");
 			this.element.find('#loop-btn').removeClass("btn-warning");
 		}
 	}

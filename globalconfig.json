@@ -24,7 +24,7 @@
 		"HPlayerPath":"./bin/HPlayer"
 	},
 	"HPlayer":{
-		"name" : "Thierry",
+		"name" : "Larry",
 		"isPlaying" : false,
 		"media" : {
 					"filepath":null,
