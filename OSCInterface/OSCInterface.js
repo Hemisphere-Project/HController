@@ -159,6 +159,7 @@ OSCInterface.prototype.blur = function(blurSize){
 }
 // PLAYER STATUS REQUEST
 OSCInterface.prototype.getStatus = function(){
+	//console.log("status asked");
 	this.oscClient.sendMessage('s/getStatus');
 }
 

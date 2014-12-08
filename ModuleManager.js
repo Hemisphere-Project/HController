@@ -30,10 +30,10 @@ function ModuleManager(){
 	this.link();
 	
 	this.startupList = [
-						{
+						/*{
 							context:this.mediaManager,
 							method:this.mediaManager.loadFromUSBStorage
-						},
+						},*/
 						{
 							context:this.mediaManager,
 							method:this.mediaManager.updateMediaList
@@ -52,10 +52,11 @@ ModuleManager.prototype.link = function() {
 	var self = this;
 
 	this.oscInterface.eventEmitter.on('status', function(status){
-		self.player.status(status);
-		//self.webServer.sendPlayerStatus(self.player.status(status));
+		//self.player.status(status);
+		//console.log("osc status received");
+		self.webServer.sendPlayerStatus(self.player.status(status));
 		// we have a heart beat from the player, we push back the IcePicker
-		self.icePicker.pushBack();
+		//self.icePicker.pushBack();
 	});
 
 	this.webServer.eventEmitter.on('socketConnection',function(client){	
@@ -124,9 +125,9 @@ ModuleManager.prototype.link = function() {
 	});
 	
 	this.webServer.eventEmitter.on('getStatus', function(){
-		//self.oscInterface.getStatus();	
+		self.oscInterface.getStatus();	
 		//console.log(self.player.status());
-		self.webServer.sendPlayerStatus(self.player.status());
+		//self.webServer.sendPlayerStatus(self.player.status());
 	});
 	
 	this.webServer.eventEmitter.on('quit', function(socketId,value){
@@ -174,7 +175,7 @@ ModuleManager.prototype.link = function() {
 			'--info',(self.player.info)?1:0,
 			'--media',(self.config.ModuleManager.playlistAutoLaunch) ? self.mediaManager.mediaDirectory : 'none'
 		],
-		false,	//re-start if killed
+		true,	//re-start if killed
 		false);  //pipe stdout to console log
 		self.icePicker.start();
 	});
@@ -230,12 +231,12 @@ ModuleManager.prototype.startServices = function() {
 			'--info',(this.player.info)?1:0,
 			'--media',(this.config.ModuleManager.playlistAutoLaunch) ? this.mediaManager.mediaDirectory : 'none'
 		],
-		false,	//re-start if killed
+		true,	//re-start if killed
 		false);  //pipe stdout to console log
 		
 	
 	//SERIAL START
-	this.serialInterface.start();
+	//this.serialInterface.start();
 	
 	//ICEPICKER START
 	//this.icePicker.start();

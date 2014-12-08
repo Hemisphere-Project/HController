@@ -6,7 +6,18 @@ var fs = require('fs'),
 var DEFAULT_MEDIA_DIR = path.join(__dirname, '../media');
 var DEFAULT_USB_DIR = '/media/usb';
 
-var SUPPORTED_MEDIA_EXT = [".mov",".avi",".mp4",".MOV",".AVI",".MP4",".mp3",".MP3"];
+var SUPPORTED_MEDIA_TYPES = {IMG:"img",VID:"vid",SND:"snd"};
+var SUPPORTED_MEDIA_EXT = [{
+															type:SUPPORTED_MEDIA_TYPES.IMG,
+															list:[".jpeg",".jpg",".JPEG",".JPG"]
+														},{
+															type:SUPPORTED_MEDIA_TYPES.VID,
+															list:[".mov",".avi",".mp4",".MOV",".AVI",".MP4"]
+														},{
+															type:SUPPORTED_MEDIA_TYPES.SND,
+															list:[".mp3",".MP3"]
+														}];
+
 
 
 function MediaManager(config){
@@ -39,10 +50,12 @@ MediaManager.prototype.listMedia = function(dir,callback){
 		var retList = new Array();
 		for(var k = 0;k<list.length;k++){
 			var ext = path.extname(list[k]);
-			for(var l=0;l<SUPPORTED_MEDIA_EXT.length;l++){
-				if(ext === SUPPORTED_MEDIA_EXT[l]){
-					//temporary
-					retList.push({filename:list[k],filepath:path.join(dir,list[k])});
+			for(var i=0;i<SUPPORTED_MEDIA_EXT.length;i++){
+				for(var l=0;l<SUPPORTED_MEDIA_EXT[i].list.length;l++){
+					if(ext === SUPPORTED_MEDIA_EXT[i].list[l]){
+						//temporary
+						retList.push({filename:list[k],filepath:path.join(dir,list[k]),filetype:SUPPORTED_MEDIA_EXT[i].type});
+					}
 				}
 			}
 		}
@@ -81,11 +94,13 @@ MediaManager.prototype.listMediaRecursive = function(dir,callback)
 					else
 					{
 						var ext = path.extname(file);
-						for(var k=0;k<SUPPORTED_MEDIA_EXT.length;k++)
-						{
-							if(ext === SUPPORTED_MEDIA_EXT[k]){
-								retList.push({filename:path.basename(file),filepath:file});
-								//retList.push(file);
+						for(var i=0;i<SUPPORTED_MEDIA_EXT.length;i++){
+							for(var k=0;k<SUPPORTED_MEDIA_EXT[i].list.length;k++)
+							{
+								if(ext === SUPPORTED_MEDIA_EXT[i].list[k]){
+									retList.push({filename:path.basename(file),filepath:file,filetype:SUPPORTED_MEDIA_EXT[i].type});
+									//retList.push(file);
+								}
 							}
 						}
 						if (!--pending) callback(null, retList);
