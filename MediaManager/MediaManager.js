@@ -54,7 +54,7 @@ MediaManager.prototype.listMedia = function(dir,callback){
 				for(var l=0;l<SUPPORTED_MEDIA_EXT[i].list.length;l++){
 					if(ext === SUPPORTED_MEDIA_EXT[i].list[l]){
 						//temporary
-						retList.push({filename:list[k],filepath:path.join(dir,list[k]),filetype:SUPPORTED_MEDIA_EXT[i].type});
+						retList.push({filename:list[k],filepath:path.join(dir,list[k]),filetype:SUPPORTED_MEDIA_EXT[i].type,filesize:fs.statSync(path.join(dir,list[k]))["size"]});
 					}
 				}
 			}
@@ -98,7 +98,7 @@ MediaManager.prototype.listMediaRecursive = function(dir,callback)
 							for(var k=0;k<SUPPORTED_MEDIA_EXT[i].list.length;k++)
 							{
 								if(ext === SUPPORTED_MEDIA_EXT[i].list[k]){
-									retList.push({filename:path.basename(file),filepath:file,filetype:SUPPORTED_MEDIA_EXT[i].type});
+									retList.push({filename:path.basename(file),filepath:file,filetype:SUPPORTED_MEDIA_EXT[i].type,filesize:stat["size"]});
 									//retList.push(file);
 								}
 							}

@@ -53,6 +53,7 @@ ModuleManager.prototype.link = function() {
 
 	this.oscInterface.eventEmitter.on('status', function(status){
 		//self.player.status(status);
+		
 		//console.log("osc status received");
 		self.webServer.sendPlayerStatus(self.player.status(status));
 		// we have a heart beat from the player, we push back the IcePicker

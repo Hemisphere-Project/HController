@@ -20,6 +20,7 @@
     "blockly": "https://github.com/google/blockly.git",
     "bootstrap": "~3.3.1",
     "jquery-ui": "~1.11.2",
-    "bootstrap-vertical-tabs": "~1.2.1"
+    "bootstrap-vertical-tabs": "~1.2.1",
+    "filesize": "~2.0.4"
   }
 }

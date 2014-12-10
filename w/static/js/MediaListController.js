@@ -46,13 +46,16 @@ MediaListController.prototype.populateMediaList = function(list){
 	
 	var self = this;
 	list.forEach(function(file){
-		self.table.find("tbody").append('<tr class="media-element"><td><span class="glyphicon glyphicon-film"></span></td><td>'+file.filename+'</td><td>55:02</td><td>773 Mo</td></tr>');
+		self.table.find("tbody").append('<tr class="media-element"><td><span class="glyphicon '+self.getIconFromFiletype(file.filetype)+'"></span></td><td>'+file.filename+'</td><td>55:02</td><td>'+filesize(file.filesize)+'</td></tr>');
 		var media = {
 				name :file.filename,
 				path :file.filepath,
+				type :file.filetype,
+				size :file.filesize,
 				element:self.table.find("tbody tr:last").get(0)
 		}
 		self.currentMediaList.push(media);
+
 	});
 	
 	this.table.find("tbody").children().uniqueId();
@@ -80,4 +83,14 @@ MediaListController.prototype.mediaIndexFromPath = function(filepath){
 		return k;
 	else
 		return null;
+}
+
+MediaListController.prototype.getIconFromFiletype = function(filetype){
+	
+	switch(filetype){
+		case "vid" : return "glyphicon-film";
+		case "img" : return "glyphicon-picture";
+		case "snd" : return "glyphicon-music";
+		default : return "glyphicon-file";
+	}
 }
