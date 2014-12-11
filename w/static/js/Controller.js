@@ -12,7 +12,7 @@ function Controller(){
 		//media player
 		this.mediaPlayer = new MediaPlayerController(this.socket,$("#media-player #player-controls"),$("#media-player .media-list"));
 		
-		
+		this.mediaSection = new MediaSectionController(this.socket,$("#media-section"),$("#media-section .media-list"));	
 
 
 		this.addEventListeners();
@@ -34,6 +34,7 @@ Controller.prototype.addEventListeners = function(){
 	
 	this.socket.on('mediaList', function (list) {
 		self.mediaPlayer.mediaList.populateMediaList(list);
+		self.mediaSection.mediaList.populateMediaList(list);
 			console.log(list);
 	});
 	

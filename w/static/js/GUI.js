@@ -8,7 +8,7 @@ function GUI(){
 	};
 	
 	// initialize the current state
-	this.changeState(this.states.controls);
+	this.changeState(this.states.scenarios);
 	
 	this.addEventListeners();
 	
@@ -89,7 +89,7 @@ GUI.prototype.changeState = function(newState){
 			$("#nav-btn-controls").addClass("active");
 			break;
 		case this.states.medias :
-			$("#medias-section").removeClass("hidden");
+			$("#media-section").removeClass("hidden");
 			$("#nav-btn-medias").addClass("active");
 			break;
 		case this.states.settings :

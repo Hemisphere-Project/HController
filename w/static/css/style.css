@@ -407,7 +407,7 @@ a:hover {
   margin: auto;
   font-size: 4rem;
 }
-#medias-section {
+#media-section {
   background-color: #43464b;
   /*height:100%;*/
   /*#media-list{
@@ -464,16 +464,16 @@ a:hover {
 		height:60px;	
 	}*/
 }
-#medias-section #media-controls {
+#media-section #media-controls {
   -webkit-box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.2);
   -moz-box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.2);
   box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.2);
   position: relative;
 }
-#medias-section .media-preview {
+#media-section .media-preview {
   height: 60px;
 }
-#medias-section .media-list {
+#media-section .media-list {
   height: calc(100% - 60px);
 }
 /*# sourceMappingURL=style.css.map */
