@@ -101,6 +101,8 @@ td {
 }
 pre.content {
 	overflow: scroll;
+	width: inherit;
+	height: calc(100% - 60px);
 }
 #content_blocks {
 	padding: 0;
@@ -111,4 +113,6 @@ pre.content {
 	border: none;
 	font-family: monospace;
 	overflow: scroll;
+	width: inherit;
+	height: calc(100% - 60px);
 }
