@@ -25,6 +25,9 @@ Client.prototype.sendPlayerStatus = function(status){
 Client.prototype.sendMediaList = function(list){
 	this.socket.emit('mediaList',list);	
 }
+Client.prototype.sendScenarioList = function(list){
+	this.socket.emit('scenarioList',list);	
+}
 Client.prototype.addEventListeners = function(webserver){
 	var self=this;
 	this.socket.on('play', function (data) {

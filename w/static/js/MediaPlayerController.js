@@ -80,6 +80,13 @@ MediaPlayerController.prototype.addEventListeners = function(){
 	
 }
 
+MediaPlayerController.prototype.updateMediaList = function(list){
+	if( typeof list === 'undefined')
+		return;
+	
+	this.mediaList.populateMediaList(list);
+}
+
 
 MediaPlayerController.prototype.updateWithPlayerStatus = function(status){
 		

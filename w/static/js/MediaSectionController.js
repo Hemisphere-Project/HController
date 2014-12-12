@@ -29,3 +29,9 @@ MediaSectionController.prototype.addEventListeners = function(){
 	});
 }
 
+MediaSectionController.prototype.updateMediaList = function(list){
+	if( typeof list === 'undefined')
+		return;
+	
+	this.mediaList.populateMediaList(list);
+}

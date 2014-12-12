@@ -14,7 +14,8 @@ function Controller(){
 		
 		this.mediaSection = new MediaSectionController(this.socket,$("#media-section"),$("#media-section .media-list"));	
 
-
+		this.scenarioSection = new ScenarioSectionController(this.socket,$("#scenario-section"),$("#scenario-section #scenario-dd"))
+		
 		this.addEventListeners();
 
 }
@@ -33,10 +34,15 @@ Controller.prototype.addEventListeners = function(){
 	});
 	
 	this.socket.on('mediaList', function (list) {
-		self.mediaPlayer.mediaList.populateMediaList(list);
-		self.mediaSection.mediaList.populateMediaList(list);
-		Blockly.Medias.populateMediaList(list);
-			console.log(list);
+		self.mediaPlayer.updateMediaList(list);
+		self.mediaSection.updateMediaList(list);
+		self.scenarioSection.updateMediaList(list);
+		//console.log(list);
+	});
+	
+	this.socket.on('scenarioList', function (list) {
+		console.log(list);
+		self.scenarioSection.updateScenarioList(list);
 	});
 	
 }

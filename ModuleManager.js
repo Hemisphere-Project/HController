@@ -5,6 +5,7 @@ var WebServer 		= require('./WebServer/WebServer.js');
 var OSCInterface 	= require('./OSCInterface/OSCInterface.js');
 var HPlayer 		= require('./HPlayer');
 var MediaManager 	= require('./MediaManager/MediaManager.js');
+var ScenarioManager 	= require('./ScenarioManager/ScenarioManager.js');
 var ConfigHelper 	= require('./ConfigHelper.js');
 var ProcessManager 	= require('./ProcessManager/ProcessManager.js');
 //var RemoteInterface = require('./RemoteInterface/RemoteInterface.js');
@@ -23,6 +24,7 @@ function ModuleManager(){
 	this.oscInterface	 = new OSCInterface(this.config.OSCInterface);
 	this.player			 = new HPlayer(this.config.HPlayer);
 	this.mediaManager	 = new MediaManager(this.config.MediaManager);
+	this.scenarioManager	 = new ScenarioManager(this.config.ScenarioManager);
 	this.processManager  = new ProcessManager();
 	this.serialInterface = new SerialInterface(this.config.SerialInterface);
 	this.icePicker = new IcePicker(this.config.IcePicker);
@@ -36,7 +38,11 @@ function ModuleManager(){
 						},*/
 						{
 							context:this.mediaManager,
-							method:this.mediaManager.updateMediaList
+							method:this.mediaManager.updateMediaList // error handling !!
+						},
+						{
+							context:this.scenarioManager,
+							method:this.scenarioManager.updateScenarioList // error handling !!
 						},
 						{	
 							context:this,
@@ -62,6 +68,7 @@ ModuleManager.prototype.link = function() {
 
 	this.webServer.eventEmitter.on('socketConnection',function(client){	
 		client.sendMediaList(self.mediaManager.mediaList);
+		client.sendScenarioList(self.scenarioManager.scenarioList);
 		client.sendPlayerStatus(self.player.status());
 	});
 

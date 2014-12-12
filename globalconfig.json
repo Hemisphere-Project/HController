@@ -6,6 +6,9 @@
 		"mediaDir": "../media",
 		"USBDir":"/media/usb"
 	},
+	"ScenarioManager":{
+		"scenarioDir": "./scenario"
+	},
 	"OSCInterface":{
 		"url":"127.0.0.1",
 		"clientPort":9000,
