@@ -11,7 +11,7 @@ Blockly.Blocks['video_play'] = {
     this.setColour(44);
     this.appendDummyInput()
         .appendTitle("Jouer la vidéo")
-        .appendTitle(new Blockly.FieldDropdown(Blockly.Medias.getMediasFor('video')), "VIDEO");
+        .appendTitle(new Blockly.FieldDropdown(Blockly.Medias.getMediasFor('vid')), "VIDEO");
     this.appendDummyInput()
     .appendTitle(new Blockly.FieldDropdown([
                  ["et attendre la fin", "True"],

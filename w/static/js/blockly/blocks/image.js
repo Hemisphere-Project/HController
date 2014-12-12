@@ -11,7 +11,7 @@ Blockly.Blocks['image_play'] = {
     this.setColour(44);
     this.appendDummyInput()
         .appendTitle("Afficher l'image")
-        .appendTitle(new Blockly.FieldDropdown(Blockly.Medias.getMediasFor('image')), "IMAGE");
+        .appendTitle(new Blockly.FieldDropdown(Blockly.Medias.getMediasFor('img')), "IMAGE");
     // this.appendValueInput("DURATION")
     //     .setCheck("")
     //     .appendTitle("pendant");

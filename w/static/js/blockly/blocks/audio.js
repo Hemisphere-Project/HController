@@ -13,7 +13,7 @@ Blockly.Blocks['audio_play'] = {
     this.setColour(44);
     this.appendDummyInput()
         .appendTitle("Jouer le son")
-         .appendTitle(new Blockly.FieldDropdown(Blockly.Medias.getMediasFor('audio')), "AUDIO");
+         .appendTitle(new Blockly.FieldDropdown(Blockly.Medias.getMediasFor('snd')), "AUDIO");
      this.appendDummyInput()
         .appendTitle(new Blockly.FieldDropdown([
              ["et attendre la fin", "True"],

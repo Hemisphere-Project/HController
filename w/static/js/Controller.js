@@ -35,6 +35,7 @@ Controller.prototype.addEventListeners = function(){
 	this.socket.on('mediaList', function (list) {
 		self.mediaPlayer.mediaList.populateMediaList(list);
 		self.mediaSection.mediaList.populateMediaList(list);
+		Blockly.Medias.populateMediaList(list);
 			console.log(list);
 	});
 	
