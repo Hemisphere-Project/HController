@@ -44,6 +44,10 @@ Controller.prototype.addEventListeners = function(){
 		console.log(list);
 		self.scenarioSection.updateScenarioList(list);
 	});
+	this.socket.on('scenario', function (scenario) {
+		console.log(scenario);
+		self.scenarioSection.updateCurrentScenario(scenario);
+	});
 	
 }
 	

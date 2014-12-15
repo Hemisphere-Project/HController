@@ -71,7 +71,13 @@ ModuleManager.prototype.link = function() {
 		client.sendScenarioList(self.scenarioManager.scenarioList);
 		client.sendPlayerStatus(self.player.status());
 	});
-
+	
+	this.webServer.eventEmitter.on('getScenario',function(client,scenario){	
+		console.log(scenario);
+		if(scenario)
+			client.sendScenario(self.scenarioManager.getScenario(scenario));
+	});
+	
 	this.webServer.eventEmitter.on('play', function(socketId,media){
 		if (self.player.loop) self.oscInterface.playloop(media);
 		else self.oscInterface.play(media);

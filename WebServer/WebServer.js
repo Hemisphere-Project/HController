@@ -28,8 +28,16 @@ Client.prototype.sendMediaList = function(list){
 Client.prototype.sendScenarioList = function(list){
 	this.socket.emit('scenarioList',list);	
 }
+Client.prototype.sendScenario = function(scenario){
+	this.socket.emit('scenario',scenario);	
+}
 Client.prototype.addEventListeners = function(webserver){
 	var self=this;
+	
+	this.socket.on('getScenario', function (data) {
+			console.log(data);
+			webserver.eventEmitter.emit('getScenario',self,data);
+	});
 	this.socket.on('play', function (data) {
 			webserver.eventEmitter.emit('play',self.socket.id,data);
 	});

@@ -6,6 +6,8 @@ function ScenarioSectionController(socket,element,scenarioListElement){
 	
 	this.socket = socket;
 	
+	this.currentScenario = {};
+	
 	this.addEventListeners();
 }
 
@@ -26,6 +28,10 @@ ScenarioSectionController.prototype.addEventListeners = function(){
 	});
 	this.element.find('#download-scenario-btn').click(function () {
 	});
+	$("#scenario-section").on('click','.scenario-dd-element',function (event) {
+		self.scenarioList.selectScenario(self.scenarioList.getScenarioIndexFromElement(event.currentTarget));
+		self.socket.emit('getScenario',self.scenarioList.selectedScenario.path);
+	});
 }
 
 ScenarioSectionController.prototype.updateMediaList = function(list){
@@ -40,9 +46,22 @@ ScenarioSectionController.prototype.updateScenarioList = function(list){
 	this.scenarioList.populateScenarioList(list);
 }
 
-ScenarioSectionController.prototype.loadScenario = function(){
-	
+ScenarioSectionController.prototype.updateCurrentScenario = function(scenario){
+	this.currentScenario = scenario;
+	this.element.find("#scenario-dd-btn #current-sco-label").text(this.currentScenario.name);
+	if(this.currentScenario.type == "block")
+		this.updateBlockly();
 }
+
+ScenarioSectionController.prototype.updateBlockly = function(){
+	
+	if (Blockly.mainWorkspace !== null)
+		Blockly.mainWorkspace.clear();
+	
+  var xml = Blockly.Xml.textToDom("<xml>"+this.currentScenario.xml+"</xml>")
+  Blockly.Xml.domToWorkspace(Blockly.getMainWorkspace(), xml);
+}
+
 ScenarioSectionController.prototype.playScenario = function(){
 	
 }

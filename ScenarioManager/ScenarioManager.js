@@ -13,6 +13,12 @@ function ScenarioManager(config){
 	this.scenarioList = [];
 }
 
+
+ScenarioManager.prototype.getScenario = function(path){
+		var scoFile = fs.readFileSync(path);
+		return JSON.parse(scoFile);
+}
+
 ScenarioManager.prototype.updateScenarioList = function(callback){
 	var self = this;
 	this.listScenario(this.scenarioDirectory,function(err,data){
@@ -56,7 +62,7 @@ ScenarioManager.prototype.listScenario = function(dir,callback)
 					{
 						var ext = path.extname(file);
 						if(ext === SCENARIO_FILE_EXT){
-							retList.push({filename:path.basename(file)});
+							retList.push({filename:path.basename(file),filepath:file});
 						}
 						if (!--pending) callback(null, retList);
 					}
