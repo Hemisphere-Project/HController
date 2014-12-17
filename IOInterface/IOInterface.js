@@ -2,15 +2,6 @@ var MCP3424 = require('mcp3424');
 var i2c = require('i2c');
 
 
-//var I2C_ADC_ADDRESS = 0x6E
-//var I2C_RTC_ADDRESS = 0x68
-
-var address = 0x6E;
-var gain = 0; //{0,1,2,3} represents {x1,x2,x4,x8}
-var resolution = 3; //{0,1,2,3} and represents {12,14,16,18} bits
-
-
-
 var raspiomix = new Raspiomix();
 
 setInterval(function(){
@@ -20,7 +11,7 @@ setInterval(function(){
  	raspiomix.readAdc(0);
  	//console.log(mcp._readData(0));
 
-}, 10); //first conversion needs a bit time...(smaller resolution -> faster)
+}, 100); //first conversion needs a bit time...(smaller resolution -> faster)
 
 
 
@@ -45,8 +36,8 @@ function Raspiomix(){
 	this.ADC_CHANNELS = [ 0x9C, 0xBC, 0xDC, 0xFC ];
 	this.ADC_MULTIPLIER = 0.0000386;
 	
-	this.adcGain = 0; //{0,1,2,3} represents {x1,x2,x4,x8}
-	this.adcResolution = 0; //{0,1,2,3} and represents {12,14,16,18} bits
+	this.adcGain = 0; //{0,1,2,3} represents {x1,x2,x4,x8} -- PB avec x8
+	this.adcResolution = 1; //{0,1,2,3} and represents {12,14,16,18} bits
 	
 	this.DEVICE = '/dev/ttyAMA0';
 	
@@ -63,35 +54,13 @@ Raspiomix.prototype.readAdc = function(channel){
 	if(channel > this.ADC_CHANNELS.length - 1)
 		return console.error("channel doesn't exist");
 	
-	/*
-	// RAW METHOD (without gain and reso) ported for 18bits only
-	self = this;
-	// watchout this has been reported as buggy (seg fault) with MCP3424
-	this.adcWire.readBytes(this.ADC_CHANNELS[channel], 4, function(err, res) {
-		//console.log(res);
-		var h = res.readUInt8(0);
-		var m = res.readUInt8(1);
-		var l = res.readUInt8(2);
-		var x = h & 0;
-		var t =((h & 0x1) << 16) | (m << 8) | l
+	
+	this.adcMCP._readData(channel,function(err,value){
+		if(err)
+			return console.error(err);
 		
-		t *= self.ADC_MULTIPLIER;
-		console.log(t);
+		console.log("channel "+channel+" : "+value);
 	});
-	*/
-	
-	
-	var res = this.adcMCP._readData(channel);
-	// var h = res.readUInt8(0);
-	// var m = res.readUInt8(1);
-	// var l = res.readUInt8(2);
-	// var x = h & 0;
-	// var t =((h & 0x1) << 16) | (m << 8) | l 
-	//t *= this.ADC_MULTIPLIER;
-	
-	console.log(res);
-	//console.log(res.readUInt8(3).toString(16));
-	//console.log(t);
 	
 }
 
