@@ -1,77 +1,90 @@
-var MCP3424 = require('mcp3424');
-var i2c = require('i2c');
+var Raspiomix = require('./Raspiomix.js');
+var osc = require('node-osc');
 
 
-var raspiomix = new Raspiomix();
 
-setInterval(function(){
-  //console.log(mcp.getMv(0)); //for channel 0
-  //console.log(mcp.getMv(3)); //for channel 3
- 	//readRTC(mcp.getMv(0));
- 	raspiomix.readAdc(0);
- 	//console.log(mcp._readData(0));
 
+/*setInterval(function(){
+		//raspiomix.printStatus();
+		//console.log(raspiomix.getAdc(0));
+		//console.log(raspiomix.getAdc(1));
 }, 100); //first conversion needs a bit time...(smaller resolution -> faster)
+*/
 
 
 
-
-
-/*** Raspiomix Class ***/
-
-
-function Raspiomix(){
+function IOInterface(){
+	this.raspiomix = new Raspiomix();
 	
-	this.IO0 = 12;
-	this.IO1 = 11;
-	this.IO2 = 13;
-	this.IO3 = 15;
-
-	this.DIP0 = 7;
-	this.DIP1 = 16;
-
-	this.I2C_ADC_ADDRESS = 0x6E;
-	this.I2C_RTC_ADDRESS = 0x68;
-
-	this.ADC_CHANNELS = [ 0x9C, 0xBC, 0xDC, 0xFC ];
-	this.ADC_MULTIPLIER = 0.0000386;
 	
-	this.adcGain = 0; //{0,1,2,3} represents {x1,x2,x4,x8} -- PB avec x8
-	this.adcResolution = 1; //{0,1,2,3} and represents {12,14,16,18} bits
+	this.url = '127.0.0.1';
+	this.clientPort = 6000;
+	this.serverPort = 6001;
+	this.baseAddress = "raspiomix";
+
 	
-	this.DEVICE = '/dev/ttyAMA0';
+	var self = this;
 	
-	this.adcMCP = new MCP3424(this.I2C_ADC_ADDRESS, this.adcGain, this.adcResolution, '/dev/i2c-1');
-	this.adcWire = new i2c(this.I2C_ADC_ADDRESS, {device: '/dev/i2c-1'}); 
-	//this.rtcWire = new i2c(this.I2C_RTC_ADDRESS, {device: '/dev/i2c-1'});
+	//OSC CLIENT: SEND MESSAGES
+	this.oscClient = new osc.Client(this.url, this.clientPort); 
+	
+	//OSC SERVER: RECEIVE MESSAGES
+	this.oscServer = new osc.Server(this.serverPort, this.url);
+	this.oscServer.on("message", function(message,rinfo){
+			self.receiveMessageOSC(message,rinfo);
+	});	
+	
+	var handler = this.stayAlive();
+}
+
+IOInterface.prototype.stayAlive = function(){
+	return setInterval(function(){
+			console.log('I am still alive');
+	},3000);
+}
+
+IOInterface.prototype.sendMessageOSC = function(operation, args){
+
+	var message = new osc.Message(self.baseAddress+'/'+operation);
+	if(typeof args !== 'undefined')// we got args
+		for(var k=0;k<args.length;k++)// we push args
+			message.append(args[k]);
+
+	this.oscClient.send(message);	
 	
 }
 
-
-Raspiomix.prototype.readAdc = function(channel){
-	if(typeof channel === 'undefined')
-		return console.error('no channel provided');
-	if(channel > this.ADC_CHANNELS.length - 1)
-		return console.error("channel doesn't exist");
-	
-	
-	this.adcMCP._readData(channel,function(err,value){
-		if(err)
-			return console.error(err);
+IOInterface.prototype.receiveMessageOSC = function(message,rinfo){
 		
-		console.log("channel "+channel+" : "+value);
-	});
+	console.log(message);
 	
+		var args = message.slice();
+		
+		var address = args.shift();
+		
+		var addressElements = address.split('/');
+		
+		var baseAddress = addressElements[0];
+		var command = addressElements[1];
+		
+		if(baseAddress != this.baseAddress)
+			return console.error("wrong base adrss  "+baseAddress);
+		
+		switch(command){
+			case "getAdc":
+				var channel = args.shift();
+				console.log(this);
+				this.oscClient.sendMessage("adcValue",[this.raspiomix.getAdc(channel)]);
+			break;
+			case "getDigital" :
+				var channel = args.shift();
+				// nothing for the moment
+			break;
+			default: console.log("message not recognized: "+ message);	
+		}	
 }
 
-Raspiomix.prototype.readRtc = function(){
-	
-	
-}
+var iointerface = new IOInterface();
 
-Raspiomix.prototype.readDigital = function(pin){
-	
-}
-
-
+module.exports = IOInterface;
 
