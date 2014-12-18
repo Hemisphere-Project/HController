@@ -1,4 +1,4 @@
-//var Raspiomix = require('./Raspiomix.js');
+var Raspiomix = require('./Raspiomix.js');
 var osc = require('node-osc');
 
 
@@ -23,7 +23,7 @@ var IOCommands = {
 
 
 function IOInterface(){
-	//this.raspiomix = new Raspiomix();
+	this.raspiomix = new Raspiomix();
 	
 	
 	this.url = '127.0.0.1';
@@ -91,13 +91,16 @@ IOInterface.prototype.receiveMessageOSC = function(message,rinfo){
 				default: return console.error("IO Address not recognized : "+baseAddress);
 		}
 		switch(command){
-			case "getAdc":
+			case IOCommands.geta:
 				var channel = args.shift();
-				console.log(this.oscClient);
-				//this.sendMessageOSC("adcValue",[this.raspiomix.getAdc(channel)]);
-				this.oscClient.sendMessageOSC("adcValue",["hehehe"]);
+				//console.log(this.oscClient);
+				this.oscClient.sendMessageOSC("adcValue",[this.raspiomix.getAdc(channel)]);
 			break;
-			case "getDigital" :
+			case IOCommands.getd :
+				var channel = args.shift();
+				// nothing for the moment
+			break;
+			case IOCommands.getRtc :
 				var channel = args.shift();
 				// nothing for the moment
 			break;
