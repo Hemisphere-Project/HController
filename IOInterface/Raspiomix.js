@@ -41,7 +41,7 @@ Raspiomix.prototype.pollADC = function(){
       self.readAdc(currentChannel);
       currentChannel >= 3 ? currentChannel = 0 : currentChannel++;
       self.adcMCP.setChannel(currentChannel);
-      
+      //self.printStatus();
     }), this.pollADCRate);
     
 }

@@ -40,7 +40,7 @@ function IOInterface(){
 IOInterface.prototype.stayAlive = function(){
 	return setInterval(function(){
 			console.log('I am still alive');
-	},3000);
+	},1000);
 }
 
 IOInterface.prototype.sendMessageOSC = function(operation, args){
