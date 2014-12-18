@@ -20,4 +20,4 @@ oscServer.on("message", function(message,rinfo){
 	
 	
 	
-oscClient.sendMessage("getAdc",[0,"salut",3.45]);
+oscClient.sendMessage("getAnalog",[0,"salut",3.45]);

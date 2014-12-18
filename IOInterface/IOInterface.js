@@ -1,8 +1,17 @@
-var Raspiomix = require('./Raspiomix.js');
+//var Raspiomix = require('./Raspiomix.js');
 var osc = require('node-osc');
 
 
-
+var IOAddesses = {
+	raspiomix:"raspiomix",
+	grovepi:"grovepi",
+	arduino:"arduino"
+}
+var IOCommands = {
+	geta:"getAnalog",
+	getd:"getDigital",
+	getrtc:"getRtc"
+}
 
 /*setInterval(function(){
 		//raspiomix.printStatus();
@@ -14,7 +23,7 @@ var osc = require('node-osc');
 
 
 function IOInterface(){
-	this.raspiomix = new Raspiomix();
+	//this.raspiomix = new Raspiomix();
 	
 	
 	this.url = '127.0.0.1';
@@ -27,6 +36,15 @@ function IOInterface(){
 	
 	//OSC CLIENT: SEND MESSAGES
 	this.oscClient = new osc.Client(this.url, this.clientPort); 
+	this.oscClient.sendMessageOSC = function(operation, args){
+		var message = new osc.Message(self.baseAddress+'/'+operation);
+		if(typeof args !== 'undefined')// we got args
+			for(var k=0;k<args.length;k++)// we push args
+				message.append(args[k]);
+	
+		self.oscClient.send(message);	
+		
+	};
 	
 	//OSC SERVER: RECEIVE MESSAGES
 	this.oscServer = new osc.Server(this.serverPort, this.url);
@@ -43,16 +61,6 @@ IOInterface.prototype.stayAlive = function(){
 	},3000);
 }
 
-IOInterface.prototype.sendMessageOSC = function(operation, args){
-
-	var message = new osc.Message(self.baseAddress+'/'+operation);
-	if(typeof args !== 'undefined')// we got args
-		for(var k=0;k<args.length;k++)// we push args
-			message.append(args[k]);
-
-	this.oscClient.send(message);	
-	
-}
 
 IOInterface.prototype.receiveMessageOSC = function(message,rinfo){
 		
@@ -70,11 +78,24 @@ IOInterface.prototype.receiveMessageOSC = function(message,rinfo){
 		if(baseAddress != this.baseAddress)
 			return console.error("wrong base adrss  "+baseAddress);
 		
+		switch(baseAddress){
+				case IOAddesses.raspiomix :
+					
+				break;
+				case IOAddesses.grovepi :
+					
+				break;
+				case IOAddesses.arduino :
+					
+				break;				
+				default: return console.error("IO Address not recognized : "+baseAddress);
+		}
 		switch(command){
 			case "getAdc":
 				var channel = args.shift();
-				console.log(this);
-				this.sendMessageOSC("adcValue",[this.raspiomix.getAdc(channel)]);
+				console.log(this.oscClient);
+				//this.sendMessageOSC("adcValue",[this.raspiomix.getAdc(channel)]);
+				this.oscClient.sendMessageOSC("adcValue",["hehehe"]);
 			break;
 			case "getDigital" :
 				var channel = args.shift();
