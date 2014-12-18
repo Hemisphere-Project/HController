@@ -74,7 +74,7 @@ IOInterface.prototype.receiveMessageOSC = function(message,rinfo){
 			case "getAdc":
 				var channel = args.shift();
 				console.log(this);
-				this.oscClient.sendMessage("adcValue",[this.raspiomix.getAdc(channel)]);
+				this.sendMessageOSC("adcValue",[this.raspiomix.getAdc(channel)]);
 			break;
 			case "getDigital" :
 				var channel = args.shift();
