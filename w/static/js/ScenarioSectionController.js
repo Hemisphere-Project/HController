@@ -21,6 +21,7 @@ ScenarioSectionController.prototype.addEventListeners = function(){
 	this.element.find('#stop-scenario-btn').click(function () {
 	});
 	this.element.find('#save-scenario-btn').click(function () {
+			self.saveScenario();
 	});
 	this.element.find('#delete-scenario-btn').click(function () {
 	});
@@ -69,7 +70,7 @@ ScenarioSectionController.prototype.stopScenario = function(){
 	
 }
 ScenarioSectionController.prototype.saveScenario = function(){
-	
+	Code.saveScenario();
 }
 ScenarioSectionController.prototype.deleteScenario = function(){
 	

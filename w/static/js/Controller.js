@@ -2,6 +2,9 @@
 
 function Controller(){
 	
+	  this.gui = new GUI();
+	
+	
 	 	if (!window.location.origin)
   			window.location.origin = window.location.protocol+"//"+window.location.host;
 		this.socket = io.connect(window.location.origin);
@@ -29,6 +32,7 @@ Controller.prototype.addEventListeners = function(){
 	
 	this.socket.on('playerStatus', function (status) {
 		$('#player-head .player-name').text(status.name);
+		$('#player-head .player-ip').text(status.ip);
 		self.mediaPlayer.updateWithPlayerStatus(status);
 		console.log(status);
 	});
@@ -47,6 +51,7 @@ Controller.prototype.addEventListeners = function(){
 	this.socket.on('scenario', function (scenario) {
 		console.log(scenario);
 		self.scenarioSection.updateCurrentScenario(scenario);
+		self.gui.changeScenarioSubState(self.gui.scenarioSubStates.scenarioloaded);
 	});
 	
 }

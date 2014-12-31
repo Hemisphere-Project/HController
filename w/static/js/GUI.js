@@ -1,14 +1,22 @@
 function GUI(){
 
 	this.states = {
-				scenarios:'scenarios', 
+				scenario:'scenario', 
 				controls:'controls', 
 				medias:'medias', 
 				settings:'settings'
 	};
 	
+	this.scenarioSubStates = {
+			scenarioempty:'scenarioempty',
+			scenarioloaded:'scenarioloaded'
+	};
+	
 	// initialize the current state
 	this.changeState(this.states.scenarios);
+	
+	// initialize scenario section
+	this.changeScenarioSubState(this.scenarioSubStates.scenarioempty);
 	
 	this.addEventListeners();
 	
@@ -44,15 +52,17 @@ GUI.prototype.addEventListeners = function(){
 /*	$(".nav-btn").each(function(element){
 			$(this).on("click",navclick(event));
 	});*/
+	
+	var scope = this;
+	
 	$(document).on('click', '.nav-btn', function(event){
 			navclick(event);
 	});
-	var scope = this
+	
 	function navclick(event){
 		switch(event.currentTarget.id){
-			case "nav-btn-scenarios" : 
-				console.log("ok");
-				scope.changeState(scope.states.scenarios);
+			case "nav-btn-scenario" : 
+				scope.changeState(scope.states.scenario);
 				break;
 			case "nav-btn-controls" : 
 				scope.changeState(scope.states.controls);
@@ -80,9 +90,9 @@ GUI.prototype.changeState = function(newState){
 	});
 	
 	switch(newState){
-		case this.states.scenarios :
+		case this.states.scenario :
 			$("#scenario-section").removeClass("hidden");
-			$("#nav-btn-scenarios").addClass("active");
+			$("#nav-btn-scenario").addClass("active");
 			break;
 		case this.states.controls :
 			$("#controls-section").removeClass("hidden");
@@ -103,3 +113,33 @@ GUI.prototype.changeState = function(newState){
 	this.currentState = newState;
 	
 }
+
+GUI.prototype.changeScenarioSubState = function(newScenarioSubState){
+	if(newScenarioSubState == this.currentScenarioSubState || !(newScenarioSubState in this.scenarioSubStates))
+		return;
+	
+	
+	switch(newScenarioSubState){
+		case this.scenarioSubStates.scenarioempty :
+			$("#play-scenario-btn").addClass("disabled");
+			$("#stop-scenario-btn").addClass("disabled");
+			$("#save-scenario-btn").addClass("disabled");
+			$("#delete-scenario-btn").addClass("disabled");
+			$("#download-scenario-btn").addClass("disabled");
+			break;
+		case this.scenarioSubStates.scenarioloaded :
+			$("#play-scenario-btn").removeClass("disabled");
+			$("#stop-scenario-btn").removeClass("disabled");
+			$("#save-scenario-btn").removeClass("disabled");
+			$("#delete-scenario-btn").removeClass("disabled");
+			$("#download-scenario-btn").removeClass("disabled");
+			break;
+		default : console.log("unknown sub state"); break;
+		
+	}
+	
+	this.currentSubState = newScenarioSubState;
+}	
+	
+	
+	
