@@ -34,7 +34,7 @@ Controller.prototype.addEventListeners = function(){
 		$('#player-head .player-name').text(status.name);
 		$('#player-head .player-ip').text(status.ip);
 		self.mediaPlayer.updateWithPlayerStatus(status);
-		console.log(status);
+		//console.log(status);
 	});
 	
 	this.socket.on('mediaList', function (list) {
@@ -49,9 +49,12 @@ Controller.prototype.addEventListeners = function(){
 		self.scenarioSection.updateScenarioList(list);
 	});
 	this.socket.on('scenario', function (scenario) {
-		console.log(scenario);
+		//console.log(scenario);
 		self.scenarioSection.updateCurrentScenario(scenario);
 		self.gui.changeScenarioSubState(self.gui.scenarioSubStates.scenarioloaded);
+	});
+	this.socket.on('scenarioSaved', function (scenariopath) {
+		console.log("scenario saved  : "+scenariopath);
 	});
 	
 }

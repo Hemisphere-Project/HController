@@ -31,12 +31,17 @@ Client.prototype.sendScenarioList = function(list){
 Client.prototype.sendScenario = function(scenario){
 	this.socket.emit('scenario',scenario);	
 }
+Client.prototype.sendScenarioSaved = function(scenariopath){
+	this.socket.emit('scenarioSaved',scenariopath);	
+}
 Client.prototype.addEventListeners = function(webserver){
 	var self=this;
 	
 	this.socket.on('getScenario', function (data) {
-			console.log(data);
 			webserver.eventEmitter.emit('getScenario',self,data);
+	});
+	this.socket.on('saveScenario', function (data) {
+			webserver.eventEmitter.emit('saveScenario',self,data);
 	});
 	this.socket.on('play', function (data) {
 			webserver.eventEmitter.emit('play',self.socket.id,data);

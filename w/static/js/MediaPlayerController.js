@@ -114,7 +114,7 @@ MediaPlayerController.prototype.updateWithPlayerStatus = function(status){
 				//$(selectedMedia.element).append('<div id="play-info"><div class="progress" ><div class="progress-bar" style="width:'+100*status.media.progress/status.media.duration+'%;"></div></div></div>');
 			}else{
 				// update progress
-				console.log("progress  "+100*status.media.progress/status.media.duration);
+				//console.log("progress  "+100*status.media.progress/status.media.duration);
 				this.element.find(".progress-bar").css('width',100*status.media.progress/status.media.duration+'%');
 			}
 		}

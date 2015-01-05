@@ -138,7 +138,7 @@ Code.discard = function() {
   }
 };
 
-Code.wrapScenario = function(code) {
+/*Code.wrapScenario = function(code) {
   var lines = code.split('\n');
 
   code = "def run():";
@@ -162,16 +162,16 @@ Code.wrapScenario = function(code) {
   console.log(code);
 
   return code;
-};
+};*/
 
-Code.saveScenario = function() {
+/*Code.saveScenario = function() {
   if (!Code.current_scenario || (Code.current_scenario.length == 0)) {
     return;
   }
 
   console.log('saving scenario to ' + Code.current_scenario);
   var xml = Blockly.Xml.workspaceToDom(Blockly.getMainWorkspace()).innerHTML;
-  var code = Code.wrapScenario(Blockly.Python.workspaceToCode());
+  var codepy = Code.wrapScenario(Blockly.Python.workspaceToCode());
   console.log(xml);
   Griotte.publish('storage.command.set.medias.scenario',
                   { value:
@@ -181,7 +181,7 @@ Code.saveScenario = function() {
                     },
                     persistent: true
                   });
-};
+};*/
 
 // Code.saveToWS = function(name) {
 //   var xml = Blockly.Xml.workspaceToDom(Blockly.getMainWorkspace());

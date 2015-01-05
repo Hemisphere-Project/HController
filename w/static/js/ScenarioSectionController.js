@@ -70,8 +70,45 @@ ScenarioSectionController.prototype.stopScenario = function(){
 	
 }
 ScenarioSectionController.prototype.saveScenario = function(){
-	Code.saveScenario();
+ 
+	//if (!Code.current_scenario || (Code.current_scenario.length == 0)) {
+  //  return;
+  //}
+
+  this.currentScenario.xml = Blockly.Xml.workspaceToDom(Blockly.getMainWorkspace()).innerHTML;
+  this.currentScenario.codepy = this.wrapPyScenario(Blockly.Python.workspaceToCode());
+  this.currentScenario.codejs = Blockly.JavaScript.workspaceToCode();
+  console.log(this.currentScenario);
+  
+  this.socket.emit('saveScenario',{scenariopath:this.scenarioList.selectedScenario.path,scenario:this.currentScenario});
 }
+// temporary
+ScenarioSectionController.prototype.wrapPyScenario = function(code) {
+  var lines = code.split('\n');
+
+  code = "def run():";
+  code += "\n";
+
+  for(var i = 0; i < lines.length; i++) {
+    code += "  " + lines[i] + "\n";
+  }
+
+  code += "\n";
+
+  var tail = [
+    '',
+    'if __name__ == "__main__":',
+    '  from griotte.config import Config',
+    '  Config("DEFAULT")',
+    '  run()',
+    ].join('\n');
+
+  code = code + tail;
+  console.log(code);
+
+  return code;
+};
+
 ScenarioSectionController.prototype.deleteScenario = function(){
 	
 }

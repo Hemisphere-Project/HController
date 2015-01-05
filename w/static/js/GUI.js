@@ -13,7 +13,7 @@ function GUI(){
 	};
 	
 	// initialize the current state
-	this.changeState(this.states.scenarios);
+	this.changeState(this.states.scenario);
 	
 	// initialize scenario section
 	this.changeScenarioSubState(this.scenarioSubStates.scenarioempty);

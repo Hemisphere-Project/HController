@@ -124,6 +124,22 @@ ScenarioManager.prototype.copyScenario = function(scenario,from,to,callback){
 ScenarioManager.prototype.createScenario = function(callback){
 	
 }
+// TO BE TESTED
+ScenarioManager.prototype.saveScenario = function(scenariopath,scenario,callback){
+	
+	//if(!fs.existsSync(scenariopath))
+		//return console.error("save error : scenario doesn't exist");
+	
+	fs.writeFile(scenariopath, JSON.stringify(scenario,null,2), function (err) {
+		if (err) console.error(err);
+		
+		callback(scenariopath);
+		console.log("scenario saved");
+	});
+	
+	
+	
+}
 ScenarioManager.prototype.deleteScenario = function(scenario,callback){
 	
 }
