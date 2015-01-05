@@ -37,6 +37,8 @@ function Raspiomix(){
 Raspiomix.prototype.pollADC = function(){
     var self = this;
     var currentChannel = 0;
+    self.adcMCP.setChannel(currentChannel);
+    
     return setInterval((function() {
       self.readAdc(currentChannel);
       currentChannel >= 3 ? currentChannel = 0 : currentChannel++;
@@ -87,20 +89,43 @@ Raspiomix.prototype.readRtc = function(){
 
 Raspiomix.prototype.readDigital = function(pin){
 	rpio.setInput(pin)
-	console.log("pin "+pin+" : "+rpio.read(pin));
+	return rpio.read(pin);
 }
 
+Raspiomix.prototype.channelToPin = function(channel){
+		switch(channel){
+				case "IO0":
+					return this.IO0;
+				break;
+				case "IO1":
+					return this.IO1;
+				break;
+				case "IO2":
+					return this.IO2;
+				break;
+				case "IO3":
+					return this.IO3;
+				break;
+				case "DIP0":
+					return this.DIP0;
+				break;
+				case "DIP1":
+					return this.DIP1;
+				break;
+				default: return console.error("unknown channel : "+channel);
+		}	
+}
 
 Raspiomix.prototype.printStatus = function(){
 	console.log('\x1b[2J\x1b[H');
 
  	console.log('-----------DIGITAL--------------');
- 	this.readDigital(this.IO0);
- 	this.readDigital(this.IO1);
- 	this.readDigital(this.IO2);
- 	this.readDigital(this.IO3);
- 	this.readDigital(this.DIP0);
- 	this.readDigital(this.DIP1);
+ 	console.log("pin IO0 : "+this.readDigital(this.IO0));
+ 	console.log("pin IO1 : "+this.readDigital(this.IO1));
+ 	console.log("pin IO2 : "+this.readDigital(this.IO2));
+ 	console.log("pin IO3 : "+this.readDigital(this.IO3));
+ 	console.log("pin DIP0 : "+this.readDigital(this.DIP0));
+ 	console.log("pin DIP1 : "+this.readDigital(this.DIP1));
  	console.log('------------ANALOG--------------');
  	console.log("channel 0 :"+this.getAdc(0));
  	console.log("channel 1 :"+this.getAdc(1));

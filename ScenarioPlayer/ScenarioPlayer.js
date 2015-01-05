@@ -2,10 +2,14 @@ var Args = require("arg-parser"),
 		fs = require('fs'),
 		path = require('path'),
 		vm = require('vm'),
+		ScenarioPlayerOSC = require('./ScenarioPlayerOSC.js'),
 		ScenarioAPI = require('./ScenarioAPI.js');
 
 function ScenarioPlayer(){
+	
 
+	this.scenarioPlayerOSC = new ScenarioPlayerOSC();
+	
 	this.isPlaying = false;
 	this.currentScenario = "";
 
@@ -15,7 +19,7 @@ function ScenarioPlayer(){
 		var sco = this.openSCO(this.options.input);
 		if(!sco)
 			return;
-		var script = vm.createScript(sco.code);
+		var script = vm.createScript(sco.codejs);
 		this.play(script);
 		
 	}
@@ -39,14 +43,13 @@ ScenarioPlayer.prototype.parseArgs = function(){
 
 ScenarioPlayer.prototype.play = function(scenario){
 	
-	var context = vm.createContext(new ScenarioAPI());
+	var context = vm.createContext(new ScenarioAPI(this.scenarioPlayerOSC));
 	//context.print = function(what){console.log(what)};
 	
 	//console.log(scenario);
-	
 	scenario.runInContext(context);
-	//scenario.runInThisContext();
-
+	
+	console.log("finished");
 }
 
 ScenarioPlayer.prototype.pause = function(){

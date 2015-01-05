@@ -7,6 +7,7 @@ oscClient.sendMessage = function (operation,args){
 			for(var k=0;k<args.length;k++)// we push args
 				message.append(args[k]);
 	//console.log(JSON.stringify(message)+"  "+args);
+	console.log(message);
 		this.send(message);	
 }
 var now;

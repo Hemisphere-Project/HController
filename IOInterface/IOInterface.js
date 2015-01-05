@@ -13,20 +13,11 @@ var IOCommands = {
 	getrtc:"getRtc"
 }
 
-/*setInterval(function(){
-		//raspiomix.printStatus();
-		//console.log(raspiomix.getAdc(0));
-		//console.log(raspiomix.getAdc(1));
-}, 100); //first conversion needs a bit time...(smaller resolution -> faster)
-*/
-
-
-
 function IOInterface(){
 	this.raspiomix = new Raspiomix();
 	
 	
-	this.url = '192.168.0.11';
+	this.url = '127.0.0.1';
 	this.clientPort = 6000;
 	this.serverPort = 6001;
 	this.baseAddress = "raspiomix";
@@ -56,15 +47,17 @@ function IOInterface(){
 }
 
 IOInterface.prototype.stayAlive = function(){
+	var self = this;
 	return setInterval(function(){
-			console.log('I am still alive');
+			//console.log('I am still alive');
+			//self.raspiomix.printStatus();
 	},1000);
 }
 
 
 IOInterface.prototype.receiveMessageOSC = function(message,rinfo){
 		
-	console.log(message);
+	//console.log(message);
 	
 		var args = message.slice();
 		
@@ -94,11 +87,11 @@ IOInterface.prototype.receiveMessageOSC = function(message,rinfo){
 			case IOCommands.geta:
 				var channel = args.shift();
 				//console.log(this.oscClient);
-				this.oscClient.sendMessageOSC("adcValue",[this.raspiomix.getAdc(channel)]);
+				this.oscClient.sendMessageOSC("analogValue",[this.raspiomix.getAdc(channel)]);
 			break;
 			case IOCommands.getd :
 				var channel = args.shift();
-				// nothing for the moment
+				this.oscClient.sendMessageOSC("digitalValue",[this.raspiomix.readDigital(this.raspiomix.channelToPin(channel))]);
 			break;
 			case IOCommands.getRtc :
 				var channel = args.shift();
