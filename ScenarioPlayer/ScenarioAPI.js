@@ -1,5 +1,6 @@
 function ScenarioAPI(){
 	
+	// verififer que contexte node accessible à l'interieur des methodes
 	this.print = function(what){
 			console.log("\x1B[32m"+what+"\x1B[39m");
 	}

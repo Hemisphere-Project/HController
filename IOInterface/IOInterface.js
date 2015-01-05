@@ -26,7 +26,7 @@ function IOInterface(){
 	this.raspiomix = new Raspiomix();
 	
 	
-	this.url = '127.0.0.1';
+	this.url = '192.168.0.11';
 	this.clientPort = 6000;
 	this.serverPort = 6001;
 	this.baseAddress = "raspiomix";
