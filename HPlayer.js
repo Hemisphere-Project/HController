@@ -5,6 +5,7 @@ function HPlayer(config){
 
 	this.pid 		= null;
 	this.name 		= "Roberto";
+	this.ip = "127.0.0.1";
 	this.isPlaying 	= false;
 	this.media = {
 		filepath:	null,
@@ -25,6 +26,7 @@ function HPlayer(config){
 		this.status(config);
 		this.hdmiAudio	= config.hdmiAudio;
 		this.info		= config.info;
+		this.ip = config.ip;
 	}
 }
 
@@ -46,6 +48,7 @@ HPlayer.prototype.status = function(status){
 	
 	return {
 		name : this.name,
+		ip : this.ip,
 		isPlaying : this.isPlaying,
 		media : this.media,
 		isPaused : this.isPaused,
