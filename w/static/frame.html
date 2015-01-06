@@ -15,7 +15,8 @@
     
     <script type="text/javascript" src="js/blockly/core/medias.js"></script>
     
-    <script type="text/javascript" src="js/blockly/blocks/plusdix.js"></script>
+    <script type="text/javascript" src="js/blockly/blocks/raspiomix.js"></script>
+    
     <script type="text/javascript" src="js/blockly/blocks/analog.js"></script>
     <script type="text/javascript" src="js/blockly/blocks/audio.js"></script>
     <script type="text/javascript" src="js/blockly/blocks/digital.js"></script>
@@ -26,7 +27,8 @@
     <script type="text/javascript" src="js/blockly/blocks/video.js"></script>
     <script type="text/javascript" src="js/blockly/blocks/monkey_patching.js"></script>
     
-    <script type="text/javascript" src="js/blockly/generators/js/plusdix.js"></script>
+    <script type="text/javascript" src="js/blockly/generators/js/raspiomix.js"></script>
+    
     <script type="text/javascript" src="js/blockly/generators/js/monkey_patching.js"></script>
     <script type="text/javascript" src="js/blockly/generators/python/analog.js"></script>
     <script type="text/javascript" src="js/blockly/generators/python/audio.js"></script>
@@ -89,9 +91,18 @@
   
      <xml id="toolbox" style="display: none">
       <category name="Capteurs">
+      	<category name="raspiomix">
+      	     <category name="analog">
+      	     		<block type="readanalog"></block>
+      	     		<block type="onanalog"></block>
+      	     </category>
+      	     <category name="digital">
+      	     		<block type="readdigital"></block>
+      	     		<block type="ondigital"></block>
+      	     </category>
+      	</category>
         <category name="Analogiques">
-        <block type="plusdix"></block>
-          <block type="analog_sensor"></block>
+        <block type="analog_sensor"></block>
         </category>
         <category name="Digitaux">
           <block type="digital_sensor"></block>

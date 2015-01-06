@@ -76,7 +76,7 @@ ScenarioSectionController.prototype.saveScenario = function(){
   //}
 
   this.currentScenario.xml = Blockly.Xml.workspaceToDom(Blockly.getMainWorkspace()).innerHTML;
-  this.currentScenario.codepy = this.wrapPyScenario(Blockly.Python.workspaceToCode());
+  //this.currentScenario.codepy = this.wrapPyScenario(Blockly.Python.workspaceToCode());
   this.currentScenario.codejs = Blockly.JavaScript.workspaceToCode();
   console.log(this.currentScenario);
   

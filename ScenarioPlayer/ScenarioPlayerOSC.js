@@ -64,6 +64,7 @@ ScenarioPlayerOSC.prototype.receiveMessageOSC = function(message,rinfo){
 
 ScenarioPlayerOSC.prototype.getDigital = function(channel,callback){
 	
+	// TODO !!!
 	//need something more specific here
 	this.responsesPending.getDigital = callback;
 	//console.log(this.responsesPending);
@@ -72,6 +73,7 @@ ScenarioPlayerOSC.prototype.getDigital = function(channel,callback){
 }
 ScenarioPlayerOSC.prototype.getAnalog = function(channel,callback){
 	
+	// TODO !!!
 	//need something more specific here
 	this.responsesPending.getAnalog = callback;
 	//console.log(this.responsesPending);
