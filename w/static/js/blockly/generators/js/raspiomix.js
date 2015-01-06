@@ -4,13 +4,38 @@ Blockly.JavaScript['readanalog'] = function(block) {
   var variable0 = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('VAR'), Blockly.Variables.NAME_TYPE);
   // TODO: Assemble JavaScript into code variable.
   var code = 'readAnalog('+dropdown_channel+',function('+variable0+'){\n'+statements_callback+'});\n';
+  //return [code, Blockly.JavaScript.ORDER_NONE];
   return code;
 };
 
-Blockly.JavaScript['onAnalog'] = function(block) {
-  var value_what = Blockly.JavaScript.valueToCode(block, 'what', Blockly.JavaScript.ORDER_ATOMIC);
-  // TODO: Assemble JavaScript into code variable.
-  var code = parseInt(value_what) + 10;
-  // TODO: Change ORDER_NONE to the correct strength.
-  return [code, Blockly.JavaScript.ORDER_NONE];
+Blockly.JavaScript['onanalog'] = function(block) {
+  var dropdown_channel = block.getFieldValue('channel');
+  var statements_callback = Blockly.JavaScript.statementToCode(block, 'callback');
+  var variable0 = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('VAR'), Blockly.Variables.NAME_TYPE);
+  var code = 'onAnalog('+dropdown_channel+',function('+variable0+'){\n'+statements_callback+'});\n';
+  return code;
+};
+
+Blockly.JavaScript['readdigital'] = function(block) {
+  var dropdown_channel = block.getFieldValue('channel');
+  var statements_callback = Blockly.JavaScript.statementToCode(block, 'callback');
+  var variable0 = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('VAR'), Blockly.Variables.NAME_TYPE);
+  var code = 'readDigital("'+dropdown_channel+'",function('+variable0+'){\n'+statements_callback+'});\n';
+  return code;
+};
+
+Blockly.JavaScript['ondigital'] = function(block) {
+  var dropdown_channel = block.getFieldValue('channel');
+  var statements_callback = Blockly.JavaScript.statementToCode(block, 'callback');
+  var variable0 = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('VAR'), Blockly.Variables.NAME_TYPE);
+  var code = 'onDigital("'+dropdown_channel+'",function('+variable0+'){\n'+statements_callback+'});\n';
+  return code;
+};
+
+Blockly.JavaScript['ondigitalchange'] = function(block) {
+  var dropdown_channel = block.getFieldValue('channel');
+  var statements_callback = Blockly.JavaScript.statementToCode(block, 'callback');
+  var variable0 = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('VAR'), Blockly.Variables.NAME_TYPE);
+  var code = 'onDigitalChange("'+dropdown_channel+'",function('+variable0+'){\n'+statements_callback+'});\n';
+  return code;
 };

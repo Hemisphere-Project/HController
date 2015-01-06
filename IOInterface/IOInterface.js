@@ -50,7 +50,7 @@ IOInterface.prototype.stayAlive = function(){
 	var self = this;
 	return setInterval(function(){
 			//console.log('I am still alive');
-			//self.raspiomix.printStatus();
+			self.raspiomix.printStatus();
 	},1000);
 }
 
@@ -87,11 +87,11 @@ IOInterface.prototype.receiveMessageOSC = function(message,rinfo){
 			case IOCommands.geta:
 				var channel = args.shift();
 				//console.log(this.oscClient);
-				this.oscClient.sendMessageOSC("analogValue",[this.raspiomix.getAdc(channel)]);
+				this.oscClient.sendMessageOSC("analogValue",[channel,this.raspiomix.getAdc(channel)]);
 			break;
 			case IOCommands.getd :
 				var channel = args.shift();
-				this.oscClient.sendMessageOSC("digitalValue",[this.raspiomix.readDigital(this.raspiomix.channelToPin(channel))]);
+				this.oscClient.sendMessageOSC("digitalValue",[channel,this.raspiomix.readDigital(this.raspiomix.channelToPin(channel))]);
 			break;
 			case IOCommands.getRtc :
 				var channel = args.shift();

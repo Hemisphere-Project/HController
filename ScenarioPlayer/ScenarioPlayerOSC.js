@@ -27,7 +27,26 @@ function ScenarioPlayerOSC(config){
 			self.receiveMessageOSC(message,rinfo);
 	});	
 	
-	this.responsesPending = {};
+	this.cbfifos = {
+			digital:{
+				IO0:[],
+				IO1:[],
+				IO2:[],
+				IO3:[],
+				DIP0:[],
+				DIP1:[]
+			},
+			analog:{
+				0:[],
+				1:[],
+				2:[],
+				3:[]
+			}
+	};
+	
+	/*setInterval(function(){
+			self.printFifos();
+	},100);*/
 	
 }
 
@@ -47,12 +66,16 @@ ScenarioPlayerOSC.prototype.receiveMessageOSC = function(message,rinfo){
 		
 		switch(command){
 			case "digitalValue" :
+				var channel = args.shift();
 				var value = args.shift();
-				this.responsesPending.getDigital(value);
+				var callback = this.cbfifos.digital[channel].shift();
+				callback(value);
 			break;
 			case "analogValue" :
+				var channel = args.shift();
 				var value = args.shift();
-				this.responsesPending.getAnalog(value);
+				var callback = this.cbfifos.analog[channel].shift();
+				callback(value);
 			break;
 			default: console.log("message not recognized: "+ message);	
 		}	
@@ -66,7 +89,7 @@ ScenarioPlayerOSC.prototype.getDigital = function(channel,callback){
 	
 	// TODO !!!
 	//need something more specific here
-	this.responsesPending.getDigital = callback;
+	this.cbfifos.digital[channel].push(callback);
 	//console.log(this.responsesPending);
 	this.oscClient.sendMessage('getDigital',[channel]);
 	
@@ -75,10 +98,25 @@ ScenarioPlayerOSC.prototype.getAnalog = function(channel,callback){
 	
 	// TODO !!!
 	//need something more specific here
-	this.responsesPending.getAnalog = callback;
+	this.cbfifos.analog[channel].push(callback);
 	//console.log(this.responsesPending);
 	this.oscClient.sendMessage('getAnalog',[channel]);
 	
+}
+
+ScenarioPlayerOSC.prototype.printFifos = function(){
+	console.log('\x1b[2J\x1b[H');
+	console.log('--------- F I F O S ------------');
+ 	console.log("IO0 : "+this.cbfifos.digital.IO0.length);
+ 	console.log("IO1 : "+this.cbfifos.digital.IO1.length);
+ 	console.log("IO2 : "+this.cbfifos.digital.IO2.length);
+ 	console.log("IO3 : "+this.cbfifos.digital.IO3.length);
+ 	console.log("DIP0 : "+this.cbfifos.digital.DIP0.length);
+ 	console.log("DIP1 : "+this.cbfifos.digital.DIP1.length);
+ 	console.log("AN 0 :"+this.cbfifos.analog[0].length);
+ 	console.log("AN 1 :"+this.cbfifos.analog[0].length);
+ 	console.log("AN 2 :"+this.cbfifos.analog[0].length);
+ 	console.log("AN 3 :"+this.cbfifos.analog[0].length);
 }
 
 
