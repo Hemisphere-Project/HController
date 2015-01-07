@@ -41,8 +41,34 @@ function GUI(){
   $( window ).resize(function() {
   		$( "#controls-accordion" ).accordion( "refresh" );
   });
-
-	
+  
+  $('#add-scenario-btn').magnificPopup({
+  		type:'inline',
+  		callbacks: {
+  			open: function() {},
+  			close: function() {
+  				// temporary
+  				$('#new-sco-ti').val('');
+  				$(".select-sco-type #sco-type-block-btn").addClass("selected");
+  				$(".select-sco-type #sco-type-script-btn").removeClass("selected");
+  			}
+  		}
+  });
+  $('#delete-scenario-btn').magnificPopup({
+  		items: {
+  		  	src: '#delete-scenario-popup',
+  		  	type: 'inline'
+      }
+  		,callbacks: {
+  			open: function() {},
+  			close: function() {
+  				// temporary
+  				//$('#new-sco-ti').val('');
+  				//$(".select-sco-type #sco-type-block-btn").addClass("selected");
+  				//$(".select-sco-type #sco-type-script-btn").removeClass("selected");
+  			}
+  		}
+  });
 
 	
 }
@@ -77,6 +103,21 @@ GUI.prototype.addEventListeners = function(){
 				break;
 		}
 	}
+	
+	$(".select-sco-type").on('click','button',function(event){
+			$(".select-sco-type #sco-type-block-btn").removeClass("selected");
+			$(".select-sco-type #sco-type-script-btn").removeClass("selected");
+			$(this).addClass("selected");
+	});
+	$("#new-scenario-popup").on('input',"#new-sco-ti",function(event){
+			if(!$(this).val())
+				$("#create-scenario-btn").addClass("disabled");
+			else
+				$("#create-scenario-btn").removeClass("disabled");
+			
+				
+	});
+	
 }
 
 GUI.prototype.changeState = function(newState){
@@ -140,6 +181,10 @@ GUI.prototype.changeScenarioSubState = function(newScenarioSubState){
 	
 	this.currentSubState = newScenarioSubState;
 }	
+
+GUI.prototype.closePopup = function(){
+	$.magnificPopup.instance.close();
+}
 	
 	
 	

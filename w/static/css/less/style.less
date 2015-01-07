@@ -87,6 +87,47 @@ a:hover{
 	margin-right:4px;	
 }
 
+/* popup */
+
+.popup{
+  position: relative;
+  background: @g1-p;
+  padding: 20px;
+  width: auto;
+  max-width: 500px;
+  margin: 20px auto;
+  
+	.btn{
+		height:@toolbar-height;
+		border-radius: 0;
+		border-style: none;
+		background-color: @g1-pp;
+	}
+	.btn:hover{
+		background-color: @g1-ppp;
+	}
+	.selected{
+		&,
+		&:hover{
+			color: @w;
+			background-color: @id-color-m;
+		}
+	}
+	.ti-container{
+		margin-top:20px;
+		margin-bottom: 15px;
+	}
+	.form-control{
+		height:40px;
+		font-size: 18px;
+		border-radius:0;		
+	}
+
+	.delete-sco-message{
+		margin-bottom: 15px;	
+	}
+}
+
 /* header */
 
 #player-head{
@@ -182,6 +223,8 @@ a:hover{
 		width:100%;
 		margin:0px;
 		padding: 0px 0;
+		max-height:350px;
+		overflow-y: scroll;
 		.ds(0,2px,3px,0,0.2);
 
 		li{

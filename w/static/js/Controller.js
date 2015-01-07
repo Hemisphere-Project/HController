@@ -56,6 +56,17 @@ Controller.prototype.addEventListeners = function(){
 	this.socket.on('scenarioSaved', function (scenariopath) {
 		console.log("scenario saved  : "+scenariopath);
 	});
+	this.socket.on('scenarioCreated', function (scenariopath,scenarioList) {
+		console.log("scenario created  : "+scenariopath);
+		self.scenarioSection.updateScenarioList(scenarioList);
+		self.scenarioSection.selectScenario(self.scenarioSection.scenarioList.getScenarioIndexFromPath(scenariopath));
+		self.gui.closePopup();
+	});
+	this.socket.on('scenarioDeleted', function (scenarioList){
+		self.scenarioSection.updateScenarioList(scenarioList);
+		self.scenarioSection.resetSelection();
+		self.gui.closePopup();
+	})
 	
 }
 	

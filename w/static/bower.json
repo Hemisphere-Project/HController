@@ -22,6 +22,7 @@
     "jquery-ui": "~1.11.2",
     "bootstrap-vertical-tabs": "~1.2.1",
     "filesize": "~2.0.4",
-    "google-closure-library": "*"
+    "google-closure-library": "*",
+    "magnific-popup": "~1.0.0"
   }
 }

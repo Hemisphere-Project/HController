@@ -57,15 +57,6 @@ ModuleManager.prototype.link = function() {
 	
 	var self = this;
 
-	this.oscInterface.eventEmitter.on('status', function(status){
-		//self.player.status(status);
-		
-		//console.log("osc status received");
-		self.webServer.sendPlayerStatus(self.player.status(status));
-		// we have a heart beat from the player, we push back the IcePicker
-		//self.icePicker.pushBack();
-	});
-
 	this.webServer.eventEmitter.on('socketConnection',function(client){	
 		client.sendMediaList(self.mediaManager.mediaList);
 		client.sendScenarioList(self.scenarioManager.scenarioList);
@@ -73,9 +64,17 @@ ModuleManager.prototype.link = function() {
 	});
 	
 	this.webServer.eventEmitter.on('getScenario',function(client,scenario){	
-		console.log(scenario);
+		//console.log(scenario);
 		if(scenario)
 			client.sendScenario(self.scenarioManager.getScenario(scenario));
+	});
+
+	this.webServer.eventEmitter.on('createScenario',function(client,scenario){	
+		//console.log(scenario);
+		if(scenario)
+			self.scenarioManager.createScenario(scenario,function(scenariopath,scenariolist){
+				client.sendScenarioCreated(scenariopath,scenariolist);
+			});
 	});
 	
 	this.webServer.eventEmitter.on('saveScenario',function(client,data){	
@@ -84,6 +83,23 @@ ModuleManager.prototype.link = function() {
 			self.scenarioManager.saveScenario(data.scenariopath,data.scenario,function(scenariopath){
 				client.sendScenarioSaved(scenariopath);		
 			});
+	});
+
+	this.webServer.eventEmitter.on('deleteScenario',function(client,scenariopath){	
+		//console.log(data);
+		if(scenariopath)
+			self.scenarioManager.deleteScenario(scenariopath,function(scenariolist){
+				client.sendScenarioDeleted(scenariolist);		
+			});
+	});	
+	
+	this.oscInterface.eventEmitter.on('status', function(status){
+		//self.player.status(status);
+		
+		//console.log("osc status received");
+		self.webServer.sendPlayerStatus(self.player.status(status));
+		// we have a heart beat from the player, we push back the IcePicker
+		//self.icePicker.pushBack();
 	});
 	
 	this.webServer.eventEmitter.on('play', function(socketId,media){

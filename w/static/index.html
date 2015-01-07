@@ -8,6 +8,7 @@
     <link href="lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="lib/bootstrap-vertical-tabs/bootstrap.vertical-tabs.min.css" rel="stylesheet">
     <link href="css/ui-slider.css" rel="stylesheet">
+    <link href="lib/magnific-popup/dist/magnific-popup.css" rel="stylesheet">
     
     <link href="css/font.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
@@ -17,6 +18,7 @@
     <script src="lib/bootstrap/dist/js/bootstrap.js"></script>
     <script src="lib/jquery-ui/jquery-ui.min.js"></script>
     <script src="lib/filesize/lib/filesize.min.js"></script>
+    <script src="lib/magnific-popup/dist/jquery.magnific-popup.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     
     <script src="js/GUI.js"></script>
@@ -58,7 +60,7 @@
 									<span class="glyphicon glyphicon-th-list"></span><span id="current-sco-label">scenario</span><span class="caret"></span>
 									</button>
 									<ul id="scenario-dd" class="dropdown-menu" role="menu">
-										<li><a id="add-scenario-btn" href="#"><span class="glyphicon glyphicon-plus"></span>Nouveau scénario</a></li>
+										<li><a id="add-scenario-btn" href="#new-scenario-popup"><span class="glyphicon glyphicon-plus"></span>Nouveau scénario</a></li>
 										<li class="divider"></li>
 										<li><a href="#"><span class="glyphicon glyphicon-th-list"></span>scenario I</a></li>
 										<li><a href="#"><span class="glyphicon glyphicon-th-list"></span>scenario II</a></li>
@@ -88,6 +90,25 @@
 						</div>
 						<div id="blockly-frame-container">
 							<iframe id="blockly-iframe" src="frame.html"></iframe>
+						</div>
+						<div id="new-scenario-popup" class="popup mfp-hide">
+							  <div class="ti-container">
+							  	<input id="new-sco-ti" type="text" class="form-control" placeholder="Name" >
+							  </div>
+								<div class="btn-group select-sco-type" role="group">
+									<button id="sco-type-block-btn" type="button" class="btn btn-default selected"><span class="glyphicon glyphicon-th-list"></span></button>
+									<button id="sco-type-script-btn" type="button" class="btn btn-default">&lt;/&gt;</button>
+								</div>
+								<div class="row">
+									<div class="col-xs-10"></div>
+									<div class="col-xs-2">
+										<button id="create-scenario-btn" type="button" class="btn btn-default disabled">create</button>
+									</div>
+								</div>							  
+						</div>
+						<div id="delete-scenario-popup" class="popup mfp-hide">
+							<div class="delete-sco-message"><span class="glyphicon glyphicon-trash" ></span>Do you wan't to delete current scenario ?</div>
+							<button id="delete-sco-confirm-btn" type="button" class="btn btn-default ">confirm</button>
 						</div>
 				</div>
 				<div id="controls-section" class="content-section">

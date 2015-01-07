@@ -34,8 +34,17 @@ Client.prototype.sendScenario = function(scenario){
 Client.prototype.sendScenarioSaved = function(scenariopath){
 	this.socket.emit('scenarioSaved',scenariopath);	
 }
+Client.prototype.sendScenarioCreated = function(scenariopath,scenariolist){
+	this.socket.emit('scenarioCreated',scenariopath,scenariolist);	
+}
+Client.prototype.sendScenarioDeleted = function(scenariolist){
+	this.socket.emit('scenarioDeleted',scenariolist);	
+}
 Client.prototype.addEventListeners = function(webserver){
+	
 	var self=this;
+	
+	/************ Scenario section events **************/
 	
 	this.socket.on('getScenario', function (data) {
 			webserver.eventEmitter.emit('getScenario',self,data);
@@ -43,6 +52,15 @@ Client.prototype.addEventListeners = function(webserver){
 	this.socket.on('saveScenario', function (data) {
 			webserver.eventEmitter.emit('saveScenario',self,data);
 	});
+	this.socket.on('createScenario', function (data) {
+			webserver.eventEmitter.emit('createScenario',self,data);
+	});
+	this.socket.on('deleteScenario', function (data) {
+			webserver.eventEmitter.emit('deleteScenario',self,data);
+	});
+	
+	/************* media player events *****************/
+	
 	this.socket.on('play', function (data) {
 			webserver.eventEmitter.emit('play',self.socket.id,data);
 	});
@@ -85,6 +103,9 @@ Client.prototype.addEventListeners = function(webserver){
 	this.socket.on('quit', function (data) {
 			webserver.eventEmitter.emit('quit',self.socket.id);
 	});
+	
+	/*************** general events ********************/ 
+	
 	this.socket.on('disconnect',function(){
 		for(var k=0;k<webserver.clients.length;k++){
 			if(webserver.clients[k].socket.id===self.socket.id){

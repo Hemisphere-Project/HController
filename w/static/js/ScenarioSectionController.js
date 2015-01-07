@@ -6,7 +6,13 @@ function ScenarioSectionController(socket,element,scenarioListElement){
 	
 	this.socket = socket;
 	
-	this.currentScenario = {};
+	this.currentScenario = {
+		name:"scenario",
+		type:"block",
+		xml:"",
+		coejs:"",
+		codepy:""
+	};
 	
 	this.addEventListeners();
 }
@@ -15,6 +21,12 @@ ScenarioSectionController.prototype.addEventListeners = function(){
 	
 	var self = this;
 	this.element.find('#add-scenario-btn').click(function () {
+	});
+	this.element.find('#create-scenario-btn').click(function () {
+			var name = $("#new-sco-ti").val();
+			var type = $(".select-sco-type #sco-type-block-btn").hasClass("selected") ? "block" : "script";
+			
+			self.createScenario(name,type);
 	});
 	this.element.find('#play-scenario-btn').click(function () {
 	});
@@ -25,13 +37,33 @@ ScenarioSectionController.prototype.addEventListeners = function(){
 	});
 	this.element.find('#delete-scenario-btn').click(function () {
 	});
+	this.element.find('#delete-sco-confirm-btn').click(function () {
+			self.deleteScenario();
+	});
 	this.element.find('#upload-scenario-btn').click(function () {
 	});
 	this.element.find('#download-scenario-btn').click(function () {
 	});
 	$("#scenario-section").on('click','.scenario-dd-element',function (event) {
-		self.scenarioList.selectScenario(self.scenarioList.getScenarioIndexFromElement(event.currentTarget));
-		self.socket.emit('getScenario',self.scenarioList.selectedScenario.path);
+		self.selectScenario(self.scenarioList.getScenarioIndexFromElement(event.currentTarget));
+
+	});
+}
+
+ScenarioSectionController.prototype.selectScenario = function(scenarioIndex){
+	this.scenarioList.selectScenario(scenarioIndex);
+	this.socket.emit('getScenario',this.scenarioList.selectedScenario.path);
+}
+
+ScenarioSectionController.prototype.resetSelection = function(){
+	
+	this.scenarioList.selectScenario(-1);
+	this.updateCurrentScenario({
+		name:"scenario",
+		type:"block",
+		xml:"",
+		coejs:"",
+		codepy:""
 	});
 }
 
@@ -61,6 +93,17 @@ ScenarioSectionController.prototype.updateBlockly = function(){
 	
   var xml = Blockly.Xml.textToDom("<xml>"+this.currentScenario.xml+"</xml>")
   Blockly.Xml.domToWorkspace(Blockly.getMainWorkspace(), xml);
+}
+
+ScenarioSectionController.prototype.createScenario = function(name,type){
+	var scenario = {
+		name:name,
+		type:type,
+		xml:"",
+		codejs:"",
+		codepy:""
+	}
+	this.socket.emit('createScenario',scenario);
 }
 
 ScenarioSectionController.prototype.playScenario = function(){
@@ -110,7 +153,7 @@ ScenarioSectionController.prototype.wrapPyScenario = function(code) {
 };
 
 ScenarioSectionController.prototype.deleteScenario = function(){
-	
+	this.socket.emit('deleteScenario',this.scenarioList.selectedScenario.path);
 }
 ScenarioSectionController.prototype.uploadScenario = function(){
 	

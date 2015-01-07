@@ -1,5 +1,6 @@
 var fs = require('fs'),
-	path = require('path');
+		sanitize = require("sanitize-filename"),
+		path = require('path');
 	
 var DEFAULT_SCENARIO_DIR = path.join(__dirname, './scenario');	
 var SCENARIO_FILE_EXT = ".sco"
@@ -121,8 +122,14 @@ ScenarioManager.prototype.copyScenario = function(scenario,from,to,callback){
     });*/
 	
 }
-ScenarioManager.prototype.createScenario = function(callback){
-	
+ScenarioManager.prototype.createScenario = function(scenario,callback){
+	var self = this;
+	var p = path.join(this.scenarioDirectory,sanitize(scenario.name+".sco"));
+	this.saveScenario(p,scenario,function(scenariopath){
+			self.updateScenarioList(function(err,list){
+					callback(scenariopath,list);
+			});
+	});
 }
 // TO BE TESTED
 ScenarioManager.prototype.saveScenario = function(scenariopath,scenario,callback){
@@ -131,7 +138,8 @@ ScenarioManager.prototype.saveScenario = function(scenariopath,scenario,callback
 		//return console.error("save error : scenario doesn't exist");
 	
 	fs.writeFile(scenariopath, JSON.stringify(scenario,null,2), function (err) {
-		if (err) console.error(err);
+		if (err) 
+			console.error(err);
 		
 		callback(scenariopath);
 		console.log("scenario saved");
@@ -140,8 +148,17 @@ ScenarioManager.prototype.saveScenario = function(scenariopath,scenario,callback
 	
 	
 }
-ScenarioManager.prototype.deleteScenario = function(scenario,callback){
-	
+ScenarioManager.prototype.deleteScenario = function(scenariopath,callback){
+	var self = this;
+	fs.unlink(scenariopath, function (err) {
+		if (err) 
+				console.error(err);
+  	
+		self.updateScenarioList(function(err,list){
+				callback(list);
+		});
+		console.log("scenario deleted");
+  });
 }
 ScenarioManager.prototype.renameScenario = function(scenario,name,callback){
 	

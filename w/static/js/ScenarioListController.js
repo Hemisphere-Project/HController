@@ -13,6 +13,13 @@ ScenarioListController.prototype.selectScenario = function(scenarioIndex){
 	if(this.currentScenarioList.length === 0)
 		return;
 	
+	if(scenarioIndex == -1)
+		return this.selectedScenario = {
+			name :"",
+			path :"",
+			element:null
+		};
+	
 	this.selectedScenario = this.currentScenarioList[scenarioIndex];		
 }
 
@@ -46,4 +53,14 @@ ScenarioListController.prototype.getScenarioIndexFromElement = function(element)
 		return k;
 	else
 		return null;
+}
+
+ScenarioListController.prototype.getScenarioIndexFromPath = function(path){
+	var k = 0;
+	while(k<this.currentScenarioList.length && this.currentScenarioList[k].path != path)
+		k++;
+	if(k<this.currentScenarioList.length)
+		return k;
+	else
+		return null;	
 }
