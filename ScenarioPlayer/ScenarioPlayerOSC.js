@@ -83,7 +83,7 @@ ScenarioPlayerOSC.prototype.receiveMessageOSC = function(message,rinfo){
 
 
 
-/***************************   OSCInterface Commands   ************************/
+/***************************   IOInterface Commands   ************************/
 
 ScenarioPlayerOSC.prototype.getDigital = function(channel,callback){
 	
@@ -118,6 +118,61 @@ ScenarioPlayerOSC.prototype.printFifos = function(){
  	console.log("AN 2 :"+this.cbfifos.analog[0].length);
  	console.log("AN 3 :"+this.cbfifos.analog[0].length);
 }
+
+/***************************   HPlayer Commands   ************************/
+
+ScenarioPlayerOSC.prototype.play = function(media){
+	this.oscClient.sendMessage('play',this.mediaOSCList(media));
+}
+ScenarioPlayerOSC.prototype.playloop = function(media){
+	this.oscClient.sendMessage('playloop',this.mediaOSCList(media));	
+}
+ScenarioPlayerOSC.prototype.stop = function(){
+	this.oscClient.sendMessage('stop');
+	
+}
+ScenarioPlayerOSC.prototype.next = function(){
+	this.oscClient.sendMessage('next');
+}
+ScenarioPlayerOSC.prototype.prev = function(){
+	this.oscClient.sendMessage('prev');
+}
+ScenarioPlayerOSC.prototype.pause = function(){
+	this.oscClient.sendMessage('pause');
+}
+ScenarioPlayerOSC.prototype.resume = function(){
+	this.oscClient.sendMessage('resume');
+}
+ScenarioPlayerOSC.prototype.loop = function(){
+	this.oscClient.sendMessage('loop');
+}
+ScenarioPlayerOSC.prototype.unloop = function(){
+	this.oscClient.sendMessage('unloop');	
+}
+ScenarioPlayerOSC.prototype.zoom = function(value){
+	this.oscClient.sendMessage('zoom',[value]);
+}
+// SOUND
+ScenarioPlayerOSC.prototype.volume = function(value){
+	//console.log("volume = "+value);
+	this.oscClient.sendMessage('volume',[value]);
+}
+ScenarioPlayerOSC.prototype.mute = function(){
+	this.oscClient.sendMessage('mute');
+}
+ScenarioPlayerOSC.prototype.unmute = function(){
+	this.oscClient.sendMessage('unmute');	
+}
+// EFFECTS
+ScenarioPlayerOSC.prototype.blur = function(blurSize){
+	this.oscClient.sendMessage('blur',[blurSize]);
+}
+// PLAYER STATUS REQUEST
+ScenarioPlayerOSC.prototype.getStatus = function(){
+	//console.log("status asked");
+	this.oscClient.sendMessage('s/getStatus');
+}
+
 
 
 module.exports = ScenarioPlayerOSC;
