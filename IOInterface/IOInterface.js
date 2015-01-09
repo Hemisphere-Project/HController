@@ -2,7 +2,7 @@ var Raspiomix = require('./Raspiomix.js');
 var osc = require('node-osc');
 
 
-var IOAddesses = {
+var IODeviceAddesses = {
 	raspiomix:"raspiomix",
 	grovepi:"grovepi",
 	arduino:"arduino"
@@ -18,17 +18,17 @@ function IOInterface(){
 	
 	
 	this.url = '127.0.0.1';
-	this.clientPort = 6000;
-	this.serverPort = 6001;
-	this.baseAddress = "raspiomix";
+	this.clientPort = 6001;
+	this.serverPort = 6000;
+	this.baseAddress = "iointerface";
 
 	
 	var self = this;
 	
 	//OSC CLIENT: SEND MESSAGES
 	this.oscClient = new osc.Client(this.url, this.clientPort); 
-	this.oscClient.sendMessageOSC = function(operation, args){
-		var message = new osc.Message(self.baseAddress+'/'+operation);
+	this.oscClient.sendMessageOSC = function(address,operation, args){
+		var message = new osc.Message(address+'/'+operation);
 		if(typeof args !== 'undefined')// we got args
 			for(var k=0;k<args.length;k++)// we push args
 				message.append(args[k]);
@@ -66,39 +66,41 @@ IOInterface.prototype.receiveMessageOSC = function(message,rinfo){
 		var addressElements = address.split('/');
 		
 		var baseAddress = addressElements[0];
-		var command = addressElements[1];
+		//var command = addressElements[1];
 		
 		if(baseAddress != this.baseAddress)
-			return console.error("wrong base adrss  "+baseAddress);
+			return;// console.error("wrong base adrss  "+baseAddress);
 		
-		switch(baseAddress){
-				case IOAddesses.raspiomix :
+		var deviceAddress = addressElements[1];
+		switch(deviceAddress){
+				case IODeviceAddesses.raspiomix :
+					var command = addressElements[2];
+					switch(command){
+						case IOCommands.geta:
+							var channel = args.shift();
+							this.oscClient.sendMessageOSC(this.baseAddress+"/raspiomix","analogValue",[channel,this.raspiomix.getAdc(channel)]);
+						break;
+						case IOCommands.getd :
+							var channel = args.shift();
+							this.oscClient.sendMessageOSC(this.baseAddress+"/raspiomix","digitalValue",[channel,this.raspiomix.readDigital(this.raspiomix.channelToPin(channel))]);
+						break;
+						case IOCommands.getRtc :
+							var channel = args.shift();
+							// nothing for the moment
+						break;
+						default: console.log("message not recognized: "+ message);	
+					}
 					
 				break;
-				case IOAddesses.grovepi :
+				case IODeviceAddesses.grovepi :
 					
 				break;
-				case IOAddesses.arduino :
+				case IODeviceAddesses.arduino :
 					
 				break;				
 				default: return console.error("IO Address not recognized : "+baseAddress);
 		}
-		switch(command){
-			case IOCommands.geta:
-				var channel = args.shift();
-				//console.log(this.oscClient);
-				this.oscClient.sendMessageOSC("analogValue",[channel,this.raspiomix.getAdc(channel)]);
-			break;
-			case IOCommands.getd :
-				var channel = args.shift();
-				this.oscClient.sendMessageOSC("digitalValue",[channel,this.raspiomix.readDigital(this.raspiomix.channelToPin(channel))]);
-			break;
-			case IOCommands.getRtc :
-				var channel = args.shift();
-				// nothing for the moment
-			break;
-			default: console.log("message not recognized: "+ message);	
-		}	
+	
 }
 
 var iointerface = new IOInterface();

@@ -14,10 +14,6 @@ function ScenarioAPI(osc){
 			self.osc.getDigital(channel,callback);
 	}
 
-	/*	this.readDigitalSync = function(channel){
-		
-	});*/
-
 	this.onDigital = function(channel,handler){
 			var h = setInterval(function(){
 					self.osc.getDigital(channel,handler);		
@@ -43,6 +39,16 @@ function ScenarioAPI(osc){
 			var h = setInterval(function(){
 					self.osc.getAnalog(channel,handler);		
 			},eventPollingPeriod);
+	}
+	
+	this.playMedia = function(media){
+			self.osc.play(media);
+	}
+	this.pauseMedia = function(){
+			self.osc.play();
+	}
+	this.resumeMedia = function(){
+			self.osc.play();
 	}
 	
 }

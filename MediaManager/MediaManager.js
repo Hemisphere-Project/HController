@@ -12,7 +12,7 @@ var SUPPORTED_MEDIA_EXT = [{
 															list:[".jpeg",".jpg",".JPEG",".JPG"]
 														},{
 															type:SUPPORTED_MEDIA_TYPES.VID,
-															list:[".mov",".avi",".mp4",".MOV",".AVI",".MP4"]
+															list:[".mov",".avi",".mp4",".mkv",".MOV",".AVI",".MP4",".MKV"]
 														},{
 															type:SUPPORTED_MEDIA_TYPES.SND,
 															list:[".mp3",".MP3"]
