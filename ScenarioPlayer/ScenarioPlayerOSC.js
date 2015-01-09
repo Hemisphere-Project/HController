@@ -10,7 +10,7 @@ function ScenarioPlayerOSC(config){
 	
 	this.addresses = {
 		iointerface:"iointerface",
-		hplayer:"#bundle"
+		hplayer:""
 	}
 	
 	
@@ -153,10 +153,10 @@ ScenarioPlayerOSC.prototype.printFifos = function(){
 /***************************   HPlayer Commands   ************************/
 
 ScenarioPlayerOSC.prototype.play = function(media){
-	this.oscClientII.sendMessage(this.addresses.hplayer,'play',media);
+	this.oscClientII.sendMessage(this.addresses.hplayer,'play',[media]);
 }
 ScenarioPlayerOSC.prototype.playloop = function(media){
-	this.oscClientII.sendMessage(this.addresses.hplayer,'playloop',media);	
+	this.oscClientII.sendMessage(this.addresses.hplayer,'playloop',[media]);	
 }
 ScenarioPlayerOSC.prototype.stop = function(){
 	this.oscClientII.sendMessage(this.addresses.hplayer,'stop');

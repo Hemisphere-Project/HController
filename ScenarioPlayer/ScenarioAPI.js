@@ -42,13 +42,16 @@ function ScenarioAPI(osc){
 	}
 	
 	this.playMedia = function(media){
+			self.osc.playloop(media);
+	}
+	this.playMediaLoop = function(media){
 			self.osc.play(media);
 	}
 	this.pauseMedia = function(){
-			self.osc.play();
+			self.osc.pause();
 	}
 	this.resumeMedia = function(){
-			self.osc.play();
+			self.osc.resume();
 	}
 	
 }
