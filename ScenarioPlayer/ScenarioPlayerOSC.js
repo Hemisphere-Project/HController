@@ -5,12 +5,12 @@ function ScenarioPlayerOSC(config){
 	var self = this;
 	
 	this.url = '127.0.0.1';
-	this.clientPort = 6000;
-	this.serverPort = 6001;
+	this.clientPort = 5000;
+	this.serverPort = 8000;
 	
-	this.addresses = {
+	this.services = {
 		iointerface:"iointerface",
-		hplayer:""
+		hplayer:"hplayer"
 	}
 	
 	
@@ -25,22 +25,12 @@ function ScenarioPlayerOSC(config){
 		self.oscClient.send(message);	
 		
 	};
-	this.oscClientII = new osc.Client(this.url, 9000); 
-	this.oscClientII.sendMessage = function(address,operation, args){
-		var message = new osc.Message(address+'/'+operation);
-		if(typeof args !== 'undefined')// we got args
-			for(var k=0;k<args.length;k++)// we push args
-				message.append(args[k]);
-		//console.log(message);
-		self.oscClientII.send(message);	
-		
-	};
-	
 	//OSC SERVER: RECEIVE MESSAGES
 	this.oscServer = new osc.Server(this.serverPort, this.url);
 	this.oscServer.on("message", function(message,rinfo){
 			self.receiveMessageOSC(message,rinfo);
 	});	
+	
 	
 	this.cbfifos = {
 			digital:{
@@ -69,46 +59,53 @@ ScenarioPlayerOSC.prototype.receiveMessageOSC = function(message,rinfo){
 		
 	//console.log(message);
 	
-		var args = message.slice();
+		/*var args = message.slice();
 		var address = args.shift();
 		var addressElements = address.split('/');
 		
-		var baseAddress = addressElements[0];
+		var baseAddress = addressElements[0];*/
+	var mes = message.slice();
+	var address = mes.shift();
+	var addressElements = address.split('/');
+	var baseAddress = addressElements.shift();
+	var baseAddressElements = baseAddress.split(':');
+	var from = baseAddressElements.shift();
+	var to = baseAddressElements.shift();
 		
-		switch(baseAddress){
-				case this.addresses.iointerface :
-						var deviceAddress = addressElements[1];
-						switch(deviceAddress){
-							case "raspiomix" :
-								var command = addressElements[2];
-								switch(command){
-									case "digitalValue" :
-										var channel = args.shift();
-										var value = args.shift();
-										var callback = this.cbfifos.digital[channel].shift();
-										callback(value);
-									break;
-									case "analogValue" :
-										var channel = args.shift();
-										var value = args.shift();
-										var callback = this.cbfifos.analog[channel].shift();
-										callback(value);
-									break;
-									default: console.log("message not recognized: "+ message);	
-								}	
-							break;
-							case "grovepi" :
-							break;
-							case "arduino" :
-							break;
-							default: console.log("device not recognized: "+ message);	
-						}	
-				break;
-				case this.addresses.hplayer :
-					
-				break;				
-				default: return console.error("Address not recognized : "+baseAddress);
-		}
+	switch(from){
+			case this.services.iointerface :
+					var deviceAddress = addressElements.shift();
+					switch(deviceAddress){
+						case "raspiomix" :
+							var command = addressElements.shift();
+							switch(command){
+								case "digitalValue" :
+									var channel = mes.shift();
+									var value = mes.shift();
+									var callback = this.cbfifos.digital[channel].shift();
+									callback(value);
+								break;
+								case "analogValue" :
+									var channel = mes.shift();
+									var value = mes.shift();
+									var callback = this.cbfifos.analog[channel].shift();
+									callback(value);
+								break;
+								default: console.log("message not recognized: "+ message);	
+							}	
+						break;
+						case "grovepi" :
+						break;
+						case "arduino" :
+						break;
+						default: console.log("device not recognized: "+ message);	
+					}	
+			break;
+			case this.services.hplayer :
+				
+			break;				
+			default: return console.error("Address not recognized : "+baseAddress);
+	}
 
 }
 
@@ -122,7 +119,7 @@ ScenarioPlayerOSC.prototype.getDigital = function(channel,callback){
 	//need something more specific here
 	this.cbfifos.digital[channel].push(callback);
 	//console.log(this.responsesPending);
-	this.oscClient.sendMessage(this.addresses.iointerface+'/raspiomix','getDigital',[channel]);
+	this.oscClient.sendMessage("scenarioplayer:"+this.services.iointerface+'/raspiomix','getDigital',[channel]);
 	
 }
 ScenarioPlayerOSC.prototype.getAnalog = function(channel,callback){
@@ -131,7 +128,7 @@ ScenarioPlayerOSC.prototype.getAnalog = function(channel,callback){
 	//need something more specific here
 	this.cbfifos.analog[channel].push(callback);
 	//console.log(this.responsesPending);
-	this.oscClient.sendMessage(this.addresses.iointerface+'/raspiomix','getAnalog',[channel]);
+	this.oscClient.sendMessage("scenarioplayer:"+this.services.iointerface+'/raspiomix','getAnalog',[channel]);
 	
 }
 
@@ -153,19 +150,19 @@ ScenarioPlayerOSC.prototype.printFifos = function(){
 /***************************   HPlayer Commands   ************************/
 
 ScenarioPlayerOSC.prototype.play = function(media){
-	this.oscClientII.sendMessage(this.addresses.hplayer,'play',[media]);
+	this.oscClient.sendMessage("scenarioplayer:"+this.services.hplayer,'play',[media]);
 }
 ScenarioPlayerOSC.prototype.playloop = function(media){
-	this.oscClientII.sendMessage(this.addresses.hplayer,'playloop',[media]);	
+	this.oscClient.sendMessage("scenarioplayer:"+this.services.hplayer,'playloop',[media]);	
 }
 ScenarioPlayerOSC.prototype.stop = function(){
-	this.oscClientII.sendMessage(this.addresses.hplayer,'stop');
+	this.oscClient.sendMessage("scenarioplayer:"+this.services.hplayer,'stop');
 }
 ScenarioPlayerOSC.prototype.pause = function(){
-	this.oscClientII.sendMessage(this.addresses.hplayer,'pause');
+	this.oscClient.sendMessage("scenarioplayer:"+this.services.hplayer,'pause');
 }
 ScenarioPlayerOSC.prototype.resume = function(){
-	this.oscClientII.sendMessage(this.addresses.hplayer,'resume');
+	this.oscClient.sendMessage("scenarioplayer:"+this.services.hplayer,'resume');
 }
 
 

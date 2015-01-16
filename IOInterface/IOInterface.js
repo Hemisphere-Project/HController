@@ -18,8 +18,8 @@ function IOInterface(){
 	
 	
 	this.url = '127.0.0.1';
-	this.clientPort = 6001;
-	this.serverPort = 6000;
+	this.clientPort = 5000;
+	this.serverPort = 7000;
 	this.baseAddress = "iointerface";
 
 	
@@ -27,8 +27,8 @@ function IOInterface(){
 	
 	//OSC CLIENT: SEND MESSAGES
 	this.oscClient = new osc.Client(this.url, this.clientPort); 
-	this.oscClient.sendMessageOSC = function(address,operation, args){
-		var message = new osc.Message(address+'/'+operation);
+	this.oscClient.sendMessageOSC = function(address, args){
+		var message = new osc.Message(address);
 		if(typeof args !== 'undefined')// we got args
 			for(var k=0;k<args.length;k++)// we push args
 				message.append(args[k]);
@@ -50,42 +50,37 @@ IOInterface.prototype.stayAlive = function(){
 	var self = this;
 	return setInterval(function(){
 			//console.log('I am still alive');
-			self.raspiomix.printStatus();
+			//self.raspiomix.printStatus();
 	},1000);
 }
 
 
-IOInterface.prototype.receiveMessageOSC = function(message,rinfo){
-		
-	//console.log(message);
+IOInterface.prototype.receiveMessageOSC = function(message,rinfo){	
+		//console.log(message);
 	
-		var args = message.slice();
-		
-		var address = args.shift();
-		
+		var mes = message.slice();
+		var address = mes.shift();
 		var addressElements = address.split('/');
+		var baseAddress = addressElements.shift();
+		var baseAddressElements = baseAddress.split(':');
+		var from = baseAddressElements.shift();
+		var to = baseAddressElements.shift();
 		
-		var baseAddress = addressElements[0];
-		//var command = addressElements[1];
-		
-		if(baseAddress != this.baseAddress)
-			return;// console.error("wrong base adrss  "+baseAddress);
-		
-		var deviceAddress = addressElements[1];
+		var deviceAddress = addressElements.shift();
 		switch(deviceAddress){
 				case IODeviceAddesses.raspiomix :
-					var command = addressElements[2];
+					var command = addressElements.shift();
 					switch(command){
 						case IOCommands.geta:
-							var channel = args.shift();
-							this.oscClient.sendMessageOSC(this.baseAddress+"/raspiomix","analogValue",[channel,this.raspiomix.getAdc(channel)]);
+							var channel = mes.shift();
+							this.oscClient.sendMessageOSC(to+':'+from+'/'+deviceAddress+'/'+'analogValue',[channel,this.raspiomix.getAdc(channel)]);
 						break;
 						case IOCommands.getd :
-							var channel = args.shift();
-							this.oscClient.sendMessageOSC(this.baseAddress+"/raspiomix","digitalValue",[channel,this.raspiomix.readDigital(this.raspiomix.channelToPin(channel))]);
+							var channel = mes.shift();
+							this.oscClient.sendMessageOSC(to+':'+from+'/'+deviceAddress+'/'+'digitalValue',[channel,this.raspiomix.readDigital(this.raspiomix.channelToPin(channel))]);
 						break;
 						case IOCommands.getRtc :
-							var channel = args.shift();
+							var channel = mes.shift();
 							// nothing for the moment
 						break;
 						default: console.log("message not recognized: "+ message);	

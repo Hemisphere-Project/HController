@@ -20,7 +20,7 @@ function Raspiomix(){
 	
 	this.adcGain = 0; //{0,1,2,3} represents {x1,x2,x4,x8} -- PB avec x8
 	this.adcResolution = 0; //{0,1,2,3} and represents {12,14,16,18} bits
-	this.pollADCRate = 40; // in millisec
+	this.pollADCRate = 5; // in millisec
 	
 	this.adcValues = [0,0,0,0];
 	
