@@ -24,7 +24,7 @@
 		"debug":false
 	},
 	"ProcessManager":{
-		"HPlayerPath":"./bin/HPlayer"
+		"HPlayerPath":"./bin/HPlayer/bin/HPlayer"
 	},
 	"HPlayer":{
 		"name" : "Larry",

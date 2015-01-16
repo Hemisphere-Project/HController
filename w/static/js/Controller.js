@@ -34,7 +34,7 @@ Controller.prototype.addEventListeners = function(){
 		$('#player-head .player-name').text(status.name);
 		$('#player-head .player-ip').text(status.ip);
 		self.mediaPlayer.updateWithPlayerStatus(status);
-		//console.log(status);
+		console.log(status);
 	});
 	
 	this.socket.on('mediaList', function (list) {
