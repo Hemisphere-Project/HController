@@ -17,6 +17,13 @@ Description
 Installation 
 ------------- 
 
+  0. configure your raspberry pi
+ 
+		sudo raspi-config
+		> 8 Advanced Options
+		> A6 I2C
+		> yes
+	
   1. install node.js 
   	
   	create a node directory and download the last arm distribution 
