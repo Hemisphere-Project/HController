@@ -50,7 +50,7 @@ IOInterface.prototype.stayAlive = function(){
 	var self = this;
 	return setInterval(function(){
 			//console.log('I am still alive');
-			//self.raspiomix.printStatus();
+			self.raspiomix.printStatus();
 	},1000);
 }
 

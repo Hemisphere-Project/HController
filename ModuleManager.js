@@ -2,7 +2,7 @@
 
 // LOAD MODULES
 var WebServer 		= require('./WebServer/WebServer.js');
-var OSCInterface 	= require('./OSCInterface/OSCInterface.js');
+//var OSCInterface 	= require('./OSCInterface/OSCInterface.js');
 var HPlayer 		= require('./HPlayer');
 var MediaManager 	= require('./MediaManager/MediaManager.js');
 var ScenarioManager 	= require('./ScenarioManager/ScenarioManager.js');
@@ -21,10 +21,10 @@ function ModuleManager(){
 	
 	this.config			 = ConfigHelper.loadConfig();
 	this.webServer		 = new WebServer(this.config.WebServer);
-	this.oscInterface	 = new OSCInterface(this.config.OSCInterface);
-	this.player			 = new HPlayer(this.config.HPlayer);
-	this.mediaManager	 = new MediaManager(this.config.MediaManager);
-	this.scenarioManager	 = new ScenarioManager(this.config.ScenarioManager);
+	//this.oscInterface	 = new OSCInterface(this.config.OSCInterface);
+	//this.player			 = new HPlayer(this.config.HPlayer);
+	//this.mediaManager	 = new MediaManager(this.config.MediaManager);
+	//this.scenarioManager	 = new ScenarioManager(this.config.ScenarioManager);
 	this.processManager  = new ProcessManager();
 	this.serialInterface = new SerialInterface(this.config.SerialInterface);
 	this.icePicker = new IcePicker(this.config.IcePicker);
@@ -57,41 +57,41 @@ ModuleManager.prototype.link = function() {
 	
 	var self = this;
 
-	this.webServer.eventEmitter.on('socketConnection',function(client){	
+	/*this.webServer.eventEmitter.on('socketConnection',function(client){	
 		client.sendMediaList(self.mediaManager.mediaList);
 		client.sendScenarioList(self.scenarioManager.scenarioList);
 		client.sendPlayerStatus(self.player.status());
-	});
+	});*/
 	
-	this.webServer.eventEmitter.on('getScenario',function(client,scenario){	
+/*	this.webServer.eventEmitter.on('getScenario',function(client,scenario){	
 		//console.log(scenario);
 		if(scenario)
 			client.sendScenario(self.scenarioManager.getScenario(scenario));
-	});
+	});*/
 
-	this.webServer.eventEmitter.on('createScenario',function(client,scenario){	
+/*	this.webServer.eventEmitter.on('createScenario',function(client,scenario){	
 		//console.log(scenario);
 		if(scenario)
 			self.scenarioManager.createScenario(scenario,function(scenariopath,scenariolist){
 				client.sendScenarioCreated(scenariopath,scenariolist);
 			});
-	});
+	});*/
 	
-	this.webServer.eventEmitter.on('saveScenario',function(client,data){	
+/*	this.webServer.eventEmitter.on('saveScenario',function(client,data){	
 		//console.log(data);
 		if(data.scenario && data.scenariopath)
 			self.scenarioManager.saveScenario(data.scenariopath,data.scenario,function(scenariopath){
 				client.sendScenarioSaved(scenariopath);		
 			});
-	});
+	});*/
 
-	this.webServer.eventEmitter.on('deleteScenario',function(client,scenariopath){	
+/*	this.webServer.eventEmitter.on('deleteScenario',function(client,scenariopath){	
 		//console.log(data);
 		if(scenariopath)
 			self.scenarioManager.deleteScenario(scenariopath,function(scenariolist){
 				client.sendScenarioDeleted(scenariolist);		
 			});
-	});	
+	});*/	
 	
 	this.oscInterface.eventEmitter.on('status', function(status){
 		//self.player.status(status);
@@ -102,76 +102,76 @@ ModuleManager.prototype.link = function() {
 		//self.icePicker.pushBack();
 	});
 	
-	this.webServer.eventEmitter.on('play', function(socketId,media){
+/*	this.webServer.eventEmitter.on('play', function(socketId,media){
 		if (self.player.loop) self.oscInterface.playloop(media);
 		else self.oscInterface.play(media);
 		console.log("play  "+media);
-	});
+	});*/
 	
-	this.webServer.eventEmitter.on('next', function(socketId){
+/*	this.webServer.eventEmitter.on('next', function(socketId){
 		self.oscInterface.next();	
 		console.log("next");
-	});
+	});*/
 	
-	this.webServer.eventEmitter.on('prev', function(socketId){
+/*	this.webServer.eventEmitter.on('prev', function(socketId){
 		self.oscInterface.prev();	
 		console.log("prev");
-	});
+	});*/
 	
-	this.webServer.eventEmitter.on('pause', function(socketId){
+/*	this.webServer.eventEmitter.on('pause', function(socketId){
 		self.oscInterface.pause();	
 		console.log("pause");
-	});
+	});*/
 	
-	this.webServer.eventEmitter.on('resume', function(socketId){
+/*	this.webServer.eventEmitter.on('resume', function(socketId){
 		self.oscInterface.resume();	
 		console.log("resume");
-	});
+	});*/
 	
-	this.webServer.eventEmitter.on('stop', function(socketId){
+/*	this.webServer.eventEmitter.on('stop', function(socketId){
 		self.oscInterface.stop();
 		console.log("stop");
-	});
+	});*/
 	
-	this.webServer.eventEmitter.on('mute', function(socketId){
+/*	this.webServer.eventEmitter.on('mute', function(socketId){
 		self.oscInterface.mute();
 		console.log("mute");
-	});
+	});*/
 	
-	this.webServer.eventEmitter.on('unmute', function(socketId){
+/*	this.webServer.eventEmitter.on('unmute', function(socketId){
 		self.oscInterface.unmute();
 		console.log("unmute");
-	});
+	});*/
 	
-	this.webServer.eventEmitter.on('loop', function(socketId){
+/*	this.webServer.eventEmitter.on('loop', function(socketId){
 		self.oscInterface.loop();
 		console.log("loop");
-	});
+	});*/
 	
-	this.webServer.eventEmitter.on('unloop', function(socketId){
+/*	this.webServer.eventEmitter.on('unloop', function(socketId){
 		self.oscInterface.unloop();
 		console.log("unloop");
-	});
+	});*/
 	
-	this.webServer.eventEmitter.on('volume', function(socketId,value){
+/*	this.webServer.eventEmitter.on('volume', function(socketId,value){
 		self.oscInterface.volume(value);	
 		console.log("volume "+value);
-	});
+	});*/
 	
-	this.webServer.eventEmitter.on('zoom', function(socketId,value){
+/*	this.webServer.eventEmitter.on('zoom', function(socketId,value){
 		self.oscInterface.zoom(value);	
-	});
+	});*/
 	
-	this.webServer.eventEmitter.on('getStatus', function(){
+/*	this.webServer.eventEmitter.on('getStatus', function(){
 		self.oscInterface.getStatus();	
 		//console.log(self.player.status());
 		//self.webServer.sendPlayerStatus(self.player.status());
-	});
+	});*/
 	
-	this.webServer.eventEmitter.on('quit', function(socketId,value){
+/*	this.webServer.eventEmitter.on('quit', function(socketId,value){
 		self.stop(0);
 		process.exit(0);
-	});
+	});*/
 	
 	this.serialInterface.eventEmitter.on('open',function(){
 		console.log("serial port open");	
