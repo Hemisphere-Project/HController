@@ -24,6 +24,17 @@ Installation
 		> A6 I2C
 		> yes
 
+		sudo nano /etc/modules
+		#add the folowing line
+		i2c-dev
+		#save and exit
+		
+		#install i2ctools and reboot
+		sudo apt-get install i2c-tools
+		sudo apt-get update
+		sudo adduser pi i2c
+		sudo reboot
+
   1bis. (temporary) Install missing pkg
   
   		sudo apt-get install libfreeimage-dev
