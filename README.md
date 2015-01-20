@@ -23,6 +23,10 @@ Installation
 		> 8 Advanced Options
 		> A6 I2C
 		> yes
+
+  0bis. (temporary) Install missing pkg
+  
+  		sudo apt-get install libfreeimage-dev
 	
   1. install node.js 
   	
