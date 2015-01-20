@@ -24,7 +24,7 @@ Installation
 		> A6 I2C
 		> yes
 
-  0bis. (temporary) Install missing pkg
+  1bis. (temporary) Install missing pkg
   
   		sudo apt-get install libfreeimage-dev
 	
