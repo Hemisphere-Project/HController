@@ -43,8 +43,8 @@ Installation
   	
   2. clone HController from GitHub
   
-	cd /home/pi
-	git clone --recursive https://github.com/hemisphere-code/HController.git
+		cd /home/pi
+		git clone --recursive https://github.com/hemisphere-code/HController.git
   	
   3. Get Started :
   
