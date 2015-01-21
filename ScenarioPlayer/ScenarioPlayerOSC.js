@@ -39,11 +39,6 @@ ScenarioOSC.prototype.receiveMessageOSC = function(message,rinfo,eventEmitter){
 		
 	//console.log(message);
 	
-		/*var args = message.slice();
-		var address = args.shift();
-		var addressElements = address.split('/');
-		
-		var baseAddress = addressElements[0];*/
 	var mes = message.slice();
 	var address = mes.shift();
 	var addressElements = address.split('/');
@@ -60,10 +55,10 @@ ScenarioOSC.prototype.receiveMessageOSC = function(message,rinfo,eventEmitter){
 								//sketchy
 								var scenario = mes.join("");
 								
-								eventEmitter.emit('play',scenario);
+								eventEmitter.emit('play',scenario,from);
 							break;
 							case "stop" :
-								eventEmitter.emit('stop');
+								eventEmitter.emit('stop',from);
 							break;
 							default: console.log("message not recognized: "+ message);	
 						}	
@@ -71,6 +66,10 @@ ScenarioOSC.prototype.receiveMessageOSC = function(message,rinfo,eventEmitter){
 			default: return console.error("Address not recognized : "+baseAddress);
 	}
 
+}
+
+ScenarioOSC.prototype.sendStatus = function(to,status){
+	this.oscClient.sendMessage("scenarioplayer:"+to,"status",[JSON.stringify(status)])
 }
 
 module.exports = ScenarioOSC;

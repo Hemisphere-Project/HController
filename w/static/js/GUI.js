@@ -185,6 +185,17 @@ GUI.prototype.changeScenarioSubState = function(newScenarioSubState){
 GUI.prototype.closePopup = function(){
 	$.magnificPopup.instance.close();
 }
+
+GUI.prototype.setScenarioPlaying = function(){
+	$("#play-scenario-btn").addClass("disabled");
+	$("#stop-scenario-btn").removeClass("disabled");
+}
+
+GUI.prototype.setScenarioStoped = function(){
+	$("#play-scenario-btn").removeClass("disabled");
+	$("#stop-scenario-btn").addClass("disabled");
+}
+
 	
 	
 	

@@ -9,16 +9,22 @@ function ScenarioPlayer(){
 	
 	var self = this;
 	
+	this.status = {
+		isPlaying:false
+	}
+	
 	this.processManager = new ProcessManager();
 	
 	this.scenarioPlayerOSC = new ScenarioPlayerOSC();
-	this.scenarioPlayerOSC.eventEmitter.on('play', function(scenario){
+	this.scenarioPlayerOSC.eventEmitter.on('play', function(scenario,from){
 		//var sco = this.openSCO(this.options.input);
 		console.log(scenario);
 		self.play(scenario);
+		self.scenarioPlayerOSC.sendStatus(from,self.status)
 	});
-	this.scenarioPlayerOSC.eventEmitter.on('stop', function(scoFilePath){
+	this.scenarioPlayerOSC.eventEmitter.on('stop', function(from){
 		self.stop();
+		self.scenarioPlayerOSC.sendStatus(from,self.status)
 	});
 	
 	this.currentScenario = "";
@@ -55,8 +61,12 @@ ScenarioPlayer.prototype.parseArgs = function(){
 
 ScenarioPlayer.prototype.play = function(scenario){
 	
-	this.processManager.spawn("node",["Runner.js",scenario],false,true); 
-	var self = this;
+	if(!this.status.isPlaying){
+		this.processManager.spawn("node",["Runner.js",scenario],false,true); 
+		this.status.isPlaying = true;
+	}
+	
+	//var self = this;
 	/*setTimeout(function(){
 		self.stop();	
 	},15000);*/
@@ -65,6 +75,7 @@ ScenarioPlayer.prototype.play = function(scenario){
 
 ScenarioPlayer.prototype.stop = function(){
 	this.processManager.killAll();
+	this.status.isPlaying = false;
 }
 
 ScenarioPlayer.prototype.openSCO = function(file){

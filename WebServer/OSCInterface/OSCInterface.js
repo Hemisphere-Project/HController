@@ -57,13 +57,19 @@ OSCInterface.prototype.receiveMessageOSC = function(message,rinfo){
 	
 	switch(from){
 			case this.services.scenarioplayer :
+				var command = addressElements.shift();
+					switch(command){
+						case "status":
+							this.eventEmitter.emit('spStatus',mes);
+						break;
+					}
 			break;
 			case this.services.iointerface :
 			break;
 			case this.services.hplayer :
 				var command = addressElements.shift();
 				switch(command){
-					case "/status":
+					case "status":
 						var player = new HPlayer();
 						player.name = args.shift();
 						switch(args.shift()){

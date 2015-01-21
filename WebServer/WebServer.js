@@ -27,6 +27,9 @@ function Client(name, socket){
 Client.prototype.sendPlayerStatus = function(status){
 	this.socket.emit('playerStatus',status);	
 }
+Client.prototype.sendScenarioPlayerStatus = function(status){
+	this.socket.emit('scenarioPlayerStatus',status);	
+}
 Client.prototype.sendMediaList = function(list){
 	this.socket.emit('mediaList',list);	
 }
@@ -78,7 +81,7 @@ Client.prototype.addEventListeners = function(webserver){
 				self.sendScenarioSaved(scenariopath);		
 			});
 	});
-	this.socket.on('deleteScenario', function (data) {
+	this.socket.on('deleteScenario', function (scenariopath) {
 			//webserver.eventEmitter.emit('deleteScenario',self,data);
 		if(scenariopath)
 			webserver.scenarioManager.deleteScenario(scenariopath,function(scenariolist){
@@ -177,7 +180,7 @@ Client.prototype.addEventListeners = function(webserver){
 function WebServer(){
 		
 	
-	var configJSON = fs.readFileSync("./webserver.config");
+	var configJSON = fs.readFileSync("/home/pi/HController/WebServer/webserver.config");
 	if(typeof configJSON === 'undefined')
 		return error.log("no config found for WebServer");
 	var config = JSON.parse(configJSON);
@@ -250,9 +253,14 @@ WebServer.prototype.start = function(){
 		client.sendPlayerStatus(self.player.status());
 	}
 	
-	// on player status handler
+	// on media player status handler
 	this.oscInterface.eventEmitter.on('status', function(status){
 		self.sendPlayerStatus(self.player.status(status));
+	});
+	
+	// on scenario player status handler
+	this.oscInterface.eventEmitter.on('spStatus', function(status){
+		self.sendScenarioPlayerStatus(status);
 	});
 	
 	this.refreshStatusId = setInterval(function(){
@@ -278,6 +286,11 @@ WebServer.prototype.stop = function(){
 WebServer.prototype.sendPlayerStatus = function(status){
 	this.clients.forEach(function(client){
 			client.sendPlayerStatus(status);
+	});
+}
+WebServer.prototype.sendScenarioPlayerStatus = function(status){
+	this.clients.forEach(function(client){
+			client.sendScenarioPlayerStatus(status);
 	});
 }
 

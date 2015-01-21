@@ -36,6 +36,15 @@ Controller.prototype.addEventListeners = function(){
 		self.mediaPlayer.updateWithPlayerStatus(status);
 		console.log(status);
 	});
+	this.socket.on('scenarioPlayerStatus', function (status) {
+		var spStatus = JSON.parse(status);
+		if(spStatus.isPlaying)
+			self.gui.setScenarioPlaying();
+		else
+			self.gui.setScenarioStoped();
+		
+		console.log(spStatus);
+	});
 	
 	this.socket.on('mediaList', function (list) {
 		self.mediaPlayer.updateMediaList(list);
