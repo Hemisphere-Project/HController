@@ -50,7 +50,15 @@ Client.prototype.addEventListeners = function(webserver){
 	var self=this;
 	
 	/************ Scenario section events **************/
-	
+	this.socket.on('playScenario', function (scenario) {
+			console.log("play scenario  "+scenario);
+		if(scenario)
+			webserver.oscInterface.playScenario(scenario);
+	});
+	this.socket.on('stopScenario', function () {
+			console.log("stopScenario");
+			webserver.oscInterface.stopScenario();
+	});
 	this.socket.on('getScenario', function (scenario) {
 			//webserver.eventEmitter.emit('getScenario',self,data);
 		if(scenario)

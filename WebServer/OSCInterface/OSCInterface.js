@@ -94,7 +94,7 @@ OSCInterface.prototype.receiveMessageOSC = function(message,rinfo){
 						player.isMuted = (args.shift() === "muted");
 						player.zoom = args.shift();
 						player.blur = args.shift();
-						
+						//pb with self ?
 						self.eventEmitter.emit('status',player.status());
 					break;
 					case "ended" :
@@ -144,7 +144,14 @@ OSCInterface.prototype.mediaOSCList = function(media){
 	return (typeof media === "string") ? [media] : media;
 }
 
-// BASIC CONTROLS 
+// scenario player controls
+OSCInterface.prototype.playScenario = function(scenario){
+	this.oscClient.sendMessage('webserver:scenarioplayer','play',scenario);
+}
+OSCInterface.prototype.stopScenario = function(){
+	this.oscClient.sendMessage('webserver:scenarioplayer','stop');
+}
+// media player controls 
 OSCInterface.prototype.play = function(media){
 	this.oscClient.sendMessage('webserver:hplayer','play',this.mediaOSCList(media));
 }
@@ -153,7 +160,6 @@ OSCInterface.prototype.playloop = function(media){
 }
 OSCInterface.prototype.stop = function(){
 	this.oscClient.sendMessage('webserver:hplayer','stop');
-	
 }
 OSCInterface.prototype.next = function(){
 	this.oscClient.sendMessage('webserver:hplayer','next');

@@ -7,7 +7,6 @@ function ScenarioAPI(osc){
 	// main communication object
 	this.osc = osc;
 	
-	
 	// console print method
 	this.print = function(what){
 			console.log("\x1B[32m"+what+"\x1B[39m");

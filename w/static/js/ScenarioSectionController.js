@@ -29,8 +29,10 @@ ScenarioSectionController.prototype.addEventListeners = function(){
 			self.createScenario(name,type);
 	});
 	this.element.find('#play-scenario-btn').click(function () {
+			self.playScenario();
 	});
 	this.element.find('#stop-scenario-btn').click(function () {
+			self.stopScenario();
 	});
 	this.element.find('#save-scenario-btn').click(function () {
 			self.saveScenario();
@@ -107,10 +109,10 @@ ScenarioSectionController.prototype.createScenario = function(name,type){
 }
 
 ScenarioSectionController.prototype.playScenario = function(){
-	
+	this.socket.emit("playScenario",this.currentScenario.codejs);
 }
 ScenarioSectionController.prototype.stopScenario = function(){
-	
+	this.socket.emit("stopScenario");
 }
 ScenarioSectionController.prototype.saveScenario = function(){
  

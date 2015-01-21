@@ -14,8 +14,12 @@ function OSCDispatcher(config){
 			port:9000,
 		},
 		{
-			name:"scenarioplayer",
+			name:"scenario",
 			port:8000
+		},
+		{
+			name:"scenarioplayer",
+			port:8001
 		},
 		{
 			name:"iointerface",

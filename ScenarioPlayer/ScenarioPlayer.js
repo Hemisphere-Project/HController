@@ -1,16 +1,26 @@
 var Args = require("arg-parser"),
 		fs = require('fs'),
 		path = require('path'),
-		vm = require('vm'),
 		ScenarioPlayerOSC = require('./ScenarioPlayerOSC.js'),
-		ScenarioAPI = require('./ScenarioAPI.js');
+		ProcessManager 	= require('../ProcessManager/ProcessManager.js');
+		
 
 function ScenarioPlayer(){
 	
-
-	this.scenarioPlayerOSC = new ScenarioPlayerOSC();
+	var self = this;
 	
-	this.isPlaying = false;
+	this.processManager = new ProcessManager();
+	
+	this.scenarioPlayerOSC = new ScenarioPlayerOSC();
+	this.scenarioPlayerOSC.eventEmitter.on('play', function(scenario){
+		//var sco = this.openSCO(this.options.input);
+		console.log(scenario);
+		self.play(scenario);
+	});
+	this.scenarioPlayerOSC.eventEmitter.on('stop', function(scoFilePath){
+		self.stop();
+	});
+	
 	this.currentScenario = "";
 
 	this.options = this.parseArgs();
@@ -19,10 +29,12 @@ function ScenarioPlayer(){
 		var sco = this.openSCO(this.options.input);
 		if(!sco)
 			return;
-		var script = vm.createScript(sco.codejs);
-		this.play(script);
+		//var script = vm.createScript(sco.codejs);
+		this.play(sco.codejs);
 		
 	}
+	
+
 	
 }
 
@@ -30,7 +42,7 @@ function ScenarioPlayer(){
 ScenarioPlayer.prototype.parseArgs = function(){
 	
 	var args = new Args('Scenario Player', '0.0.1','\n','\n\n'); 
-	args.add({ name: 'input', desc: 'input file', switches: [ '-i', '--input-file'], value: 'input', required:true });
+	args.add({ name: 'input', desc: 'input file', switches: [ '-i', '--input-file'], value: 'input', required:false });
 	args.add({ name: 'verbose', desc: 'verbose mode', switches: [ '-V', '--verbose'] });
 	//args.add({ name: 'text', desc: 'text to store', required: false });
 	
@@ -43,21 +55,16 @@ ScenarioPlayer.prototype.parseArgs = function(){
 
 ScenarioPlayer.prototype.play = function(scenario){
 	
-	var context = vm.createContext(new ScenarioAPI(this.scenarioPlayerOSC));
-	//context.print = function(what){console.log(what)};
-	
-	//console.log(scenario);
-	scenario.runInContext(context);
-	
-	console.log("finished");
+	this.processManager.spawn("node",["Runner.js",scenario],false,true); 
+	var self = this;
+	/*setTimeout(function(){
+		self.stop();	
+	},15000);*/
 }
 
-ScenarioPlayer.prototype.pause = function(){
-	
-}
 
 ScenarioPlayer.prototype.stop = function(){
-	
+	this.processManager.killAll();
 }
 
 ScenarioPlayer.prototype.openSCO = function(file){
