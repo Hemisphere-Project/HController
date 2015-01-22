@@ -1,7 +1,7 @@
 function ScenarioAPI(osc){
 	
 	// perdiod of which we ask for sensor values over osc
-	var eventPollingPeriod = 50;//ms
+	var eventPollingPeriod = 200;//ms
 	var self = this;
 	
 	// main communication object
@@ -66,6 +66,10 @@ function ScenarioAPI(osc){
 	//resume a media
 	this.resumeMedia = function(){
 			self.osc.resume();
+	}
+	//stop a media
+	this.stopMedia = function(){
+			self.osc.stop();
 	}
 	
 }
