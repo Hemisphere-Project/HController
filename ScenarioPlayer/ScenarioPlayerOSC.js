@@ -52,13 +52,17 @@ ScenarioOSC.prototype.receiveMessageOSC = function(message,rinfo,eventEmitter){
 						var command = addressElements.shift();
 						switch(command){
 							case "play" :
+								var scenarioname = mes.shift();
 								//sketchy
 								var scenario = mes.join("");
 								
-								eventEmitter.emit('play',scenario,from);
+								eventEmitter.emit('play',scenarioname,scenario,from);
 							break;
 							case "stop" :
 								eventEmitter.emit('stop',from);
+							break;
+							case "getStatus" :
+								eventEmitter.emit('status',from);
 							break;
 							default: console.log("message not recognized: "+ message);	
 						}	

@@ -5,6 +5,8 @@
     
     <link href="css/blockly.css" rel="stylesheet">
     
+    <script type="text/javascript" src="lib/ace-builds/src-noconflict/ace.js" charset="utf-8"></script>
+    
     <script type="text/javascript" src="lib/blockly/blockly_compressed.js"></script>
     <script type="text/javascript" src="lib/blockly/blocks_compressed.js"></script>
     <script type="text/javascript" src="lib/blockly/javascript_compressed.js"></script>
@@ -44,6 +46,7 @@
     <script type="text/javascript" src="js/blockly/msg/fr_monkey_patching.js"></script>  
     
     <script type="text/javascript" src="js/blockly/blockly.js"></script>
+    
 
     <script>
       function init() {
@@ -52,11 +55,33 @@
         // Let the top-level application know that Blockly is ready.
         window.parent.blocklyLoaded(Blockly);
         
+        
+        Code.jseditor = ace.edit("content_javascript");
+       	Code.jseditor.setTheme("ace/theme/chrome");
+       	Code.jseditor.getSession().setMode("ace/mode/javascript");
+       	Code.jseditor.setReadOnly(true);
+       	Code.jseditor.setHighlightActiveLine(false);
+       	Code.jseditor.renderer.setShowGutter(false); 
+       	Code.jseditor.setShowPrintMargin(false);
+       	Code.jseditor.getSession().setUseWrapMode(false);
+ 
+       	Code.xmleditor = ace.edit("content_xml");
+       	Code.xmleditor.setTheme("ace/theme/chrome");
+       	Code.xmleditor.getSession().setMode("ace/mode/xml");
+       	Code.xmleditor.setReadOnly(false);
+       	Code.xmleditor.setHighlightActiveLine(false);
+       	Code.xmleditor.renderer.setShowGutter(true); 
+       	Code.xmleditor.setShowPrintMargin(false);
+       	Code.xmleditor.getSession().setUseWrapMode(false);
+       	
+      
+        
         Code.init();
         
         Blockly.addChangeListener(function(){
         	console.log("render content");
         	Code.renderContent();
+        	//editor.setValue(document.getElementById("content_javascript").innerHTML);
         });
         
       }
@@ -73,18 +98,14 @@
 								<table width="100%">
 									<tr id="tabRow" height="1em">
 										<td id="tab_javascript" class="tabon">JavaScript</td>
-										<td id="tab_python" class="taboff">Python</td>
-										<td id="tab_dart" class="taboff">Dart</td>
 										<td id="tab_xml" class="taboff">XML</td>
 									</tr>
 								</table>
 							</td>
 						</tr>
 				</table>
-				<pre id="content_javascript" class="content"></pre>
-				<pre id="content_python" class="content"></pre>
-				<pre id="content_dart" class="content"></pre>
-				<textarea id="content_xml" class="content" wrap="off"></textarea> 
+				<div id="content_javascript" class="content"></div>
+				<div id="content_xml" class="content"></div> 
   		</div>
   	</div>
   

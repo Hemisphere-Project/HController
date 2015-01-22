@@ -4,7 +4,8 @@ var fs = require('fs'),
     path = require('path'),
     events = require('events'),
     util = require('util'),
-    colors = require('colors');
+    colors = require('colors'),
+    process = require('child_process');
     
 var HPlayer 		= require('./HPlayer');
 var MediaManager 	= require('./MediaManager/MediaManager.js');
@@ -30,6 +31,9 @@ Client.prototype.sendPlayerStatus = function(status){
 Client.prototype.sendScenarioPlayerStatus = function(status){
 	this.socket.emit('scenarioPlayerStatus',status);	
 }
+Client.prototype.sendNetworkInfo = function(networkInfo){
+	this.socket.emit('networkInfo',networkInfo);	
+}
 Client.prototype.sendMediaList = function(list){
 	this.socket.emit('mediaList',list);	
 }
@@ -53,10 +57,10 @@ Client.prototype.addEventListeners = function(webserver){
 	var self=this;
 	
 	/************ Scenario section events **************/
-	this.socket.on('playScenario', function (scenario) {
-			console.log("play scenario  "+scenario);
+	this.socket.on('playScenario', function (scenarioname,scenario) {
+			console.log("play scenario  "+scenarioname);
 		if(scenario)
-			webserver.oscInterface.playScenario(scenario);
+			webserver.oscInterface.playScenario(scenarioname,scenario);
 	});
 	this.socket.on('stopScenario', function () {
 			console.log("stopScenario");
@@ -199,6 +203,11 @@ function WebServer(){
 	this.mediaManager	 = new MediaManager(config.MediaManager);
 	this.scenarioManager	 = new ScenarioManager(config.ScenarioManager);
 	this.oscInterface	 = new OSCInterface(config.OSCInterface);
+	
+	this.networkInfo = {
+			hostname:null,
+			ip:null
+	}
 
 }
 
@@ -215,6 +224,10 @@ WebServer.prototype.start = function(){
 						{
 							context:this.scenarioManager,
 							method:this.scenarioManager.updateScenarioList // error handling !!
+						},
+						{
+							context:this,
+							method:this.getNetworkInfo // error handling !!
 						}
 	];
 	function sync(task) 
@@ -247,10 +260,12 @@ WebServer.prototype.start = function(){
 		var client = new Client("none",socket);
 		client.addEventListeners(self);
 		self.clients.push(client);
-		//self.eventEmitter.emit('socketConnection',client);
 		client.sendMediaList(self.mediaManager.mediaList);
 		client.sendScenarioList(self.scenarioManager.scenarioList);
 		client.sendPlayerStatus(self.player.status());
+		client.sendNetworkInfo(self.networkInfo);
+		// we ask for scenario player status, answer will be broadcasted to every connected client
+		self.oscInterface.getScenarioPlayerStatus();
 	}
 	
 	// on media player status handler
@@ -265,7 +280,7 @@ WebServer.prototype.start = function(){
 	
 	this.refreshStatusId = setInterval(function(){
 		//self.eventEmitter.emit('getStatus');	
-		self.oscInterface.getStatus();	
+		self.oscInterface.getPlayerStatus();	
 	},this.refreshStatusPeriod);
 	
 	console.log('[WebServer]'.green+' started on port '+this.port);
@@ -291,6 +306,22 @@ WebServer.prototype.sendPlayerStatus = function(status){
 WebServer.prototype.sendScenarioPlayerStatus = function(status){
 	this.clients.forEach(function(client){
 			client.sendScenarioPlayerStatus(status);
+	});
+}
+
+WebServer.prototype.getNetworkInfo = function(){
+	var self = this;
+	process.exec('hostname', function (err, stdout, stderr){
+			if(err)
+				return console.err("error with hostname");
+			
+			self.networkInfo.hostname = stdout.replace(/(?:\r\n|\r|\n)/g, '');
+	});
+	process.exec('hostname -I', function (err, stdout, stderr){
+			if(err)
+				return console.err("error with hostname -I");
+			
+			self.networkInfo.ip = stdout.replace(/(?:\r\n|\r|\n)/g, '');;
 	});
 }
 

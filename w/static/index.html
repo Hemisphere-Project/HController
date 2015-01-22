@@ -68,12 +68,14 @@
 									</ul>
 								</div>
 								<div class="col-xs-1">
-									<button id="play-scenario-btn" type="button" class="btn btn-default col-xs-12 "><span class="glyphicon glyphicon-play" ></span>Play</button>
+									<button id="play-scenario-btn" type="button" class="btn col-xs-12 "><span class="glyphicon glyphicon-play" ></span>Play</button>
 								</div>
 								<div class="col-xs-1">
 									<button id="stop-scenario-btn" type="button" class="btn btn-default col-xs-12 "><span class="glyphicon glyphicon-stop" ></span>Stop</button>
 								</div>
-								<div class="col-xs-4"></div>
+								<div class="col-xs-4">
+									<div id="now-playing"></div>
+								</div>
 								<div class="col-xs-1">
 									<button id="save-scenario-btn" type="button" class="btn btn-default col-xs-12 "><span class="glyphicon glyphicon-floppy-disk" ></span>Save</button>
 								</div>
@@ -88,7 +90,7 @@
 								</div>
 							</div>
 						</div>
-						<div id="blockly-frame-container">
+						<div id="blockly-frame-container" style="display:none">
 							<iframe id="blockly-iframe" src="frame.html"></iframe>
 						</div>
 						<div id="new-scenario-popup" class="popup mfp-hide">

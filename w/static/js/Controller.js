@@ -30,19 +30,21 @@ Controller.prototype.addEventListeners = function(){
 			console.log('connected');
 	});
 	
+	this.socket.on('networkInfo', function (info) {
+		console.log(info);
+		$('#player-head .player-name').text(info.hostname);
+		$('#player-head .player-ip').text(info.ip);
+	});	
+	
 	this.socket.on('playerStatus', function (status) {
-		$('#player-head .player-name').text(status.name);
-		$('#player-head .player-ip').text(status.ip);
+
 		self.mediaPlayer.updateWithPlayerStatus(status);
 		console.log(status);
 	});
+	
 	this.socket.on('scenarioPlayerStatus', function (status) {
 		var spStatus = JSON.parse(status);
-		if(spStatus.isPlaying)
-			self.gui.setScenarioPlaying();
-		else
-			self.gui.setScenarioStoped();
-		
+		self.gui.changeSpStatus(spStatus);
 		console.log(spStatus);
 	});
 	
@@ -74,6 +76,7 @@ Controller.prototype.addEventListeners = function(){
 	this.socket.on('scenarioDeleted', function (scenarioList){
 		self.scenarioSection.updateScenarioList(scenarioList);
 		self.scenarioSection.resetSelection();
+		self.gui.changeScenarioSubState(self.gui.scenarioSubStates.scenarioempty);
 		self.gui.closePopup();
 	})
 	

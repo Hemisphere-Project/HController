@@ -151,8 +151,8 @@ OSCInterface.prototype.mediaOSCList = function(media){
 }
 
 // scenario player controls
-OSCInterface.prototype.playScenario = function(scenario){
-	this.oscClient.sendMessage('webserver:scenarioplayer','play',scenario);
+OSCInterface.prototype.playScenario = function(scenarioname,scenario){
+	this.oscClient.sendMessage('webserver:scenarioplayer','play',[scenarioname,scenario]);
 }
 OSCInterface.prototype.stopScenario = function(){
 	this.oscClient.sendMessage('webserver:scenarioplayer','stop');
@@ -203,10 +203,14 @@ OSCInterface.prototype.unmute = function(){
 OSCInterface.prototype.blur = function(blurSize){
 	this.oscClient.sendMessage('webserver:hplayer','blur',[blurSize]);
 }
-// PLAYER STATUS REQUEST
-OSCInterface.prototype.getStatus = function(){
+// PLAYERS STATUS REQUEST
+OSCInterface.prototype.getPlayerStatus = function(){
 	//console.log("status asked");
 	this.oscClient.sendMessage('webserver:hplayer','s/getStatus');
+}
+OSCInterface.prototype.getScenarioPlayerStatus = function(){
+	//console.log("status asked");
+	this.oscClient.sendMessage('webserver:scenarioplayer','getStatus');
 }
 
 module.exports = OSCInterface

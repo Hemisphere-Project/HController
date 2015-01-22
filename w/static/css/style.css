@@ -18,6 +18,15 @@
   -moz-box-shadow: none;
   box-shadow: none;
 }
+#now-playing {
+  height: 35px;
+  color: #43464b;
+  padding: 7px;
+}
+#now-playing::before {
+  content: "now playing : ";
+  color: #878a8f;
+}
 /* global */
 html,
 body {
@@ -109,7 +118,7 @@ a:hover {
 .player-ip {
   position: absolute;
   left: 5px;
-  bottom: 5px;
+  bottom: 0px;
   color: #babd3c;
 }
 /* nav bar */
@@ -258,7 +267,7 @@ a:hover {
 }
 /* content section */
 .content-section {
-  background-color: pink;
+  background-color: #43464b;
   margin-top: 160px;
   height: calc(100% -  160px);
 }

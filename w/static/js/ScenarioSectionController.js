@@ -109,7 +109,7 @@ ScenarioSectionController.prototype.createScenario = function(name,type){
 }
 
 ScenarioSectionController.prototype.playScenario = function(){
-	this.socket.emit("playScenario",this.currentScenario.codejs);
+	this.socket.emit("playScenario",this.currentScenario.name,this.currentScenario.codejs);
 }
 ScenarioSectionController.prototype.stopScenario = function(){
 	this.socket.emit("stopScenario");

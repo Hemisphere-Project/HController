@@ -98,6 +98,7 @@ td {
 	padding: 1ex;
 	position: absolute;
 	direction: ltr;
+	height:100%;
 }
 pre.content {
 	overflow: scroll;
@@ -108,11 +109,15 @@ pre.content {
 	padding: 0;
 }
 #content_xml {
-	resize: none;
+	/*resize: none;
 	outline: none;
 	border: none;
 	font-family: monospace;
 	overflow: scroll;
 	width: inherit;
-	height: calc(100% - 60px);
+	height: calc(100% - 60px);*/
+}
+.ace_editor{
+	position: absolute !important;
+	width: calc(20% - 14px) !important;	
 }

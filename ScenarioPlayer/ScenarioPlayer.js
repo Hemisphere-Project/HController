@@ -10,20 +10,26 @@ function ScenarioPlayer(){
 	var self = this;
 	
 	this.status = {
-		isPlaying:false
+		isPlaying:false,
+		nowplaying:""
 	}
 	
 	this.processManager = new ProcessManager();
 	
 	this.scenarioPlayerOSC = new ScenarioPlayerOSC();
-	this.scenarioPlayerOSC.eventEmitter.on('play', function(scenario,from){
+	this.scenarioPlayerOSC.eventEmitter.on('play', function(scenarioname,scenario,from){
 		//var sco = this.openSCO(this.options.input);
 		console.log(scenario);
 		self.play(scenario);
+		self.status.nowplaying = scenarioname;
 		self.scenarioPlayerOSC.sendStatus(from,self.status)
 	});
 	this.scenarioPlayerOSC.eventEmitter.on('stop', function(from){
 		self.stop();
+		self.status.nowplaying = "";
+		self.scenarioPlayerOSC.sendStatus(from,self.status)
+	});
+	this.scenarioPlayerOSC.eventEmitter.on('status', function(from){
 		self.scenarioPlayerOSC.sendStatus(from,self.status)
 	});
 	

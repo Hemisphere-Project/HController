@@ -12,6 +12,11 @@ function GUI(){
 			scenarioloaded:'scenarioloaded'
 	};
 	
+	this.spStatus = {
+			isPlaying:false,
+			nowplaying:""
+	}
+	
 	// initialize the current state
 	this.changeState(this.states.scenario);
 	
@@ -163,17 +168,25 @@ GUI.prototype.changeScenarioSubState = function(newScenarioSubState){
 	switch(newScenarioSubState){
 		case this.scenarioSubStates.scenarioempty :
 			$("#play-scenario-btn").addClass("disabled");
-			$("#stop-scenario-btn").addClass("disabled");
+			//$("#stop-scenario-btn").addClass("disabled");
 			$("#save-scenario-btn").addClass("disabled");
 			$("#delete-scenario-btn").addClass("disabled");
 			$("#download-scenario-btn").addClass("disabled");
+			$("#upload-scenario-btn").addClass("disabled");
+			
+			$("#blockly-frame-container").fadeOut("fast");
 			break;
 		case this.scenarioSubStates.scenarioloaded :
-			$("#play-scenario-btn").removeClass("disabled");
-			$("#stop-scenario-btn").removeClass("disabled");
+			if(!this.spStatus.isPlaying)
+				$("#play-scenario-btn").removeClass("disabled");
+			else
+				$("#stop-scenario-btn").removeClass("disabled");
 			$("#save-scenario-btn").removeClass("disabled");
 			$("#delete-scenario-btn").removeClass("disabled");
-			$("#download-scenario-btn").removeClass("disabled");
+			//$("#download-scenario-btn").removeClass("disabled");
+			//$("#upload-scenario-btn").removeClass("disabled");
+			
+			$("#blockly-frame-container").fadeIn("fast");
 			break;
 		default : console.log("unknown sub state"); break;
 		
@@ -186,14 +199,26 @@ GUI.prototype.closePopup = function(){
 	$.magnificPopup.instance.close();
 }
 
+GUI.prototype.changeSpStatus = function(newspStatus){
+	this.spStatus = newspStatus;
+	if(this.spStatus.isPlaying)
+		this.setScenarioPlaying();
+	else
+		this.setScenarioStoped();
+}
+
 GUI.prototype.setScenarioPlaying = function(){
 	$("#play-scenario-btn").addClass("disabled");
 	$("#stop-scenario-btn").removeClass("disabled");
+	
+	$("#now-playing").text(this.spStatus.nowplaying);
 }
 
 GUI.prototype.setScenarioStoped = function(){
 	$("#play-scenario-btn").removeClass("disabled");
 	$("#stop-scenario-btn").addClass("disabled");
+	
+	$("#now-playing").text(this.spStatus.nowplaying);
 }
 
 	

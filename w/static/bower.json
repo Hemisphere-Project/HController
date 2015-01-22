@@ -23,6 +23,7 @@
     "bootstrap-vertical-tabs": "~1.2.1",
     "filesize": "~2.0.4",
     "google-closure-library": "*",
-    "magnific-popup": "~1.0.0"
+    "magnific-popup": "~1.0.0",
+    "ace-builds": "~1.1.8"
   }
 }
