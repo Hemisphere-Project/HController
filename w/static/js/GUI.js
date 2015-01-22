@@ -212,13 +212,16 @@ GUI.prototype.setScenarioPlaying = function(){
 	$("#stop-scenario-btn").removeClass("disabled");
 	
 	$("#now-playing").text(this.spStatus.nowplaying);
+	$('#play-scenario-btn').addClass("btn-warning");
 }
 
 GUI.prototype.setScenarioStoped = function(){
-	$("#play-scenario-btn").removeClass("disabled");
+	if(this.currentSubState != this.scenarioSubStates.scenarioempty)
+		$("#play-scenario-btn").removeClass("disabled");
 	$("#stop-scenario-btn").addClass("disabled");
 	
 	$("#now-playing").text(this.spStatus.nowplaying);
+	$('#play-scenario-btn').removeClass("btn-warning");
 }
 
 	

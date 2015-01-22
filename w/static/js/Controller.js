@@ -65,7 +65,7 @@ Controller.prototype.addEventListeners = function(){
 		self.gui.changeScenarioSubState(self.gui.scenarioSubStates.scenarioloaded);
 	});
 	this.socket.on('scenarioSaved', function (scenariopath) {
-		console.log("scenario saved  : "+scenariopath);
+		$("#save-scenario-btn").removeClass("btn-warning");
 	});
 	this.socket.on('scenarioCreated', function (scenariopath,scenarioList) {
 		console.log("scenario created  : "+scenariopath);

@@ -212,6 +212,7 @@ a:hover{
 /* tool bar */
 
 .toolbar {
+	
 	/*line-height:@toolbar-height;*/
 	background: @g1-ppp;
 	.row{
@@ -254,6 +255,12 @@ a:hover{
 				background-color: @g1-pp;
 			}
 		}	
+	}
+	.btn-warning{
+		background-color: @id-color;	
+	}
+	.btn-warning:focus{
+		background-color: @id-color-m;	
 	}
 
 }
@@ -405,7 +412,7 @@ a:hover{
 		.panel-body{
 			padding:0;
 			height:100%;
-			background-color: orange; 
+			background-color: @g1-ppp; 
 		}
 		
 	}

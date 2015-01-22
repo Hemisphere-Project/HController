@@ -196,6 +196,12 @@ a:hover {
   margin: 0px;
   background-color: #878a8f;
 }
+.toolbar .btn-warning {
+  background-color: #dcdf5e;
+}
+.toolbar .btn-warning:focus {
+  background-color: #babd3c;
+}
 /* progress-bar */
 .progress-container {
   padding: 0px 10px;
@@ -325,7 +331,7 @@ a:hover {
 #controls-section .panel .panel-body {
   padding: 0;
   height: 100%;
-  background-color: orange;
+  background-color: #cbced3;
 }
 #controls-section #media-player {
   overflow: hidden !important;

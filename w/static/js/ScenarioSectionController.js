@@ -35,6 +35,7 @@ ScenarioSectionController.prototype.addEventListeners = function(){
 			self.stopScenario();
 	});
 	this.element.find('#save-scenario-btn').click(function () {
+			$(this).addClass("btn-warning");
 			self.saveScenario();
 	});
 	this.element.find('#delete-scenario-btn').click(function () {
@@ -109,7 +110,8 @@ ScenarioSectionController.prototype.createScenario = function(name,type){
 }
 
 ScenarioSectionController.prototype.playScenario = function(){
-	this.socket.emit("playScenario",this.currentScenario.name,this.currentScenario.codejs);
+	this.socket.emit("playScenario",this.currentScenario.name,Blockly.JavaScript.workspaceToCode());
+	//this.socket.emit("playScenario",this.currentScenario.name,this.currentScenario.codejs);
 }
 ScenarioSectionController.prototype.stopScenario = function(){
 	this.socket.emit("stopScenario");
