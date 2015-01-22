@@ -41,7 +41,7 @@ Installation
   		
   1ter. (optional) Install ftdi driver for ENTTEC DMX USB PRO
   
-  		follow the instructions at `http://www.ftdichip.com/Drivers/D2XX.htm`
+  		follow the instructions at http://www.ftdichip.com/Drivers/D2XX.htm
 	
   1. install node.js 
   	
