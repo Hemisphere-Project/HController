@@ -19,7 +19,7 @@ function ScenarioPlayer(){
 	this.scenarioPlayerOSC = new ScenarioPlayerOSC();
 	this.scenarioPlayerOSC.eventEmitter.on('play', function(scenarioname,scenario,from){
 		//var sco = this.openSCO(this.options.input);
-		console.log(scenario);
+		console.log("play ! - "+scenarioname);
 		self.play(scenario);
 		self.status.nowplaying = scenarioname;
 		self.scenarioPlayerOSC.sendStatus(from,self.status)
@@ -66,16 +66,15 @@ ScenarioPlayer.prototype.parseArgs = function(){
 }
 
 ScenarioPlayer.prototype.play = function(scenario){
-	
 	if(!this.status.isPlaying){
-		this.processManager.spawn("node",["Runner.js",scenario],false,true); 
+		this.processManager.spawn("node",["/home/pi/HController/ScenarioPlayer/Runner.js",scenario],false,true); 
 		this.status.isPlaying = true;
 	}
 	
 	//var self = this;
-	/*setTimeout(function(){
-		self.stop();	
-	},15000);*/
+	//setTimeout(function(){
+	//	self.stop();	
+	//},15000);
 }
 
 

@@ -2,7 +2,7 @@
 Blockly.Blocks['readanalog'] = {
   init: function() {
     this.setHelpUrl('http://www.example.com/');
-    this.setColour(90);
+    this.setColour(290);
     this.appendDummyInput()
         .appendField("Lis Capteur Analogique");
     this.appendDummyInput()
@@ -59,7 +59,7 @@ Blockly.Blocks['readanalog'] = {
 Blockly.Blocks['onanalog'] = {
   init: function() {
     this.setHelpUrl('http://www.example.com/');
-    this.setColour(130);
+    this.setColour(330);
     this.appendDummyInput()
         .appendField("Ecoute Capteur Analogique");
     this.appendDummyInput()

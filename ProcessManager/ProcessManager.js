@@ -18,7 +18,8 @@ ProcessManager.prototype.spawn = function(proc,args,autorespawn,pipestdout){
 		child.stdout.on('data', function (data) {
 				console.log(data);
 		});
-	}
+	}else
+		child.stdout = 'ignore';
 	
 	child.on('exit', function (code,signal) {
 			console.log('[Process Manager] '+this.pid+' exited with code '.red+code+' and signal '.red+signal);

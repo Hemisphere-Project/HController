@@ -14,6 +14,5 @@ Runner.prototype.run = function(){
 	this.script.runInContext(this.context);
 	//console.log("finito");
 }
-
 var runner = new Runner();
 runner.run();
