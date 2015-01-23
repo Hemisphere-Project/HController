@@ -43,6 +43,10 @@ Installation
   
   		follow the instructions at http://www.ftdichip.com/Drivers/D2XX.htm
   		and then copy ftd2xx.h and WinTypes.h to /usr/local/include directory
+  		OR
+  		clone the node ftdi module (https://github.com/KABA-CCEAC/node-ftdi) and run install.sh that will do the math 			for you.
+  		
+  		NB : if you have ftdi_sio installed you might need to remove it for the DMX USB PRO to work properly
 	
   1. install node.js 
   	
