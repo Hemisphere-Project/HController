@@ -1,20 +1,27 @@
 var Raspiomix = require('./Raspiomix.js');
+var DMXInterface = require('./DMXInterface.js');
 var osc = require('node-osc');
 
 
 var IODeviceAddesses = {
 	raspiomix:"raspiomix",
 	grovepi:"grovepi",
-	arduino:"arduino"
+	arduino:"arduino",
+	dmxusbpro:"dmxusbpro"
 }
 var IOCommands = {
 	geta:"getAnalog",
 	getd:"getDigital",
-	getrtc:"getRtc"
+	getrtc:"getRtc",
+	senddmx:"senddmx",
+	senddmxmultiple:"senddmxmultiple",
+	senddmxblackout:"senddmxblackout"
 }
+
 
 function IOInterface(){
 	this.raspiomix = new Raspiomix();
+	this.dmxInterface = new DMXInterface();
 	
 	
 	this.url = '127.0.0.1';
@@ -85,13 +92,30 @@ IOInterface.prototype.receiveMessageOSC = function(message,rinfo){
 						break;
 						default: console.log("message not recognized: "+ message);	
 					}
-					
 				break;
 				case IODeviceAddesses.grovepi :
 					
 				break;
 				case IODeviceAddesses.arduino :
 					
+				break;
+				case IODeviceAddesses.dmxusbpro :
+					var command = addressElements.shift();
+					switch(command){
+						case IOCommands.senddmx:
+							var channel = mes.shift();
+							var value = mes.shift();
+							this.dmxInterface.send(channel,value);
+						break;
+						case IOCommands.senddmxmultiple :
+							var valuesString = mes.shift();
+							this.dmxInterface.sendM(JSON.parse(valueString));
+						break;
+						case IOCommands.senddmxblackout :
+							this.dmxInterface.blackout();
+						break;
+						default: console.log("message not recognized: "+ message);	
+					}					
 				break;				
 				default: return console.error("IO Address not recognized : "+baseAddress);
 		}
