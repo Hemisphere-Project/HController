@@ -1,11 +1,11 @@
 'use strict';
 
-goog.provide('Blockly.Python.video');
-goog.require('Blockly.Python');
+//goog.provide('Blockly.Python.video');
+//goog.require('Blockly.Python');
 
 Blockly.JavaScript['video_play'] = function(block) {
 	var checkbox_loop_cb = block.getFieldValue('loop_cb') == 'TRUE';
-  var media = Blockly.Python.quote_(block.getTitleValue('VIDEO'));
+  var media = Blockly.JavaScript.quote_(block.getTitleValue('VIDEO'));
   if(checkbox_loop_cb)
   	var code = 'playMediaLoop(' + media + ');\n';
   else

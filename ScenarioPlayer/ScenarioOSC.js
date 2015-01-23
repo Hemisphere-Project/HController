@@ -165,6 +165,18 @@ ScenarioOSC.prototype.resume = function(){
 	this.oscClient.sendMessage("scenario:"+this.services.hplayer,'resume');
 }
 
+/***************************  DMX Commands  ************************/
 
+ScenarioOSC.prototype.sendDmx = function(channel,value){
+	this.oscClient.sendMessage("scenario:"+this.services.iointerface+'/dmxusbpro','senddmx',[channel,value]);
+}
+
+ScenarioOSC.prototype.sendDmxM = function(valuesString){
+	this.oscClient.sendMessage("scenario:"+this.services.iointerface+'/dmxusbpro','senddmxmultiple',[valuesString]);
+}
+ScenarioOSC.prototype.sendDmxBlackout = function(){
+		this.oscClient.sendMessage("scenario:"+this.services.iointerface+'/dmxusbpro','senddmxblackout');
+
+}
 
 module.exports = ScenarioOSC;

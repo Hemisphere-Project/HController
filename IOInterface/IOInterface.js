@@ -20,6 +20,8 @@ var IOCommands = {
 
 
 function IOInterface(){
+	
+	
 	this.raspiomix = new Raspiomix();
 	this.dmxInterface = new DMXInterface();
 	
@@ -63,7 +65,7 @@ IOInterface.prototype.stayAlive = function(){
 
 
 IOInterface.prototype.receiveMessageOSC = function(message,rinfo){	
-		//console.log(message);
+		console.log(message);
 	
 		var mes = message.slice();
 		var address = mes.shift();
@@ -109,7 +111,8 @@ IOInterface.prototype.receiveMessageOSC = function(message,rinfo){
 						break;
 						case IOCommands.senddmxmultiple :
 							var valuesString = mes.shift();
-							this.dmxInterface.sendM(JSON.parse(valueString));
+							console.log(valuesString);
+							this.dmxInterface.sendM(JSON.parse(valuesString));
 						break;
 						case IOCommands.senddmxblackout :
 							this.dmxInterface.blackout();

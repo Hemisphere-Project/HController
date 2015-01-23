@@ -11,13 +11,16 @@ DMXInterface.prototype.send = function(channel,value){
 	var val = {};
 	val[channel] = value
 	this.universe.update(val);
+	//console.log(this.universe);
 }
 
 DMXInterface.prototype.sendM = function(valueObj){
 	// valueObj : {chan0:val0,chan15:val15,...}
 	this.universe.update(valueObj);
+	//console.log(this.universe);
 	
 }
+
 DMXInterface.prototype.blackout = function(){
 	values = {};
 	for(var i=0;i<512;i++)
@@ -25,6 +28,7 @@ DMXInterface.prototype.blackout = function(){
 	
 	//console.log(values);
 	this.universe.update(values);
+	//console.log(this.universe);
 }
 /*var dmxInterface = new DMXInterface();
 dmxInterface.send(3,0xFF);

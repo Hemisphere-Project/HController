@@ -1,4 +1,4 @@
-// debug top -p `pgrep process-name | tr "\\n" "," | sed 's/,$//'`
+// debug top -p `pgrep node | tr "\\n" "," | sed 's/,$//'`
 
 var ProcessManager 	= require('./ProcessManager/ProcessManager.js');
 pm = new ProcessManager();
@@ -16,8 +16,8 @@ pm.spawn("node",["./OSCDispatcher/OSCDispatcher.js"],true,true);
 printBlue("starting Webserver...");
 pm.spawn("node",["./WebServer/WebServer.js"],true,false);
 
-printBlue("starting IOInterface...");
-pm.spawn("sudo",["node","./IOInterface/IOInterface.js"],true,false);
+//printBlue("starting IOInterface...");
+//pm.spawn("sudo",["node","./IOInterface/IOInterface.js"],true,true);
 
 
 process.on('SIGINT', gameover);

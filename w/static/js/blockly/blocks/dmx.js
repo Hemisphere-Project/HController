@@ -1,8 +1,3 @@
-'use strict';
-
-goog.provide('Blockly.Blocks.dmx');
-
-goog.require('Blockly.Blocks');
 
 Blockly.Blocks['dmx_send_single'] = {
   init: function() {
@@ -25,7 +20,7 @@ Blockly.Blocks['dmx_send_single'] = {
 Blockly.Blocks['dmx_send_channels'] = {
   init: function() {
     this.setHelpUrl('http://griotte.erasme.org/');
-    this.setColour(120);
+    this.setColour(140);
     this.appendValueInput("VALUES")
         .setCheck("Array")
         .setAlign(Blockly.ALIGN_RIGHT)
@@ -43,7 +38,7 @@ Blockly.Blocks['dmx_send_channels'] = {
 Blockly.Blocks['dmx_blackout'] = {
   init: function() {
     this.setHelpUrl('http://griotte.erasme.org/');
-    this.setColour(120);
+    this.setColour(160);
     this.appendDummyInput()
         .appendField("Eteindre toutes les lumières");
     this.setInputsInline(true);
