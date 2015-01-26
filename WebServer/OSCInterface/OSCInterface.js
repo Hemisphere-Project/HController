@@ -71,6 +71,7 @@ OSCInterface.prototype.receiveMessageOSC = function(message,rinfo){
 				switch(command){
 					case "status":
 						var player = new HPlayer();
+						args.shift();
 						player.name = args.shift();
 						switch(args.shift()){
 							case "playing" :
@@ -101,7 +102,7 @@ OSCInterface.prototype.receiveMessageOSC = function(message,rinfo){
 						player.zoom = args.shift();
 						player.blur = args.shift();
 						//pb with self ?
-						self.eventEmitter.emit('status',player.status());
+						this.eventEmitter.emit('status',player.status());
 					break;
 					case "ended" :
 						// nothing for the moment
@@ -206,7 +207,7 @@ OSCInterface.prototype.blur = function(blurSize){
 // PLAYERS STATUS REQUEST
 OSCInterface.prototype.getPlayerStatus = function(){
 	//console.log("status asked");
-	this.oscClient.sendMessage('webserver:hplayer','s/getStatus');
+	this.oscClient.sendMessage('webserver:hplayer','getStatus');
 }
 OSCInterface.prototype.getScenarioPlayerStatus = function(){
 	//console.log("status asked");

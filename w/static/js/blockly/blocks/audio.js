@@ -14,10 +14,9 @@ Blockly.Blocks['audio_play'] = {
     this.appendDummyInput()
         .appendTitle("Jouer le son")
          .appendTitle(new Blockly.FieldDropdown(Blockly.Medias.getMediasFor('snd')), "AUDIO");
-     this.appendDummyInput()
-        .appendTitle(new Blockly.FieldDropdown([
-             ["et attendre la fin", "True"],
-             ["et passer à la suite", "False"]]), "SYNC");
+    this.appendDummyInput("lire en boucle")
+        .appendField(new Blockly.FieldCheckbox("TRUE"), "loop_cb")
+        .appendField("en boucle");
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setTooltip('Joue le son sélectionné une seule fois');

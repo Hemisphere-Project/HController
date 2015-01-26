@@ -62,10 +62,17 @@ OSCDispatcher.prototype.receiveMessageOSC = function(message,rinfo){
 	var from = baseAddressElements.shift();
 	var to = baseAddressElements.shift();
 	
+	// HACK POUR MGR
+	/*if(message[0] === "#bundle"){
+		var hpmess = message[2];
+		hpmess.unshift("hplayer:webserver/status");
+		return this.services[4].client.sendMessage(hpmess)
+	}*/
+	
 	var k = 0;
 	for(var k = 0; k<this.services.length; k++){
 			if(this.services[k].name == to){
-				this.services[k].client.sendMessage(message)
+				return this.services[k].client.sendMessage(message)
 			}
 				
 	}

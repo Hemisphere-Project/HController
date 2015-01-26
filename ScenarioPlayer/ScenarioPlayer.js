@@ -19,7 +19,7 @@ function ScenarioPlayer(){
 	this.scenarioPlayerOSC = new ScenarioPlayerOSC();
 	this.scenarioPlayerOSC.eventEmitter.on('play', function(scenarioname,scenario,from){
 		//var sco = this.openSCO(this.options.input);
-		console.log("play ! - "+scenarioname);
+		console.log("play ! - "+scenarioname+'\n'+scenario);
 		self.play(scenario);
 		self.status.nowplaying = scenarioname;
 		self.scenarioPlayerOSC.sendStatus(from,self.status)
