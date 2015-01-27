@@ -15,7 +15,7 @@ var SUPPORTED_MEDIA_EXT = [{
 															list:[".mov",".avi",".mp4",".mkv",".MOV",".AVI",".MP4",".MKV"]
 														},{
 															type:SUPPORTED_MEDIA_TYPES.SND,
-															list:[".mp3",".MP3"]
+															list:[".mp3",".MP3",".wav",".WAV"]
 														}];
 
 
