@@ -47,7 +47,7 @@ Compiled
 Compiled
 [notice ] bool ofxOMXPlayer::openEngine(int): DELETE TOOK 0 MS
 [ error ] COMXPlayer::OpenFile -  
-[notice ] bool ofxOMXPlayerEngine::didReadFile(bool): didOpenMovie TOOK 1 MS
+[notice ] bool ofxOMXPlayerEngine::didReadFile(bool): didOpenMovie TOOK 0 MS
 [warning] bool ofxOMXPlayerEngine::setup(ofxOMXPlayerSettings&): FAST PATH MOVE OPEN FAILED - LIKELY A STREAM, TRYING SLOW PATH
 [ error ] COMXPlayer::OpenFile -  
 [notice ] bool ofxOMXPlayerEngine::didReadFile(bool): didOpenMovie TOOK 0 MS
@@ -64,13 +64,13 @@ Compiled
 Compiled
 [notice ] ofAppEGLWindow: runAppViaInfiniteLoop(): setting up notifications complete
 [notice ] bool ofxOMXPlayer::openEngine(int): DELETE TOOK 0 MS
-[notice ] bool ofxOMXPlayerEngine::didReadFile(bool): didOpenMovie TOOK 21 MS
-[notice ] bool ofxOMXPlayer::openEngine(int): setup TOOK 40 MS
+[notice ] bool ofxOMXPlayerEngine::didReadFile(bool): didOpenMovie TOOK 77 MS
+[notice ] bool ofxOMXPlayer::openEngine(int): setup TOOK 96 MS
 [notice ] bool ofxOMXPlayerEngine::openPlayer(int): duration SET: 52.2083
 [notice ] bool OMXClock::OMXStart(double, bool): at pts: 0
 [notice ] bool ofxOMXPlayerEngine::openPlayer(int): Opened video PASS
 [ error ] OMX_ERRORTYPE COMXCoreTunel::Deestablish(bool): OMX.broadcom.audio_mixer TUNNEL UNSET FAIL: OMX_ErrorIncorrectStateOperation
 [ error ] OMX_ERRORTYPE COMXCoreTunel::Deestablish(bool): OMX.broadcom.audio_mixer TUNNEL UNSET FAIL: OMX_ErrorIncorrectStateOperation
-[notice ] ofAppEGLWindow: destroyNativeKeyboard()
-[notice ] ofAppEGLWindow: destroyNativeKeyboard(): unable to reset terminal
-[notice ] ofAppEGLWindow: destroySurface(): destroying EGL surface
+[ error ] OMX_ERRORTYPE COMXCoreComponent::SetStateForComponent(OMX_STATETYPE):  OMX_GetState FAIL OMX_ErrorInsufficientResources
+[ error ] OMX_ERRORTYPE COMXCoreComponent::SetStateForComponent(OMX_STATETYPE):  OMX_GetState FAIL OMX_ErrorInsufficientResources
+[ error ] OMX_ERRORTYPE COMXCoreComponent::SetStateForComponent(OMX_STATETYPE):  OMX_GetState FAIL OMX_ErrorInsufficientResources

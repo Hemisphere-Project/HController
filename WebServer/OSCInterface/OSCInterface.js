@@ -44,7 +44,7 @@ function OSCInterface(config){
 }
 OSCInterface.prototype.receiveMessageOSC = function(message,rinfo){
 	
-	console.log(message);
+	//console.log(message);
 	
 	var mess = message.slice();
 	var address = mess.shift();
