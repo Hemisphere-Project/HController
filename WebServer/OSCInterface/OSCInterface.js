@@ -46,9 +46,8 @@ OSCInterface.prototype.receiveMessageOSC = function(message,rinfo){
 	
 	console.log(message);
 	
-	
-	var mes = message.slice();
-	var address = mes.shift();
+	var mess = message.slice();
+	var address = mess.shift();
 	var addressElements = address.split('/');
 	var baseAddress = addressElements.shift();
 	var baseAddressElements = baseAddress.split(':');
@@ -60,7 +59,7 @@ OSCInterface.prototype.receiveMessageOSC = function(message,rinfo){
 				var command = addressElements.shift();
 					switch(command){
 						case "status":
-							this.eventEmitter.emit('spStatus',mes);
+							this.eventEmitter.emit('spStatus',mess);
 						break;
 					}
 			break;
@@ -71,9 +70,8 @@ OSCInterface.prototype.receiveMessageOSC = function(message,rinfo){
 				switch(command){
 					case "status":
 						var player = new HPlayer();
-						args.shift();
-						player.name = args.shift();
-						switch(args.shift()){
+						player.name = mess.shift();
+						switch(mess.shift()){
 							case "playing" :
 								player.isPlaying = true;
 								player.isPaused = false;
@@ -89,18 +87,18 @@ OSCInterface.prototype.receiveMessageOSC = function(message,rinfo){
 							break;
 			
 						}
-						if(self.base64Encode)
-							player.media.filepath = new Buffer(args.shift(), 'base64').toString('utf8');
-						else
-							player.media.filepath = args.shift();
+						/*if(self.base64Encode)
+							player.media.filepath = new Buffer(mess.shift(), 'base64').toString('utf8');
+						else*/
+							player.media.filepath = mess.shift();
 						
-						player.media.progress = args.shift();
-						player.media.duration = args.shift();
-						player.loop = (args.shift() === 1);
-						player.volume = args.shift();
-						player.isMuted = (args.shift() === "muted");
-						player.zoom = args.shift();
-						player.blur = args.shift();
+						player.media.progress = mess.shift();
+						player.media.duration = mess.shift();
+						player.loop = (mess.shift() === 1);
+						player.volume = mess.shift();
+						player.isMuted = (mess.shift() === "muted");
+						player.zoom = mess.shift();
+						player.blur = mess.shift();
 						//pb with self ?
 						this.eventEmitter.emit('status',player.status());
 					break;
