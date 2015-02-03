@@ -1,5 +1,5 @@
 var Raspiomix = require('./Raspiomix.js');
-var DMXInterface = require('./DMXInterface.js');
+//var DMXInterface = require('./DMXInterface.js');
 var osc = require('node-osc');
 
 
@@ -23,7 +23,7 @@ function IOInterface(){
 	
 	
 	this.raspiomix = new Raspiomix();
-	this.dmxInterface = new DMXInterface();
+	//this.dmxInterface = new DMXInterface();
 	
 	
 	this.url = '127.0.0.1';
@@ -102,7 +102,8 @@ IOInterface.prototype.receiveMessageOSC = function(message,rinfo){
 					
 				break;
 				case IODeviceAddesses.dmxusbpro :
-					var command = addressElements.shift();
+					
+					/*var command = addressElements.shift();
 					switch(command){
 						case IOCommands.senddmx:
 							var channel = mes.shift();
@@ -118,7 +119,7 @@ IOInterface.prototype.receiveMessageOSC = function(message,rinfo){
 							this.dmxInterface.blackout();
 						break;
 						default: console.log("message not recognized: "+ message);	
-					}					
+					}		*/			
 				break;				
 				default: return console.error("IO Address not recognized : "+baseAddress);
 		}
