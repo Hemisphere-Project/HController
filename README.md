@@ -39,7 +39,7 @@ Installation
   
   		sudo apt-get install libfreeimage-dev
   		
-  1ter. (optional) Install ftdi driver for ENTTEC DMX USB PRO
+  1ter. Install ftdi driver for ENTTEC DMX USB PRO
   
   		follow the instructions at http://www.ftdichip.com/Drivers/D2XX.htm
   		and then copy ftd2xx.h and WinTypes.h to /usr/local/include directory
@@ -47,6 +47,7 @@ Installation
   		clone the node ftdi module (https://github.com/KABA-CCEAC/node-ftdi) and run install.sh that will do the math 			for you.
   		
   		NB : if you have ftdi_sio installed you might need to remove it for the DMX USB PRO to work properly
+  		(sudo nano /etc/modprobe.d/raspi-blacklist.conf)
 	
   1. install node.js 
   	
