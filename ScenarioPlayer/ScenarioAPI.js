@@ -29,7 +29,7 @@ function ScenarioAPI(osc){
 			var lastValue = null;
 			var h = setInterval(function(){
 					self.osc.getDigital(channel,function(val){
-							if(val != lastValue)
+							if(val != lastValue && lastValue !== null)
 								handler(val);
 							lastValue = val;
 					});		
@@ -80,6 +80,18 @@ function ScenarioAPI(osc){
 	}
 	this.sendDmxBlackout = function(){
 			self.osc.sendDmxBlackout();
+	}
+	this.setTimeout = function(callback,time){
+		return setTimeout(callback,time);
+	}
+	this.clearTimeout = function(handler){
+		clearTimeout(handler);
+	}
+	this.setInterval = function(callback,time){
+		return setInterval(callback,time);
+	}
+	this.clearInterval = function(handler){
+		clearInterval(handler);
 	}
 	
 }

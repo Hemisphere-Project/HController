@@ -1,13 +1,44 @@
 [32m[WebServer][39m started on port 8080
-play  /home/pi/media/vocals.wav
-play  /home/pi/media/vocals2.wav
-play  /home/pi/media/vocals.wav
-pause
-play  /home/pi/media/vocals.wav
-pause
-play  /home/pi/media/vocals.wav
-play  /home/pi/media/sintel-720p.mp4
-pause
-resume
-play  /home/pi/media/vocals.wav
-stop
+play scenario  digital handler
+stopScenario
+scenario saved
+play scenario  digital handler
+stopScenario
+scenario saved
+scenario saved
+scenario saved
+play scenario  tempo test
+stopScenario
+scenario saved
+play scenario  tempo test
+stopScenario
+play scenario  tempo test
+stopScenario
+scenario saved
+play scenario  tempo test
+stopScenario
+play scenario  tempo test
+stopScenario
+play scenario  tempo test
+stopScenario
+play scenario  tempo test
+stopScenario
+scenario saved
+play scenario  tempo test
+stopScenario
+play scenario  tempo test
+stopScenario
+play scenario  tempo test
+stopScenario
+play scenario  tempo test
+stopScenario
+scenario saved
+play scenario  tempo test
+stopScenario
+scenario saved
+play scenario  tempo test
+stopScenario
+scenario saved
+scenario saved
+scenario deleted
+scenario saved

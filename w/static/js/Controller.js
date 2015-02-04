@@ -34,6 +34,7 @@ Controller.prototype.addEventListeners = function(){
 		console.log(info);
 		$('#player-head .player-name').text(info.hostname);
 		$('#player-head .player-ip').text(info.ip);
+		document.title = info.hostname;
 	});	
 	
 	this.socket.on('playerStatus', function (status) {

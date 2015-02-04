@@ -1,0 +1,2657 @@
+play ! - digital handler
+var v;
+
+
+onDigital("IO0",function(v){
+  if (v == 1) {
+    print('Bouton appuyC) !');
+  }
+});
+
+[32m[Process Manager] [39mnode started with pid 6093
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[31m[Process Manager] [39m6093 killed
+[Process Manager] 6093[31m exited with code [39mnull[31m and signal [39mSIGKILL
+play ! - digital handler
+var v;
+
+
+onDigital("IO0",function(v){
+  if (v == 1) {
+    print('Bouton appuyC) !');
+  } else {
+    print('Bouton pas appuyC) !');
+  }
+});
+
+[32m[Process Manager] [39mnode started with pid 6144
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[32mBouton appuyC) ![39m
+
+[31m[Process Manager] [39m6144 killed
+[Process Manager] 6144[31m exited with code [39mnull[31m and signal [39mSIGKILL
+play ! - tempo test
+var handler;
+
+
+handler = setTimeout(function(){  print('It\'s about time !!');
+},1000);
+[32m[Process Manager] [39mnode started with pid 8926
+[32mIt's about time !![39m
+
+[31m[Process Manager] [39m8926 killed
+[Process Manager] 8926[31m exited with code [39mnull[31m and signal [39mSIGKILL
+play ! - tempo test
+var zogHand;
+
+
+zogHand = setTimeout(function(){
+  print('It\'s about time !!');
+
+},1000);
+clearTimeout(zogHand);
+
+[32m[Process Manager] [39mnode started with pid 9038
+[31m[Process Manager] [39m9038 killed
+[Process Manager] 9038[31m exited with code [39mnull[31m and signal [39mSIGKILL
+play ! - tempo test
+var zogHand;
+var eog;
+
+
+zogHand = setTimeout(function(){
+  print('It\'s about time !!');
+
+},1000);
+clearTimeout(eog);
+
+[32m[Process Manager] [39mnode started with pid 9069
+[32mIt's about time !![39m
+
+[31m[Process Manager] [39m9069 killed
+[Process Manager] 9069[31m exited with code [39mnull[31m and signal [39mSIGKILL
+play ! - tempo test
+var handler;
+
+
+handler = setInterval(function(){
+  print('It\'s about time !!');
+},1000);
+
+[32m[Process Manager] [39mnode started with pid 9425
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[31m[Process Manager] [39m9425 killed
+[Process Manager] 9425[31m exited with code [39mnull[31m and signal [39mSIGKILL
+play ! - tempo test
+var manu;
+var v;
+var handler;
+
+
+manu = setInterval(function(){
+  print('It\'s about time !!');
+},1000);
+
+onDigitalChange("DIP0",function(v){
+  clearInterval(handler);
+});
+
+[32m[Process Manager] [39mnode started with pid 9495
+[32mIt's about time !![39m
+
+[31m[Process Manager] [39m9495 killed
+[Process Manager] 9495[31m exited with code [39mnull[31m and signal [39mSIGKILL
+play ! - tempo test
+var manu;
+var v;
+
+
+manu = setInterval(function(){
+  print('It\'s about time !!');
+},1000);
+
+onDigitalChange("DIP0",function(v){
+  clearInterval(manu);
+});
+
+[32m[Process Manager] [39mnode started with pid 9508
+[31m[Process Manager] [39m9508 killed
+[Process Manager] 9508[31m exited with code [39mnull[31m and signal [39mSIGKILL
+play ! - tempo test
+var manu;
+var v;
+
+
+manu = setInterval(function(){
+  print('It\'s about time !!');
+},1000);
+
+onDigitalChange("DIP0",function(v){
+  print('CHANGE !');
+  clearInterval(manu);
+});
+
+[32m[Process Manager] [39mnode started with pid 9541
+[32mCHANGE ![39m
+
+[31m[Process Manager] [39m9541 killed
+[Process Manager] 9541[31m exited with code [39mnull[31m and signal [39mSIGKILL
+play ! - tempo test
+var handler;
+var v;
+
+
+handler = setInterval(function(){
+  print('It\'s about time !!');
+},1000);
+
+onDigitalChange("IO0",function(v){
+  print('CAHNGE');
+  clearInterval(handler);
+});
+
+[32m[Process Manager] [39mnode started with pid 9715
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[31m[Process Manager] [39m9715 killed
+[Process Manager] 9715[31m exited with code [39mnull[31m and signal [39mSIGKILL
+play ! - tempo test
+var handler;
+var v;
+
+
+handler = setInterval(function(){
+  print('It\'s about time !!');
+},1000);
+
+onDigitalChange("IO0",function(v){
+  print('CAHNGE');
+  clearInterval(handler);
+});
+
+[32m[Process Manager] [39mnode started with pid 9782
+[32mCAHNGE[39m
+
+[31m[Process Manager] [39m9782 killed
+[Process Manager] 9782[31m exited with code [39mnull[31m and signal [39mSIGKILL
+play ! - tempo test
+var handler;
+var v;
+
+
+handler = setInterval(function(){
+  print('It\'s about time !!');
+},1000);
+
+onDigitalChange("IO0",function(v){
+  print('CAHNGE');
+  clearInterval(handler);
+});
+
+[32m[Process Manager] [39mnode started with pid 9832
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[31m[Process Manager] [39m9832 killed
+[Process Manager] 9832[31m exited with code [39mnull[31m and signal [39mSIGKILL
+play ! - tempo test
+var handler;
+var v;
+
+
+handler = setInterval(function(){
+  print('It\'s about time !!');
+},1000);
+
+onDigitalChange("IO0",function(v){
+  print('CAHNGE');
+  clearInterval(handler);
+});
+
+[32m[Process Manager] [39mnode started with pid 9933
+null
+
+1
+
+1
+
+1
+
+[32mIt's about time !![39m
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+[32mIt's about time !![39m
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+[32mIt's about time !![39m
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+[32mIt's about time !![39m
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+[32mIt's about time !![39m
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+[32mIt's about time !![39m
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+[32mIt's about time !![39m
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+[32mIt's about time !![39m
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+[32mIt's about time !![39m
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+[32mIt's about time !![39m
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+[32mIt's about time !![39m
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+[32mIt's about time !![39m
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+[32mIt's about time !![39m
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+[32mIt's about time !![39m
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+[32mIt's about time !![39m
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+[32mIt's about time !![39m
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+[32mIt's about time !![39m
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+[32mIt's about time !![39m
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+[32mIt's about time !![39m
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+[32mIt's about time !![39m
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+[32mIt's about time !![39m
+
+1
+
+1
+
+1
+
+1
+
+1
+
+[31m[Process Manager] [39m9933 killed
+[Process Manager] 9933[31m exited with code [39mnull[31m and signal [39mSIGKILL
+play ! - tempo test
+var handler;
+var v;
+
+
+handler = setInterval(function(){
+  print('It\'s about time !!');
+},1000);
+
+onDigitalChange("DIP0",function(v){
+  print('CAHNGE');
+  clearInterval(handler);
+});
+
+[32m[Process Manager] [39mnode started with pid 9981
+null
+
+0
+
+0
+
+0
+
+[32mIt's about time !![39m
+
+0
+
+0
+
+0
+
+0
+
+0
+
+0
+
+[32mIt's about time !![39m
+
+0
+
+0
+
+0
+
+0
+
+0
+
+0
+
+0
+
+[32mIt's about time !![39m
+
+0
+
+0
+
+0
+
+0
+
+0
+
+0
+
+[32mIt's about time !![39m
+
+0
+
+0
+
+0
+
+0
+
+0
+
+0
+
+[32mIt's about time !![39m
+
+0
+
+0
+
+0
+
+0
+
+0
+
+0
+
+0
+
+[32mIt's about time !![39m
+
+0
+
+0
+
+0
+
+0
+
+0
+
+0
+
+[32mIt's about time !![39m
+
+0
+
+0
+
+0
+
+0
+
+0
+
+0
+
+[32mIt's about time !![39m
+
+0
+
+0
+
+0
+
+0
+
+0
+
+0
+
+[32mIt's about time !![39m
+
+0
+
+0
+
+0
+
+0
+
+0
+
+[32mCAHNGE[39m
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+[31m[Process Manager] [39m9981 killed
+[Process Manager] 9981[31m exited with code [39mnull[31m and signal [39mSIGKILL
+play ! - tempo test
+var handler;
+var v;
+
+
+handler = setInterval(function(){
+  print('It\'s about time !!');
+},1000);
+
+onDigitalChange("DIP0",function(v){
+  print('STOOOOOOP !');
+  clearInterval(handler);
+});
+
+[32m[Process Manager] [39mnode started with pid 10047
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mIt's about time !![39m
+
+[32mSTOOOOOOP ![39m
+
+[31m[Process Manager] [39m10047 killed
+[Process Manager] 10047[31m exited with code [39mnull[31m and signal [39mSIGKILL
