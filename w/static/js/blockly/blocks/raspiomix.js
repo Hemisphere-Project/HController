@@ -4,14 +4,14 @@ Blockly.Blocks['readanalog'] = {
     this.setHelpUrl('http://www.example.com/');
     this.setColour(290);
     this.appendDummyInput()
-        .appendField("Lis Capteur Analogique");
+        .appendField("Lis");
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldDropdown([["AN0", "0"], ["AN1", "1"], ["AN2", "2"], ["AN3", "3"]]), "channel");
     this.appendDummyInput()
         .appendField("dans variable :")
-        .appendField(new Blockly.FieldVariable("v"), "VAR");
-    this.appendDummyInput()
-        .appendField("Cannal")
-        .appendField(new Blockly.FieldDropdown([["AN0", "0"], ["AN1", "1"], ["AN2", "2"], ["AN3", "3"]]), "channel");
+        .appendField(new Blockly.FieldVariable("v"), "VAR");    
     this.appendStatementInput("callback");
+    this.setInputsInline(true);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setTooltip('');
@@ -61,14 +61,14 @@ Blockly.Blocks['onanalog'] = {
     this.setHelpUrl('http://www.example.com/');
     this.setColour(330);
     this.appendDummyInput()
-        .appendField("Ecoute Capteur Analogique");
+        .appendField("Ecoute");
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldDropdown([["AN0", "0"], ["AN1", "1"], ["AN2", "2"], ["AN3", "3"]]), "channel");
     this.appendDummyInput()
         .appendField("dans variable :")
-        .appendField(new Blockly.FieldVariable("v"), "VAR");
-    this.appendDummyInput()
-        .appendField("Cannal")
-        .appendField(new Blockly.FieldDropdown([["AN0", "0"], ["AN1", "1"], ["AN2", "2"], ["AN3", "3"]]), "channel");
+        .appendField(new Blockly.FieldVariable("v"), "VAR");  
     this.appendStatementInput("callback");
+    this.setInputsInline(true);
     this.setPreviousStatement(false);
     this.setNextStatement(false);
     this.setTooltip('');
@@ -88,14 +88,14 @@ Blockly.Blocks['readdigital'] = {
     this.setHelpUrl('http://www.example.com/');
     this.setColour(90);
     this.appendDummyInput()
-        .appendField("Lis Capteur Numérique");
+        .appendField("Lis");
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldDropdown([["IO0", "IO0"], ["IO1", "IO1"], ["IO2", "IO2"], ["IO3", "IO3"], ["DIP0", "DIP0"], ["DIP1", "DIP1"]]), "channel");
     this.appendDummyInput()
         .appendField("dans variable :")
-        .appendField(new Blockly.FieldVariable("v"), "VAR");
-    this.appendDummyInput()
-        .appendField("Cannal")
-        .appendField(new Blockly.FieldDropdown([["IO0", "IO0"], ["IO1", "IO1"], ["IO2", "IO2"], ["IO3", "IO3"], ["DIP0", "DIP0"], ["DIP1", "DIP1"]]), "channel");
+        .appendField(new Blockly.FieldVariable("v"), "VAR");    
     this.appendStatementInput("callback");
+    this.setInputsInline(true);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setTooltip('');
@@ -110,19 +110,34 @@ Blockly.Blocks['readdigital'] = {
   }
 };
 
+Blockly.Blocks['writedigital'] = {
+  init: function() {
+    this.setHelpUrl('http://www.example.com/');
+    this.setColour(115);
+    this.appendDummyInput()
+        .appendField("Ecris")
+        .appendField(new Blockly.FieldDropdown([["1", "1"], ["0", "0"]]), "valeur")
+        .appendField("sur")
+        .appendField(new Blockly.FieldDropdown([["IO0", "IO0"], ["IO1", "IO1"], ["IO2", "IO2"], ["IO3", "IO3"], ["DIP0", "DIP0"], ["DIP1", "DIP1"]]), "channel");
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setTooltip('');
+  }
+};
+
 Blockly.Blocks['ondigital'] = {
   init: function() {
     this.setHelpUrl('http://www.example.com/');
     this.setColour(130);
     this.appendDummyInput()
-        .appendField("Ecoute Capteur Numérique");
+        .appendField("Ecoute");
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldDropdown([["IO0", "IO0"], ["IO1", "IO1"], ["IO2", "IO2"], ["IO3", "IO3"], ["DIP0", "DIP0"], ["DIP1", "DIP1"]]), "channel");
     this.appendDummyInput()
         .appendField("dans variable :")
-        .appendField(new Blockly.FieldVariable("v"), "VAR");
-    this.appendDummyInput()
-        .appendField("Cannal")
-        .appendField(new Blockly.FieldDropdown([["IO0", "IO0"], ["IO1", "IO1"], ["IO2", "IO2"], ["IO3", "IO3"], ["DIP0", "DIP0"], ["DIP1", "DIP1"]]), "channel");
+        .appendField(new Blockly.FieldVariable("v"), "VAR");   
     this.appendStatementInput("callback");
+    this.setInputsInline(true);
     this.setPreviousStatement(false);
     this.setNextStatement(false);
     this.setTooltip('');

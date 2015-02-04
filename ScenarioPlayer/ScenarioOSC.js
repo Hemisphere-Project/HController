@@ -122,6 +122,9 @@ ScenarioOSC.prototype.getDigital = function(channel,callback){
 	this.oscClient.sendMessage("scenario:"+this.services.iointerface+'/raspiomix','getDigital',[channel]);
 	
 }
+ScenarioOSC.prototype.writeDigital = function(channel,value){
+	this.oscClient.sendMessage("scenario:"+this.services.iointerface+'/raspiomix','writeDigital',[channel,value]);
+}
 ScenarioOSC.prototype.getAnalog = function(channel,callback){
 	
 	// TODO !!!

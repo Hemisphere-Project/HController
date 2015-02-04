@@ -91,6 +91,10 @@ Raspiomix.prototype.readDigital = function(pin){
 	rpio.setInput(pin)
 	return rpio.read(pin);
 }
+Raspiomix.prototype.writeDigital = function(pin,value){
+	rpio.setOutput(pin);
+	rpio.write(pin,value);
+}
 
 Raspiomix.prototype.channelToPin = function(channel){
 		switch(channel){

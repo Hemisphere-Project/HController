@@ -24,6 +24,14 @@ Blockly.JavaScript['readdigital'] = function(block) {
   return code;
 };
 
+Blockly.JavaScript['writedigital'] = function(block) {
+  var dropdown_valeur = block.getFieldValue('valeur');
+  var dropdown_channel = block.getFieldValue('channel');
+  // TODO: Assemble JavaScript into code variable.
+  var code = 'writeDigital("'+dropdown_channel+'",'+dropdown_valeur+');';
+  return code;
+};
+
 Blockly.JavaScript['ondigital'] = function(block) {
   var dropdown_channel = block.getFieldValue('channel');
   var statements_callback = Blockly.JavaScript.statementToCode(block, 'callback');

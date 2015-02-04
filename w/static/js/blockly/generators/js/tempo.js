@@ -19,7 +19,7 @@ Blockly.JavaScript['setinterval'] = function(block) {
   var statements_callback = Blockly.JavaScript.statementToCode(block, 'callback');
   var variable_handler = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('handler'), Blockly.Variables.NAME_TYPE);
   // TODO: Assemble JavaScript into code variable.
-  var code = variable_handler+' = setInterval(function(){\n'+statements_callback+'},'+value_time+');\n';
+  var code = variable_handler+' = setInterval(function(){\n'+statements_callback+'}\n,'+value_time+');\n';
   return code;
 };
 

@@ -17,6 +17,11 @@ function ScenarioAPI(osc){
 			self.osc.getDigital(channel,callback);
 	}
 
+	// write a digital value.
+	this.writeDigital = function(channel,value){
+			self.osc.writeDigital(channel,value);
+	}
+	
 	// pseudo event listener for digital value. callback is called on every value received
 	this.onDigital = function(channel,handler){
 			var h = setInterval(function(){

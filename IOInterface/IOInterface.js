@@ -12,6 +12,7 @@ var IODeviceAddesses = {
 var IOCommands = {
 	geta:"getAnalog",
 	getd:"getDigital",
+	writed:"writeDigital",
 	getrtc:"getRtc",
 	senddmx:"senddmx",
 	senddmxmultiple:"senddmxmultiple",
@@ -52,7 +53,7 @@ function IOInterface(){
 			self.receiveMessageOSC(message,rinfo);
 	});	
 	
-	var handler = this.stayAlive();
+	//var handler = this.stayAlive();
 }
 
 IOInterface.prototype.stayAlive = function(){
@@ -87,6 +88,11 @@ IOInterface.prototype.receiveMessageOSC = function(message,rinfo){
 						case IOCommands.getd :
 							var channel = mes.shift();
 							this.oscClient.sendMessageOSC(to+':'+from+'/'+deviceAddress+'/'+'digitalValue',[channel,this.raspiomix.readDigital(this.raspiomix.channelToPin(channel))]);
+						break;
+						case IOCommands.writed :
+							var channel = mes.shift();
+							var value = mes.shift();
+							this.raspiomix.writeDigital(this.raspiomix.channelToPin(channel),value);
 						break;
 						case IOCommands.getRtc :
 							var channel = mes.shift();
